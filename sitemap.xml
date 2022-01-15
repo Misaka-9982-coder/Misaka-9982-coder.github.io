@@ -178,6 +178,13 @@
   </url>
   
   <url>
+    <loc>http://www.misaka-9982.com/tags/Django/</loc>
+    <lastmod>2022-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://www.misaka-9982.com/tags/CS144/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -186,13 +193,6 @@
   
   <url>
     <loc>http://www.misaka-9982.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.misaka-9982.com/tags/Django/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
