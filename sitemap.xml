@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.misaka-9982.com/2022/01/17/Linux%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2022-01-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.misaka-9982.com/2022/01/14/LeetCode-31%EF%BD%9E40/</loc>
     
     <lastmod>2022-01-15</lastmod>
@@ -157,7 +166,7 @@
 
   <url>
     <loc>http://www.misaka-9982.com/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -165,42 +174,49 @@
   
   <url>
     <loc>http://www.misaka-9982.com/tags/Acwing/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.misaka-9982.com/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.misaka-9982.com/tags/LeetCode/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.misaka-9982.com/tags/CS144/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.misaka-9982.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.misaka-9982.com/tags/Django/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.misaka-9982.com/tags/Linux/</loc>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -209,7 +225,7 @@
   
   <url>
     <loc>http://www.misaka-9982.com/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-01-16</lastmod>
+    <lastmod>2022-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
