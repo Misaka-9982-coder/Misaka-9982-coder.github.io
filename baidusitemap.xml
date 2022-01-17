@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.misaka-9982.com/2022/01/14/CS144-Lab0/</loc>
+    <lastmod>2022-01-17</lastmod>
+  </url>
+  <url>
+    <loc>http://www.misaka-9982.com/2022/01/17/CS144-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2022-01-17</lastmod>
+  </url>
+  <url>
     <loc>http://www.misaka-9982.com/2022/01/17/Linux%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2022-01-17</lastmod>
   </url>
@@ -54,10 +62,6 @@
   </url>
   <url>
     <loc>http://www.misaka-9982.com/2021/12/14/Django-%E6%95%B0%E6%8D%AE%E5%BA%93-CRUD/</loc>
-    <lastmod>2022-01-14</lastmod>
-  </url>
-  <url>
-    <loc>http://www.misaka-9982.com/2022/01/14/CS144-Lab0/</loc>
     <lastmod>2022-01-14</lastmod>
   </url>
 </urlset> 
