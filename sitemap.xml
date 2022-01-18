@@ -196,13 +196,6 @@
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/LeetCode/</loc>
-    <lastmod>2022-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.misaka-9982.com/tags/CS144/</loc>
     <lastmod>2022-01-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -217,7 +210,7 @@
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/Django/</loc>
+    <loc>http://www.misaka-9982.com/tags/LeetCode/</loc>
     <lastmod>2022-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -225,6 +218,13 @@
   
   <url>
     <loc>http://www.misaka-9982.com/tags/Linux/</loc>
+    <lastmod>2022-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.misaka-9982.com/tags/Django/</loc>
     <lastmod>2022-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
