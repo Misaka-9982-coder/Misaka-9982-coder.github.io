@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Mac能连接手机热点却无法上网问题解决CS144-环境配置</title>
+      <link href="/2022/01/20/Mac%E8%83%BD%E8%BF%9E%E6%8E%A5%E6%89%8B%E6%9C%BA%E7%83%AD%E7%82%B9%E5%8D%B4%E6%97%A0%E6%B3%95%E4%B8%8A%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3CS144-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <url>/2022/01/20/Mac%E8%83%BD%E8%BF%9E%E6%8E%A5%E6%89%8B%E6%9C%BA%E7%83%AD%E7%82%B9%E5%8D%B4%E6%97%A0%E6%B3%95%E4%B8%8A%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3CS144-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>两条指令解决</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /Library/Preferences/SystemConfiguration</span><br><span class="line">sudo rm com.apple.airport.preferences.plist com.apple.wifi.message-tracer.plist NetworkInterfaces.plist preferences.plist</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂项 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux基本环境配置</title>
       <link href="/2022/01/17/Linux%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
       <url>/2022/01/17/Linux%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
