@@ -3,7 +3,7 @@ var OriginTitle = document.title;
  document.addEventListener('visibilitychange', function () {
      if (document.hidden) {
          $('[rel="icon"]').attr('href', "/joke.ico");
-         document.title = '看不见我( つ•̀ω•́)つ看不见我( つ•̀ω•́)つ';
+         document.title = '看不见我??( つ•̀ω•́)つ看不见我??( つ•̀ω•́)つ';
          clearTimeout(titleTime);
      }
      else {
