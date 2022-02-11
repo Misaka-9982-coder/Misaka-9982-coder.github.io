@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>http://www.misaka-9982.com/messageboard/index.html</loc>
+    
+    <lastmod>2022-02-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.misaka-9982.com/2022/02/08/Hexo%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-02-11</lastmod>
@@ -402,14 +411,14 @@
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/%E6%9D%82%E9%A1%B9/</loc>
+    <loc>http://www.misaka-9982.com/tags/Linux/</loc>
     <lastmod>2022-02-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/Linux/</loc>
+    <loc>http://www.misaka-9982.com/tags/%E6%9D%82%E9%A1%B9/</loc>
     <lastmod>2022-02-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
