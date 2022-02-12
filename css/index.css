@@ -6339,3 +6339,47 @@ blockquote.pullquote.right {
     max-height: 75vh !important;
   }
 }
+#vcomment .vheader .vnick {
+  width: 30%;
+  border: 2px solid #dedede;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+#vcomment .vheader .vmail {
+  width: 30%;
+  border: 2px solid #dedede;
+  margin-left: 34px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+#vcomment .vheader .vlink {
+  width: 30%;
+  border: 2px solid #dedede;
+  margin-left: 34px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+#vcomment .vcards .vcard {
+  padding: 15px 20px 0 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 0 0 4px 1px rgba(0,0,0,0.12);
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.12);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#vcomment .vcards .vcard:hover {
+  -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 0 8px 3px rgba(0,0,0,0.12);
+}
+#vcomment .vcards .vcard .vh .vcard {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
