@@ -1,14 +1,16 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>分类 | Misaka's blog</title><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://www.misaka-9982.com/categories/index.html">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Git基本使用 | Misaka's blog</title><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.1. git基本概念 工作区：仓库的目录。工作区是独立于各个分支的。 暂存区：数据暂时存放的区域，类似于工作区写入版本库前的缓存区。暂存区是独立于各个分支的。 版本库：存放所有已经提交到本地仓库的代码版本 版本结构：树结构，树中每个节点代表一个代码版本。 1.2 git常用命令 git config --global user.name xxx：设置全局用户名，信息记录在~&#x2F;.gitconfi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git基本使用">
+<meta property="og:url" content="http://www.misaka-9982.com/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Misaka&#39;s blog">
+<meta property="og:description" content="1.1. git基本概念 工作区：仓库的目录。工作区是独立于各个分支的。 暂存区：数据暂时存放的区域，类似于工作区写入版本库前的缓存区。暂存区是独立于各个分支的。 版本库：存放所有已经提交到本地仓库的代码版本 版本结构：树结构，树中每个节点代表一个代码版本。 1.2 git常用命令 git config --global user.name xxx：设置全局用户名，信息记录在~&#x2F;.gitconfi">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png">
-<meta property="article:published_time" content="2022-01-14T07:27:27.000Z">
-<meta property="article:modified_time" content="2022-01-14T07:27:53.099Z">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png">
+<meta property="article:published_time" content="2022-02-25T15:58:31.000Z">
+<meta property="article:modified_time" content="2022-02-25T15:58:43.196Z">
 <meta property="article:author" content="Misaka">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/categories/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -50,12 +52,12 @@
   islazyload: false,
   isanchor: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '分类',
-  isPost: false,
+  title: 'Git基本使用',
+  isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-01-14 15:27:53'
+  postUpdate: '2022-02-25 23:58:43'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,15 +146,54 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/transparent.css"><link rel="stylesheet" href="/css/veditor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">分类</h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="category-lists"><div class="category-title is-center">分类 - <span class="category-amount">2</span></div><div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">10</span></li></ul></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/GM0YAC5U0AH7T76VQLB23.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具"><img src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shell工具"/></a><div class="content"><a class="title" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具">Shell工具</a><time datetime="2022-02-25T15:40:20.000Z" title="发表于 2022-02-25 23:40:20">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Vim基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Vim基本使用">Vim基本使用</a><time datetime="2022-02-25T14:14:21.000Z" title="发表于 2022-02-25 22:14:21">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Tmux%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Tmux基本使用"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Tmux基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Tmux%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Tmux基本使用">Tmux基本使用</a><time datetime="2022-02-25T12:27:15.000Z" title="发表于 2022-02-25 20:27:15">2022-02-25</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/"><span class="card-category-list-name">工程</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">10</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fa fa-tags" aria-hidden="true"></i><span>标签</span><script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script><div class="widget tagcloud" id="myCanvasContainer" align="center"><canvas id="resCanvas" width="200" height="200" style="width=100%"><a href="/tags/Acwing/" style="font-size: 16.25px;">Acwing</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/C/" style="font-size: 12.5px;">C++</a> <a href="/tags/CS144/" style="font-size: 12.5px;">CS144</a> <a href="/tags/Computer-Network/" style="font-size: 17.5px;">Computer Network</a> <a href="/tags/Django/" style="font-size: 13.75px;">Django</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/LeetCode/" style="font-size: 18.75px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Shell/" style="font-size: 11.25px;">Shell</a> <a href="/tags/Vim/" style="font-size: 11.25px;">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 11.25px;">Vocabulary</a></canvas><a href="/tags/Acwing/" style="font-size: 21px; color: #99a3b1">Acwing</a> <a href="/tags/Algorithm/" style="font-size: 24px; color: #99a9bf">Algorithm</a> <a href="/tags/C/" style="font-size: 18px; color: #999da3">C++</a> <a href="/tags/CS144/" style="font-size: 18px; color: #999da3">CS144</a> <a href="/tags/Computer-Network/" style="font-size: 22px; color: #99a5b6">Computer Network</a> <a href="/tags/Django/" style="font-size: 19px; color: #999fa7">Django</a> <a href="/tags/Git/" style="font-size: 16px; color: #999">Git</a> <a href="/tags/Hexo/" style="font-size: 17px; color: #999b9e">Hexo</a> <a href="/tags/LeetCode/" style="font-size: 23px; color: #99a7ba">LeetCode</a> <a href="/tags/Linux/" style="font-size: 20px; color: #99a1ac">Linux</a> <a href="/tags/Shell/" style="font-size: 17px; color: #999b9e">Shell</a> <a href="/tags/Vim/" style="font-size: 17px; color: #999b9e">Vim</a> <a href="/tags/Vocabulary/" style="font-size: 17px; color: #999b9e">Vocabulary</a></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">二月 2022</span><span class="card-archive-list-count">21</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/11/"><span class="card-archive-list-date">十一月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">十月 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">七月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-map"><div class="card-content"><div class="item-headline"><i class="fa fa-globe-asia" aria-hidden="true"></i><span>访客地图</span></div><script id="clstr_globe" type="text/javascript" defer="defer" src="//clustrmaps.com/globe.js?d=NAGSI3cBPnTXd3xVo3V7zDC9xqeu_9ed2OCmGUj1uiw"></script></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">53</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-12-29T09:56:34.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">269k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-02-25T15:58:53.532Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/transparent.css"><link rel="stylesheet" href="/css/veditor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git基本使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-25T15:58:43.196Z" title="更新于 2022-02-25 23:58:43">2022-02-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">856</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git基本使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1.1. git基本概念<br>
+工作区：仓库的目录。工作区是独立于各个分支的。<br>
+暂存区：数据暂时存放的区域，类似于工作区写入版本库前的缓存区。暂存区是独立于各个分支的。<br>
+版本库：存放所有已经提交到本地仓库的代码版本<br>
+版本结构：树结构，树中每个节点代表一个代码版本。<br>
+1.2 git常用命令<br>
+git config --global <a target="_blank" rel="noopener" href="http://user.name">user.name</a> xxx：设置全局用户名，信息记录在~/.gitconfig文件中<br>
+git config --global user.email <a href="mailto:xxx@xxx.com">xxx@xxx.com</a>：设置全局邮箱地址，信息记录在~/.gitconfig文件中<br>
+git init：将当前目录配置成git仓库，信息记录在隐藏的.git文件夹中<br>
+git add XX：将XX文件添加到暂存区<br>
+git add .：将所有待加入暂存区的文件加入暂存区<br>
+git rm --cached XX：将文件从仓库索引目录中删掉<br>
+git commit -m “给自己看的备注信息”：将暂存区的内容提交到当前分支<br>
+git status：查看仓库状态<br>
+git diff XX：查看XX文件相对于暂存区修改了哪些内容<br>
+git log：查看当前分支的所有版本<br>
+git reflog：查看HEAD指针的移动历史（包括被回滚的版本）<br>
+git reset --hard HEAD^ 或 git reset --hard HEAD~：将代码库回滚到上一个版本<br>
+git reset --hard HEAD^^：往上回滚两次，以此类推<br>
+git reset --hard HEAD~100：往上回滚100个版本<br>
+git reset --hard 版本号：回滚到某一特定版本<br>
+git checkout — XX或git restore XX：将XX文件尚未加入暂存区的修改全部撤销<br>
+git remote add origin <a href="mailto:git@git.acwing.com">git@git.acwing.com</a>:xxx/XXX.git：将本地仓库关联到远程仓库<br>
+git push -u (第一次需要-u以后不需要)：将当前分支推送到远程仓库<br>
+git push origin branch_name：将本地的某个分支推送到远程仓库<br>
+git clone <a href="mailto:git@git.acwing.com">git@git.acwing.com</a>:xxx/XXX.git：将远程仓库XXX下载到当前目录下<br>
+git checkout -b branch_name：创建并切换到branch_name这个分支<br>
+git branch：查看所有分支和当前所处分支<br>
+git checkout branch_name：切换到branch_name这个分支<br>
+git merge branch_name：将分支branch_name合并到当前分支上<br>
+git branch -d branch_name：删除本地仓库的branch_name分支<br>
+git branch branch_name：创建新分支<br>
+git push --set-upstream origin branch_name：设置本地的branch_name分支对应远程仓库的branch_name分支<br>
+git push -d origin branch_name：删除远程仓库的branch_name分支<br>
+git pull：将远程仓库的当前分支与本地仓库的当前分支合并<br>
+git pull origin branch_name：将远程仓库的branch_name分支与本地仓库的当前分支合并<br>
+git branch --set-upstream-to=origin/branch_name1 branch_name2：将远程的branch_name1分支与本地的branch_name2分支对应<br>
+git checkout -t origin/branch_name 将远程的branch_name分支拉取到本地<br>
+git stash：将工作区和暂存区中尚未提交的修改存入栈中<br>
+git stash apply：将栈顶存储的修改恢复到当前分支，但不删除栈顶元素<br>
+git stash drop：删除栈顶存储的修改<br>
+git stash pop：将栈顶存储的修改恢复到当前分支，同时删除栈顶元素<br>
+git stash list：查看栈中所有元素</p>
+<p>作者：yxc<br>
+链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/file_system/file/content/whole/index/content/2932078/">https://www.acwing.com/file_system/file/content/whole/index/content/2932078/</a><br>
+来源：AcWing<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">http://www.misaka-9982.com/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/GM0YAC5U0AH7T76VQLB23.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vim工具</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/GM0YAC5U0AH7T76VQLB23.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具"><img src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shell工具"/></a><div class="content"><a class="title" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具">Shell工具</a><time datetime="2022-02-25T15:40:20.000Z" title="发表于 2022-02-25 23:40:20">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Vim基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Vim基本使用">Vim基本使用</a><time datetime="2022-02-25T14:14:21.000Z" title="发表于 2022-02-25 22:14:21">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Tmux%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Tmux基本使用"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Tmux基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Tmux%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Tmux基本使用">Tmux基本使用</a><time datetime="2022-02-25T12:27:15.000Z" title="发表于 2022-02-25 20:27:15">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
   let create_time = Math.round(new Date('2021-12-29 17:56:34').getTime() / 1000);
   let timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
   let second = timestamp - create_time;
@@ -184,7 +225,7 @@
   #sidebar_search_box input[type=text]{
     width:calc(100% - 24px)
   }
-}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+}</style></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
@@ -278,9 +319,9 @@ if ('Valine' === 'Valine' || !true) {
   }
 }</script><script>function loadDisqus () {
   var disqus_config = function () {
-    this.page.url = 'http://www.misaka-9982.com/categories/index.html'
-    this.page.identifier = 'categories/index.html'
-    this.page.title = '分类'
+    this.page.url = 'http://www.misaka-9982.com/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/'
+    this.page.identifier = '2022/02/25/Git基本使用/'
+    this.page.title = 'Git基本使用'
   };
 
   window.disqusReset = () => {
@@ -309,101 +350,7 @@ if ('Valine' === 'Disqus' || !true) {
     loadDisqus()
   }
 }
-</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
-  const changeContent = (content) => {
-    if (content === '') return content
-
-    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
-    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
-    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
-    content = content.replace(/<[^>]+>/g,"") // remove html tag
-
-    if (content.length > 150) {
-      content = content.substring(0,150) + '...'
-    }
-    return content
-  }
-
-  const getIcon = (icon, mail) => {
-    if (icon) return icon
-    let defaultIcon = '?d=monsterid'
-    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
-    return iconUrl
-  }
-
-  const generateHtml = array => {
-    let result = ''
-
-    if (array.length) {
-      for (let i = 0; i < array.length; i++) {
-        result += '<div class=\'aside-list-item\'>'
-
-        if (true) {
-          const name = 'src'
-          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
-        }
-
-        result += `<div class='content'>
-        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
-        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
-        </div></div>`
-      }
-    } else {
-      result += '没有评论'
-    }
-
-    let $dom = document.querySelector('#card-newest-comments .aside-list')
-    $dom.innerHTML= result
-    window.lazyLoadInstance && window.lazyLoadInstance.update()
-    window.pjax && window.pjax.refresh($dom)
-  }
-
-  const getComment = () => {
-    const serverURL = 'https://jus6imsl.api.lncldglobal.com'
-
-    var settings = {
-      "method": "GET",
-      "headers": {
-        "X-LC-Id": 'JUs6IMSlkaeqfdmOGPJXLJu5-MdYXbMMI',
-        "X-LC-Key": '0WYyLQr0fRGVArYXW6EIvKoL',
-        "Content-Type": "application/json"
-      },
-    }
-
-    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
-      .then(response => response.json())
-      .then(data => {
-        const valineArray = data.results.map(function (e) {
-          return {
-            'avatar': getIcon(e.QQAvatar, e.mail),
-            'content': changeContent(e.comment),
-            'nick': e.nick,
-            'url': e.url + '#' + e.objectId,
-            'date': e.updatedAt,
-          }
-        })
-        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
-        generateHtml(valineArray)
-      }).catch(e => {
-        const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
-      }) 
-  }
-
-  const newestCommentInit = () => {
-    if (document.querySelector('#card-newest-comments .aside-list')) {
-      const data = saveToLocal.get('valine-newest-comments')
-      if (data) {
-        generateHtml(JSON.parse(data))
-      } else {
-        getComment()
-      }
-    }
-  }
-
-  newestCommentInit()
-  document.addEventListener('pjax:complete', newestCommentInit)
-})</script><script src="/js/jq.js"></script><script src="/js/fish.js"></script><script src="/js/butterflycirclemagic.js"></script><script src="/js/valine.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+</script></div><script src="/js/jq.js"></script><script src="/js/fish.js"></script><script src="/js/butterflycirclemagic.js"></script><script src="/js/valine.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
   function gitcalendar_injector_config(){
       var parent_div_git = document.getElementById('recent-posts');
       var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
