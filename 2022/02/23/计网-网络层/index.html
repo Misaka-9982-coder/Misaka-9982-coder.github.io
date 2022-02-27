@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>计网-网络层 | Misaka's blog</title><meta name="keywords" content="Network"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="4.1、网络层概述 简介  网络层的主要任务是实现网络互连，进而实现数据包在各网络之间的传输    这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可 但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器 有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可    要实现网络层任务，需要解决一下主">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>计网-网络层 | Misaka's blog</title><meta name="keywords" content="Network"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="4.1、网络层概述简介 网络层的主要任务是实现网络互连，进而实现数据包在各网络之间的传输   这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可 但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器 有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可   要实现网络层任务，需要解决一下主要问题：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计网-网络层">
 <meta property="og:url" content="http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
 <meta property="og:site_name" content="Misaka&#39;s blog">
-<meta property="og:description" content="4.1、网络层概述 简介  网络层的主要任务是实现网络互连，进而实现数据包在各网络之间的传输    这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可 但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器 有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可    要实现网络层任务，需要解决一下主">
+<meta property="og:description" content="4.1、网络层概述简介 网络层的主要任务是实现网络互连，进而实现数据包在各网络之间的传输   这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可 但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器 有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可   要实现网络层任务，需要解决一下主要问题：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png">
 <meta property="article:published_time" content="2022-02-23T15:07:08.000Z">
 <meta property="article:modified_time" content="2022-02-26T12:55:33.270Z">
 <meta property="article:author" content="Misaka">
 <meta property="article:tag" content="Network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -147,11 +147,8 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/transparent.css"><link rel="stylesheet" href="/css/veditor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">55</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计网-网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-23T15:07:08.000Z" title="发表于 2022-02-23 23:07:08">2022-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-26T12:55:33.270Z" title="更新于 2022-02-26 20:55:33">2022-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计网-网络层"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>4.1、网络层概述</h1>
-<h2 id="简介">简介</h2>
-<ul>
-<li>网络层的主要任务是<strong>实现网络互连</strong>，进而<strong>实现数据包在各网络之间的传输</strong><br>
-<img src="https://img-blog.csdnimg.cn/d9dfdb593449404e9ec38bf1d62a515f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/transparent.css"><link rel="stylesheet" href="/css/veditor.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">55</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计网-网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-23T15:07:08.000Z" title="发表于 2022-02-23 23:07:08">2022-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-26T12:55:33.270Z" title="更新于 2022-02-26 20:55:33">2022-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计网-网络层"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="4-1、网络层概述"><a href="#4-1、网络层概述" class="headerlink" title="4.1、网络层概述"></a>4.1、网络层概述</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>网络层的主要任务是<strong>实现网络互连</strong>，进而<strong>实现数据包在各网络之间的传输</strong><br><img src="https://img-blog.csdnimg.cn/d9dfdb593449404e9ec38bf1d62a515f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 <blockquote>
 <p>这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可</p>
@@ -159,21 +156,18 @@
 <p>有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可</p>
 </blockquote>
 <ul>
-<li>
-<p>要实现网络层任务，需要解决一下主要问题：</p>
+<li><p>要实现网络层任务，需要解决一下主要问题：</p>
 <ul>
-<li>
-<p>网络层向运输层提供怎样的服务（“可靠传输”还是“不可靠传输”）</p>
+<li><p>网络层向运输层提供怎样的服务（“可靠传输”还是“不可靠传输”）</p>
 <p>在数据链路层那课讲过的可靠传输，详情可以看那边的笔记：网络层对以下的<strong>分组丢失</strong>、<strong>分组失序</strong>、<strong>分组重复</strong>的传输错误采取措施，使得接收方能正确接受发送方发送的数据，就是<strong>可靠传输</strong>，反之，如果什么措施也不采取，则是<strong>不可靠传输</strong></p>
 </li>
-<li>
-<p>网络层寻址问题</p>
-</li>
-<li>
-<p>路由选择问题</p>
+<li><p>网络层寻址问题</p>
 </li>
 </ul>
 </li>
+</ul>
+<ul>
+<li>路由选择问题</li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/73ac681ba149452586d190579d2579a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
@@ -188,21 +182,18 @@
 </blockquote>
 <p><img src="https://img-blog.csdnimg.cn/d203e8a55a6244d5a39af31b3d820327.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
-<p>补充 <strong>网络层（网际层）<strong>除了 <strong>IP协议</strong>外，还有之前介绍过的</strong>地址解析协议ARP</strong>，还有<strong>网际控制报文协议ICMP</strong>，<strong>网际组管理协议IGMP</strong></p>
+<p>补充 <strong>网络层（网际层）</strong>除了 <strong>IP协议</strong>外，还有之前介绍过的<strong>地址解析协议ARP</strong>，还有<strong>网际控制报文协议ICMP</strong>，<strong>网际组管理协议IGMP</strong></p>
 </blockquote>
-<h2 id="总结-11">总结</h2>
-<p><img src="https://img-blog.csdnimg.cn/cc9c8d4dedaa43fbbe0b328d0c9da524.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/cc9c8d4dedaa43fbbe0b328d0c9da524.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.2、网络层提供的两种服务</h1>
-<ul>
+<h1 id="4-2、网络层提供的两种服务"><a href="#4-2、网络层提供的两种服务" class="headerlink" title="4.2、网络层提供的两种服务"></a>4.2、网络层提供的两种服务</h1><ul>
 <li>在计算机网络领域，网络层应该向运输层提供怎样的服务（“<strong>面向连接</strong>”还是“<strong>无连接</strong>”）曾引起了长期的争论。</li>
-<li>争论焦点的实质就是：<strong>在计算机通信中，可靠交付应当由谁来负责</strong>？是<strong>网络</strong>还是<strong>端系统</strong>？</li>
+<li>争论焦点的实质就是：<strong>在计算机通信中，可靠交付应当由谁来负责</strong>？是<strong>网络</strong>还是<strong>端系统</strong>？ </li>
 </ul>
-<h2 id="面向连接的虚电路服务">面向连接的虚电路服务</h2>
-<p><strong>一种观点：让网络负责可靠交付</strong></p>
+<h2 id="面向连接的虚电路服务"><a href="#面向连接的虚电路服务" class="headerlink" title="面向连接的虚电路服务"></a>面向连接的虚电路服务</h2><p><strong>一种观点：让网络负责可靠交付</strong></p>
 <ul>
 <li>这种观点认为，应借助于电信网的成功经验，让网络负责可靠交付，计算机网络应模仿电信网络，使用<strong>面向连接</strong>的通信方式。</li>
-<li>通信之前先建立<strong>虚电路</strong> (Virtual Circuit)，以保证双方通信所需的一切网络资源。</li>
+<li>通信之前先建立<strong>虚电路</strong> (Virtual Circuit)，以保证双方通信所需的一切网络资源。 </li>
 <li>如果再使用可靠传输的网络协议，就可使所发送的分组无差错按序到达终点，不丢失、不重复。</li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/d7da17a5cc924430ae89125d644a67c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -214,13 +205,12 @@
 <li>因此分组交换的虚连接和电路交换的连接只是类似，但并不完全一样</li>
 </ul>
 </blockquote>
-<h2 id="无连接的数据报服务">无连接的数据报服务</h2>
-<p><strong>另一种观点：网络提供数据报服务</strong></p>
+<h2 id="无连接的数据报服务"><a href="#无连接的数据报服务" class="headerlink" title="无连接的数据报服务"></a>无连接的数据报服务</h2><p><strong>另一种观点：网络提供数据报服务</strong></p>
 <ul>
 <li>互联网的先驱者提出了一种崭新的网络设计思路。</li>
 <li>网络层向上只提供简单灵活的、<strong>无连接的</strong>、<strong>尽最大努力交付</strong>的<strong>数据报服务</strong>。</li>
 <li>网络在发送分组时不需要先建立连接。每一个分组（即 IP 数据报）独立发送，与其前后的分组无关（不进行编号）。</li>
-<li><strong>网络层不提供服务质量的承诺</strong>。即所传送的分组可能出错、丢失、重复和失序（不按序到达终点），当然也不保证分组传送的时限。</li>
+<li><strong>网络层不提供服务质量的承诺</strong>。即所传送的分组可能出错、丢失、重复和失序（不按序到达终点），当然也不保证分组传送的时限。 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/7a62ea50f36e451e89516300c3093382.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>发送方</strong> 发送给 <strong>接收方</strong> 的分组可能沿着不同路径传送</p>
@@ -232,7 +222,7 @@
 <li>互连网能够发展到今日的规模，充分证明了当初采用这种设计思路的正确性。</li>
 </ul>
 </blockquote>
-<h2 id="虚电路服务与数据报服务的对比">虚电路服务与数据报服务的对比</h2>
+<h2 id="虚电路服务与数据报服务的对比"><a href="#虚电路服务与数据报服务的对比" class="headerlink" title="虚电路服务与数据报服务的对比"></a>虚电路服务与数据报服务的对比</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -279,68 +269,54 @@
 </tr>
 </tbody>
 </table>
+</div>
 <hr>
-<h1>4.3、IPv4</h1>
-<h2 id="概述-2">概述</h2>
-<p><img src="https://img-blog.csdnimg.cn/e6bc449cb0dd493496d0bc91e98204c7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="分类编制的IPv4地址">分类编制的IPv4地址</h2>
-<h3 id="简介-2">简介</h3>
-<p><img src="https://img-blog.csdnimg.cn/c702debcebfc4356a7f2c03ac1c1f6a3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="4-3、IPv4"><a href="#4-3、IPv4" class="headerlink" title="4.3、IPv4"></a>4.3、IPv4</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><img src="https://img-blog.csdnimg.cn/e6bc449cb0dd493496d0bc91e98204c7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="分类编制的IPv4地址"><a href="#分类编制的IPv4地址" class="headerlink" title="分类编制的IPv4地址"></a>分类编制的IPv4地址</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p><img src="https://img-blog.csdnimg.cn/c702debcebfc4356a7f2c03ac1c1f6a3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <ul>
 <li>每一类地址都由两个固定长度的字段组成，其中一个字段是<strong>网络号 net-id</strong>，它标志主机（或路由器）所连接到的网络，而另一个字段则是<strong>主机号 host-id</strong>，它标志该主机（或路由器）。</li>
 <li>主机号在它前面的网络号所指明的网络范围内必须是唯一的。</li>
 <li>由此可见，<strong>一个 IP 地址在整个互联网范围内是唯一的</strong>。</li>
 </ul>
-<p><strong>A类地址</strong><br>
-<img src="https://img-blog.csdnimg.cn/dd7e8a5c05d1406198467737e32ec70a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>B类地址</strong><br>
-<img src="https://img-blog.csdnimg.cn/093d09afb382484484cc4e848d5fb881.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>A类地址</strong><br><img src="https://img-blog.csdnimg.cn/dd7e8a5c05d1406198467737e32ec70a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>B类地址</strong><br><img src="https://img-blog.csdnimg.cn/093d09afb382484484cc4e848d5fb881.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>C类地址</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/87a0dd0ba70e44bdad5c04d1384faade.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>练习</strong><br>
-<img src="https://img-blog.csdnimg.cn/ee6a3b7281e34b80ad1121f0c317d715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="总结-12">总结</h3>
-<p><strong>IP 地址的指派范围</strong><br>
-<img src="https://img-blog.csdnimg.cn/d38dcaef1c934116849017f9485dc02e.png" alt="在这里插入图片描述"></p>
-<p><strong>一般不使用的特殊的 IP 地址</strong><br>
-<img src="https://img-blog.csdnimg.cn/50dafde219f34f1abad28b3129ff2322.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>练习</strong><br><img src="https://img-blog.csdnimg.cn/ee6a3b7281e34b80ad1121f0c317d715.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong>IP 地址的指派范围</strong><br><img src="https://img-blog.csdnimg.cn/d38dcaef1c934116849017f9485dc02e.png" alt="在这里插入图片描述"></p>
+<p><strong>一般不使用的特殊的 IP 地址</strong><br><img src="https://img-blog.csdnimg.cn/50dafde219f34f1abad28b3129ff2322.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>IP 地址的一些重要特点</strong></p>
 <p>(1) <strong>IP 地址是一种分等级的地址结构</strong>。分两个等级的好处是：</p>
 <ul>
 <li><strong>第一</strong>，IP 地址管理机构在分配 IP 地址时只分配网络号，而剩下的主机号则由得到该网络号的单位自行分配。这样就方便了 IP 地址的管理。</li>
-<li><strong>第二</strong>，路由器仅根据目的主机所连接的网络号来转发分组（而不考虑目的主机号），这样就可以使路由表中的项目数大幅度减少，从而减小了路由表所占的存储空间。</li>
+<li><strong>第二</strong>，路由器仅根据目的主机所连接的网络号来转发分组（而不考虑目的主机号），这样就可以使路由表中的项目数大幅度减少，从而减小了路由表所占的存储空间。 </li>
 </ul>
 <p>(2) <strong>实际上 IP 地址是标志一个主机（或路由器）和一条链路的接口</strong>。</p>
 <ul>
 <li>当一个主机同时连接到两个网络上时，该主机就必须同时具有两个相应的 IP 地址，其网络号 net-id 必须是不同的。这种主机称为<strong>多归属主机</strong> (multihomed host)。</li>
-<li>由于一个路由器至少应当连接到两个网络（这样它才能将 IP 数据报从一个网络转发到另一个网络），因此<strong>一个路由器至少应当有两个不同的 IP 地址</strong>。</li>
+<li>由于一个路由器至少应当连接到两个网络（这样它才能将 IP 数据报从一个网络转发到另一个网络），因此<strong>一个路由器至少应当有两个不同的 IP 地址</strong>。 </li>
 </ul>
 <p>(3) <strong>用转发器或网桥连接起来的若干个局域网仍为一个网络</strong>，因此这些局域网都具有同样的网络号 net-id。</p>
 <p>(4) <strong>所有分配到网络号 net-id 的网络，无论是范围很小的局域网，还是可能覆盖很大地理范围的广域网，都是平等的。</strong></p>
-<h2 id="划分子网的IPv4地址">划分子网的IPv4地址</h2>
-<h3 id="为什么要划分子网">为什么要划分子网</h3>
-<p>在 ARPANET 的早期，IP 地址的设计确实不够合理：</p>
+<h2 id="划分子网的IPv4地址"><a href="#划分子网的IPv4地址" class="headerlink" title="划分子网的IPv4地址"></a>划分子网的IPv4地址</h2><h3 id="为什么要划分子网"><a href="#为什么要划分子网" class="headerlink" title="为什么要划分子网"></a>为什么要划分子网</h3><p>在 ARPANET 的早期，IP 地址的设计确实不够合理：</p>
 <ul>
-<li>IP 地址空间的利用率有时很低。</li>
-<li>给每一个物理网络分配一个网络号会使路由表变得太大因而使网络性能变坏。</li>
-<li>两级的 IP 地址不够灵活。<br>
-<img src="https://img-blog.csdnimg.cn/1053aa4f9b4e4bc69a1aa3f37e0f0f7f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>IP 地址空间的利用率有时很低。 </li>
+<li>给每一个物理网络分配一个网络号会使路由表变得太大因而使网络性能变坏。 </li>
+<li>两级的 IP 地址不够灵活。<br><img src="https://img-blog.csdnimg.cn/1053aa4f9b4e4bc69a1aa3f37e0f0f7f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 <p>如果想要将原来的网络划分成三个独立的网路</p>
 <p><img src="https://img-blog.csdnimg.cn/b5f7336e0f6c48b080844423ba2f137f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>所以是否可以从主机号部分借用一部分作为子网号<br>
-<img src="https://img-blog.csdnimg.cn/d7968f5ae44b4d15a68099f55b99d910.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>所以是否可以从主机号部分借用一部分作为子网号<br><img src="https://img-blog.csdnimg.cn/d7968f5ae44b4d15a68099f55b99d910.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>但是如果未在图中标记子网号部分，那么我们和计算机又如何知道分类地址中主机号有多少比特被用作子网号了呢？</p>
 <p>所以就有了划分子网的工具：<strong>子网掩码</strong></p>
 <ul>
 <li>从 1985 年起在 IP 地址中又增加了一个“<strong>子网号字段</strong>”，使两级的 IP 地址变成为<strong>三级的 IP 地址</strong>。</li>
 <li>这种做法叫做<strong>划分子网</strong> (subnetting) 。</li>
-<li>划分子网已成为互联网的正式标准协议。</li>
+<li>划分子网已成为互联网的正式标准协议。 </li>
 </ul>
 </blockquote>
-<h3 id="如何划分子网">如何划分子网</h3>
-<p>基本思路</p>
+<h3 id="如何划分子网"><a href="#如何划分子网" class="headerlink" title="如何划分子网"></a>如何划分子网</h3><p>基本思路</p>
 <ul>
 <li>划分子网纯属一个<strong>单位内部的事情</strong>。单位对外仍然表现为没有划分子网的网络。</li>
 <li>从主机号<strong>借用</strong>若干个位作为<strong>子网号</strong> subnet-id，而主机号 host-id 也就相应减少了若干个位。</li>
@@ -355,8 +331,7 @@
 <p><img src="https://img-blog.csdnimg.cn/c94fb540cf594c81bbcdd92c191434b6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <ul>
-<li><strong>优点</strong>
-<ol>
+<li><strong>优点</strong><ol>
 <li>减少了 IP 地址的浪费</li>
 <li>使网络的组织更加灵活</li>
 <li>更便于维护和管理</li>
@@ -365,20 +340,17 @@
 <li><strong>划分子网纯属一个单位内部的事情，对外部网络透明</strong>，对外仍然表现为没有划分子网的一个网络。</li>
 </ul>
 </blockquote>
-<h3 id="子网掩码">子网掩码</h3>
-<p><img src="https://img-blog.csdnimg.cn/a971b086c6724459abbf57f3782e9d4a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><p><img src="https://img-blog.csdnimg.cn/a971b086c6724459abbf57f3782e9d4a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p><strong>(IP 地址) AND (子网掩码) = 网络地址</strong> 重要，下面很多相关知识都会用到</p>
 </blockquote>
 <p>举例</p>
 <p>例子1</p>
 <p><img src="https://img-blog.csdnimg.cn/9de030c5965d4b0d9b9962dc931c30cb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>例子2<br>
-<img src="https://img-blog.csdnimg.cn/f49ba2e8bab148fb818515b3c9ee2ea7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>例子2<br><img src="https://img-blog.csdnimg.cn/f49ba2e8bab148fb818515b3c9ee2ea7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>默认子网掩码</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/46c007288be148d1bc20877635cc1192.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="总结-13">总结</h3>
-<p><img src="https://img-blog.csdnimg.cn/52f27ff46c4741fca711323b2cb30b23.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p><img src="https://img-blog.csdnimg.cn/52f27ff46c4741fca711323b2cb30b23.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <ul>
 <li>子网掩码是一个网络或一个子网的重要属性。</li>
@@ -387,53 +359,40 @@
 <li>若一个路由器连接在两个子网上，就拥有两个网络地址和两个子网掩码。</li>
 </ul>
 </blockquote>
-<h2 id="无分类编址的IPv4地址">无分类编址的IPv4地址</h2>
-<h3 id="为什么使用无分类编址">为什么使用无分类编址</h3>
-<p><strong>无分类域间路由选择 CIDR</strong> (Classless Inter-Domain Routing)。</p>
+<h2 id="无分类编址的IPv4地址"><a href="#无分类编址的IPv4地址" class="headerlink" title="无分类编址的IPv4地址"></a>无分类编址的IPv4地址</h2><h3 id="为什么使用无分类编址"><a href="#为什么使用无分类编址" class="headerlink" title="为什么使用无分类编址"></a>为什么使用无分类编址</h3><p><strong>无分类域间路由选择 CIDR</strong> (Classless Inter-Domain Routing)。 </p>
 <p><img src="https://img-blog.csdnimg.cn/5b34d73540114a11accc2cc4e4c8827f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p><strong>CIDR 最主要的特点</strong></p>
 <ul>
 <li>CIDR使用各种长度的“<strong>网络前缀</strong>”(network-prefix)来代替分类地址中的网络号和子网号。</li>
-<li><strong>IP 地址从三级编址（使用子网掩码）又回到了两级编址</strong>。</li>
+<li><strong>IP 地址从三级编址（使用子网掩码）又回到了两级编址</strong>。 </li>
 </ul>
 </blockquote>
-<h3 id="如何使用无分类编址">如何使用无分类编址</h3>
-<p><img src="https://img-blog.csdnimg.cn/94cf269a13fc45698adef32a212af077.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="如何使用无分类编址"><a href="#如何使用无分类编址" class="headerlink" title="如何使用无分类编址"></a>如何使用无分类编址</h3><p><img src="https://img-blog.csdnimg.cn/94cf269a13fc45698adef32a212af077.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>举例</p>
 <p><img src="https://img-blog.csdnimg.cn/cd848977cb4b4ba28913bc049f8267fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="路由聚合（构造超网）">路由聚合（构造超网）</h3>
-<p><img src="https://img-blog.csdnimg.cn/12d19f02eeeb4baa96ac78989ac790cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="总结-14">总结</h3>
-<p><img src="https://img-blog.csdnimg.cn/779340de8fac4ceeb96241430aed94b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="IPv4地址的应用规划">IPv4地址的应用规划</h2>
-<p>给定一个IPv4地址快，如何将其划分成几个更小的地址块，并将这些地址块分配给互联网中不同网络，进而可以给各网络中的主机和路由器接口分配IPv4地址</p>
-<h3 id="定长的子网掩码FLSM（Fixed-Length-Subnet-Mask）">定长的子网掩码FLSM（Fixed Length Subnet Mask）</h3>
-<p><img src="https://img-blog.csdnimg.cn/e04b3dd0e4f04b459804afcc01c49f44.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="路由聚合（构造超网）"><a href="#路由聚合（构造超网）" class="headerlink" title="路由聚合（构造超网）"></a>路由聚合（构造超网）</h3><p><img src="https://img-blog.csdnimg.cn/12d19f02eeeb4baa96ac78989ac790cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p><img src="https://img-blog.csdnimg.cn/779340de8fac4ceeb96241430aed94b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="IPv4地址的应用规划"><a href="#IPv4地址的应用规划" class="headerlink" title="IPv4地址的应用规划"></a>IPv4地址的应用规划</h2><p>给定一个IPv4地址快，如何将其划分成几个更小的地址块，并将这些地址块分配给互联网中不同网络，进而可以给各网络中的主机和路由器接口分配IPv4地址</p>
+<h3 id="定长的子网掩码FLSM（Fixed-Length-Subnet-Mask）"><a href="#定长的子网掩码FLSM（Fixed-Length-Subnet-Mask）" class="headerlink" title="定长的子网掩码FLSM（Fixed Length Subnet Mask）"></a>定长的子网掩码FLSM（Fixed Length Subnet Mask）</h3><p><img src="https://img-blog.csdnimg.cn/e04b3dd0e4f04b459804afcc01c49f44.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>划分子网的IPv4就是定长的子网掩码</strong></p>
 <p>举例</p>
-<p><img src="https://img-blog.csdnimg.cn/b3bed65c45e4491596c10f44229b968d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/07a7122940684d28b8f3a13c45bafc1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/b3bed65c45e4491596c10f44229b968d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/07a7122940684d28b8f3a13c45bafc1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/8d355359ee764861b89aa94d4f2adc36.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>通过上面步骤分析，就可以从子网1~8中任选5个分配给左图中的N1~N5</p>
 <p><strong>采用定长的子网掩码划分，只能划分出2^n个子网，其中n是从主机号部分借用的用来作为子网号的比特数量，每个子网所分配的IP地址数量相同</strong></p>
 <p><strong>但是也因为每个子网所分配的IP地址数量相同，不够灵活，容易造成IP地址的浪费</strong></p>
 </blockquote>
-<h3 id="变长的子网掩码VLSM（Variable-Length-Subnet-Mask）">变长的子网掩码VLSM（Variable Length Subnet Mask）</h3>
-<p><img src="https://img-blog.csdnimg.cn/d59a1c86cc8947fb9e7614e5a8b8edf6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="变长的子网掩码VLSM（Variable-Length-Subnet-Mask）"><a href="#变长的子网掩码VLSM（Variable-Length-Subnet-Mask）" class="headerlink" title="变长的子网掩码VLSM（Variable Length Subnet Mask）"></a>变长的子网掩码VLSM（Variable Length Subnet Mask）</h3><p><img src="https://img-blog.csdnimg.cn/d59a1c86cc8947fb9e7614e5a8b8edf6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>无分类编址的IPv4就是变长的子网掩码</strong></p>
-<p>举例<br>
-<img src="https://img-blog.csdnimg.cn/a59fd905187b4d8c86feb11ad001093f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例<br><img src="https://img-blog.csdnimg.cn/a59fd905187b4d8c86feb11ad001093f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/b159ca013a8644e6a0c0c68cf912ca86.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.4、IP数据报的发送和转发过程</h1>
-<p><img src="https://img-blog.csdnimg.cn/2a75a95cbbc648bbba42d6b035fc5469.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>举例<br>
-<img src="https://img-blog.csdnimg.cn/7b1294fbf8e4432aa186573fc8642591.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="4-4、IP数据报的发送和转发过程"><a href="#4-4、IP数据报的发送和转发过程" class="headerlink" title="4.4、IP数据报的发送和转发过程"></a>4.4、IP数据报的发送和转发过程</h1><p><img src="https://img-blog.csdnimg.cn/2a75a95cbbc648bbba42d6b035fc5469.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例<br><img src="https://img-blog.csdnimg.cn/7b1294fbf8e4432aa186573fc8642591.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/baf66fdb331e449692f0ff75a1d7ab46.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>源主机如何知道目的主机是否与自己在同一个网络中，是直接交付，还是间接交付？<br>
-<img src="https://img-blog.csdnimg.cn/b128e351ae304507802930f5802af264.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>源主机如何知道目的主机是否与自己在同一个网络中，是直接交付，还是间接交付？<br><img src="https://img-blog.csdnimg.cn/b128e351ae304507802930f5802af264.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>可以通过<strong>目的地址IP</strong>和<strong>源地址的子网掩码</strong>进行<strong>逻辑与运算</strong>得到<strong>目的网络地址</strong></p>
 <ul>
@@ -453,14 +412,12 @@
 </blockquote>
 <p>路由器收到IP数据报后如何转发？</p>
 <ul>
-<li>检查IP数据报首部是否出错：
-<ul>
+<li>检查IP数据报首部是否出错：<ul>
 <li>若出错，则直接丢弃该IP数据报并通告源主机</li>
 <li>若没有出错，则进行转发</li>
 </ul>
 </li>
-<li>根据IP数据报的目的地址在路由表中查找匹配的条目：
-<ul>
+<li>根据IP数据报的目的地址在路由表中查找匹配的条目：<ul>
 <li>若找到匹配的条目，则转发给条目中指示的吓一跳</li>
 <li>若找不到，则丢弃该数据报并通告源主机</li>
 </ul>
@@ -468,8 +425,7 @@
 </ul>
 <p>假设IP数据报首部没有出错，路由器取出IP数据报首部各地址字段的值</p>
 <p><img src="https://img-blog.csdnimg.cn/e932cad9752f4ec59147de41e8c67ec0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>接下来路由器对该IP数据报进行查表转发<br>
-<img src="https://img-blog.csdnimg.cn/775b8a2506e54bee92e3e62381af3a8b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>接下来路由器对该IP数据报进行查表转发<br><img src="https://img-blog.csdnimg.cn/775b8a2506e54bee92e3e62381af3a8b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>逐条检查路由条目，将目的地址与路由条目中的地址掩码进行逻辑与运算得到目的网络地址，然后与路由条目中的目的网络进行比较，如果相同，则这条路由条目就是匹配的路由条目，按照它的下一条指示，图中所示的也就是接口1转发该IP数据报</p>
 </blockquote>
@@ -477,11 +433,8 @@
 <p>路由器是隔离广播域的</p>
 <p><img src="https://img-blog.csdnimg.cn/231f7b54a11a4917956ea97e88dab7c8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.5、静态路由配置及其可能产生的路由环路问题</h1>
-<h2 id="概念-11">概念</h2>
-<p><img src="https://img-blog.csdnimg.cn/c005f4b6149a4815a4d36c692550cfcb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="多种情况举例">多种情况举例</h2>
-<p><strong>静态路由配置</strong></p>
+<h1 id="4-5、静态路由配置及其可能产生的路由环路问题"><a href="#4-5、静态路由配置及其可能产生的路由环路问题" class="headerlink" title="4.5、静态路由配置及其可能产生的路由环路问题"></a>4.5、静态路由配置及其可能产生的路由环路问题</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><img src="https://img-blog.csdnimg.cn/c005f4b6149a4815a4d36c692550cfcb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="多种情况举例"><a href="#多种情况举例" class="headerlink" title="多种情况举例"></a>多种情况举例</h2><p> <strong>静态路由配置</strong></p>
 <p>举例</p>
 <p><img src="https://img-blog.csdnimg.cn/ff65640f8a114522ab5b32d57cc154be.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>默认路由</strong></p>
@@ -491,57 +444,43 @@
 <p><strong>特定主机路由</strong></p>
 <p>举例</p>
 <p>有时候，我们可以给路由器添加针对某个主机的特定主机路由条目</p>
-<p>一般用于网络管理人员对网络的管理和测试<br>
-<img src="https://img-blog.csdnimg.cn/52410fdb9ca748ad84890ca68cc04f87.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>一般用于网络管理人员对网络的管理和测试<br><img src="https://img-blog.csdnimg.cn/52410fdb9ca748ad84890ca68cc04f87.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>多条路由可选，匹配路由最具体的</p>
 </blockquote>
 <p><strong>静态路由配置错误导致路由环路</strong></p>
-<p>举例<br>
-<img src="https://img-blog.csdnimg.cn/5170c0a7f2ff4944ad52091a87bc6e60.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例<br><img src="https://img-blog.csdnimg.cn/5170c0a7f2ff4944ad52091a87bc6e60.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>假设将R2的路由表中第三条目录配置错了下一跳</p>
 <p>这导致R2和R3之间产生了路由环路</p>
 <p><img src="https://img-blog.csdnimg.cn/342e00b4f6214b548211bcd1f16154e4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>聚合了不存在的网络而导致路由环路</strong></p>
 <p>举例</p>
 <p>正常情况</p>
-<p><img src="https://img-blog.csdnimg.cn/0a5a73234a1d480e8b7103299dbe3f6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/8a58e71f0bce4a14ba2ac1dd56f2285f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0a5a73234a1d480e8b7103299dbe3f6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/8a58e71f0bce4a14ba2ac1dd56f2285f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>错误情况</p>
 <p><img src="https://img-blog.csdnimg.cn/1f89097c711c4876b9ed63a705dfb15c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>解决方法<br>
-<img src="https://img-blog.csdnimg.cn/13617f7d4d104381aba94f65f28bb397.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>解决方法<br><img src="https://img-blog.csdnimg.cn/13617f7d4d104381aba94f65f28bb397.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/66858c676d3a4f2d917ad34d381afce0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>黑洞路由的下一跳为null0，这是路由器内部的虚拟接口，IP数据报进入它后就被丢弃</p>
 </blockquote>
 <p><strong>网络故障而导致路由环路</strong></p>
-<p>举例<br>
-<img src="https://img-blog.csdnimg.cn/57cbc3e0614343a7a4a5848d96616b2f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例<br><img src="https://img-blog.csdnimg.cn/57cbc3e0614343a7a4a5848d96616b2f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/77d4cd1c143c4275b654c3769d9be229.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>解决方法</p>
-<p>添加故障的网络为黑洞路由<br>
-<img src="https://img-blog.csdnimg.cn/813935679d6d467cb07883cd56c29e25.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/978335e293cd41ca8cf843df02f87794.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>添加故障的网络为黑洞路由<br><img src="https://img-blog.csdnimg.cn/813935679d6d467cb07883cd56c29e25.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/978335e293cd41ca8cf843df02f87794.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>假设。一段时间后故障网络恢复了</p>
 <p>R1又自动地得出了其接口0的直连网络的路由条目</p>
-<p>针对该网络的黑洞网络会自动失效<br>
-<img src="https://img-blog.csdnimg.cn/9a512f6b4bfc42e8b6415061674934b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>针对该网络的黑洞网络会自动失效<br><img src="https://img-blog.csdnimg.cn/9a512f6b4bfc42e8b6415061674934b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>如果又故障</p>
-<p>则生效该网络的黑洞网络<br>
-<img src="https://img-blog.csdnimg.cn/863d8e5cc20842f4895036082b393107.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="总结-15">总结</h2>
-<p><img src="https://img-blog.csdnimg.cn/003b18a2f78942c9ba3eb909c75defdd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>则生效该网络的黑洞网络<br><img src="https://img-blog.csdnimg.cn/863d8e5cc20842f4895036082b393107.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/003b18a2f78942c9ba3eb909c75defdd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.6、路由选择协议</h1>
-<h2 id="概述-3">概述</h2>
-<p><img src="https://img-blog.csdnimg.cn/497d0cc1335047799519347cd4ed9339.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>因特网所采用的路由选择协议的主要特点</strong><br>
-<img src="https://img-blog.csdnimg.cn/2d3a1ef208894f668f7a4293b842cf2b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="4-6、路由选择协议"><a href="#4-6、路由选择协议" class="headerlink" title="4.6、路由选择协议"></a>4.6、路由选择协议</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p><img src="https://img-blog.csdnimg.cn/497d0cc1335047799519347cd4ed9339.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>因特网所采用的路由选择协议的主要特点</strong><br><img src="https://img-blog.csdnimg.cn/2d3a1ef208894f668f7a4293b842cf2b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>因特网采用分层次的路由选择协议</strong></p>
 <ul>
-<li><strong>自治系统 AS</strong>：在单一的技术管理下的一组路由器，而这些路由器使用一种 AS 内部的路由选择协议和共同的度量以确定分组在该 AS 内的路由，同时还使用一种 AS 之间的路由选择协议用以确定分组在 AS之间的路由。<br>
-<img src="https://img-blog.csdnimg.cn/d66f9daff2aa4f69ae5495202e386cc2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li><strong>自治系统 AS</strong>：在单一的技术管理下的一组路由器，而这些路由器使用一种 AS 内部的路由选择协议和共同的度量以确定分组在该 AS 内的路由，同时还使用一种 AS 之间的路由选择协议用以确定分组在 AS之间的路由。<br><img src="https://img-blog.csdnimg.cn/d66f9daff2aa4f69ae5495202e386cc2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 <blockquote>
 <p>自治系统之间的路由选择简称为域间路由选择，自治系统内部的路由选择简称为域内路由选择</p>
@@ -552,79 +491,61 @@
 <p>域内路由选择使用内部网关协议IGP这个类别的路由选择协议</p>
 <p><strong>网关协议</strong>的名称可称为<strong>路由协议</strong></p>
 </blockquote>
-<p><strong>常见的路由选择协议</strong><br>
-<img src="https://img-blog.csdnimg.cn/8db56906ed3940158a1896fe9c7d7edf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>常见的路由选择协议</strong><br><img src="https://img-blog.csdnimg.cn/8db56906ed3940158a1896fe9c7d7edf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>路由器的基本结构</strong></p>
-<p>路由器是一种具有多个输入端口，和输出端口的专用计算机，其任务是转发分组<br>
-<img src="https://img-blog.csdnimg.cn/83bcee2bbad6492d915b65fd33156db6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>路由器是一种具有多个输入端口，和输出端口的专用计算机，其任务是转发分组<br><img src="https://img-blog.csdnimg.cn/83bcee2bbad6492d915b65fd33156db6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>路由器结构可划分为两大部分：</p>
 <p>1、<strong>分组转发部分</strong></p>
-<p>由三部分构成</p>
+<p> 由三部分构成</p>
 <ul>
-<li>
-<p>交换结构</p>
+<li><p>交换结构</p>
 </li>
-<li>
-<p>一组输入端口：</p>
+<li><p>一组输入端口：</p>
 <p>信号从某个输入端口进入路由器</p>
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/fe0f3063a0f84036a073d15a062c56cb.png" alt="在这里插入图片描述"></p>
-<p>物理层将信号转换成比特流，送交数据链路层处理</p>
+<p>   物理层将信号转换成比特流，送交数据链路层处理</p>
 <p><img src="https://img-blog.csdnimg.cn/078fe81b6abd46c5a00afd37087c9270.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>数据链路层识别从比特流中识别出帧，去掉帧头和帧尾后，送交网络层处理<br>
-<img src="https://img-blog.csdnimg.cn/06a6bad5c0174e269260d454b63ae39a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>   数据链路层识别从比特流中识别出帧，去掉帧头和帧尾后，送交网络层处理<br><img src="https://img-blog.csdnimg.cn/06a6bad5c0174e269260d454b63ae39a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <pre><code> 如果送交网络层的分组是普通待转发的数据分组
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/90493c34d7b448b08a29dd912317d3de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</code></pre><p><img src="https://img-blog.csdnimg.cn/90493c34d7b448b08a29dd912317d3de.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <pre><code>  则根据分组首部中的目的地址进行查表转发
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/c4f77eb6032d44cba86838b60bc7bea5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>若找不到匹配的转发条目，则丢弃该分组，否则，按照匹配条目中所指示的端口进行转发</p>
+</code></pre><p><img src="https://img-blog.csdnimg.cn/c4f77eb6032d44cba86838b60bc7bea5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>   若找不到匹配的转发条目，则丢弃该分组，否则，按照匹配条目中所指示的端口进行转发</p>
 <ul>
-<li>
-<p>一组输出端口</p>
-<p>网络层更新数据分组首部中某些字段的值，例如将数据分组的生存时间减1，然后送交数据链路层进行封装<br>
-<img src="https://img-blog.csdnimg.cn/b57a3803ebb24f22af03061d46fe1bae.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>数据链路层将数据分组封装成帧，交给物理层处理<br>
-<img src="https://img-blog.csdnimg.cn/f7ef1b96eebe46c2a2be803e1584b204.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>物理层将帧看成比特流将其变换成相应的电信号进行发送</p>
+<li><p>一组输出端口</p>
+<p>网络层更新数据分组首部中某些字段的值，例如将数据分组的生存时间减1，然后送交数据链路层进行封装<br><img src="https://img-blog.csdnimg.cn/b57a3803ebb24f22af03061d46fe1bae.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
 </ul>
+<p>   数据链路层将数据分组封装成帧，交给物理层处理<br><img src="https://img-blog.csdnimg.cn/f7ef1b96eebe46c2a2be803e1584b204.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>   物理层将帧看成比特流将其变换成相应的电信号进行发送</p>
 <blockquote>
 <p>路由器的各端口还会有输入缓冲区和输出缓冲区</p>
 <ul>
-<li>
-<p>输入缓冲区用来暂存新进入路由器但还来不及处理的分组</p>
+<li><p>输入缓冲区用来暂存新进入路由器但还来不及处理的分组</p>
 </li>
-<li>
-<p>输出缓冲区用来暂存已经处理完毕但还来不及发送的分组</p>
+<li><p>输出缓冲区用来暂存已经处理完毕但还来不及发送的分组</p>
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/ca824b6dc922476d9b6cb05d105940b7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>路由器的端口一般都具有输入和输出功能</strong>，这些实例分出了输入端口和输出端口是更好演示路由基本工作过程</p>
 </blockquote>
-<p>2、<strong>路由选择部分</strong></p>
+<p> 2、<strong>路由选择部分</strong></p>
 <ul>
-<li>
-<p>路由选择部分的核心构件是路由选择处理机，它的任务是根据所使用的路由选择协议。周期性地与其他路由器 进行路由信息的交互，来更新路由表</p>
-<p>如果送交给输入端口的网络层的分组是路由器之间交换路由信息的路由报文，则把这种分组送交给路由选择处理机<br>
-<img src="https://img-blog.csdnimg.cn/d4280e94ec3f4b9996d0587b94f9db6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>路由选择处理机根据分组的内容来更新自己的<strong>路由表</strong><br>
-<img src="https://img-blog.csdnimg.cn/b91df16e8cf14150a1f8b7c6906bec3e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>路由选择处理机还会周期性地给其他路由器发送自己所知道的路由信息</p>
+<li><p>路由选择部分的核心构件是路由选择处理机，它的任务是根据所使用的路由选择协议。周期性地与其他路由器 进行路由信息的交互，来更新路由表</p>
+<p>如果送交给输入端口的网络层的分组是路由器之间交换路由信息的路由报文，则把这种分组送交给路由选择处理机<br><img src="https://img-blog.csdnimg.cn/d4280e94ec3f4b9996d0587b94f9db6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
 </ul>
+<p>   路由选择处理机根据分组的内容来更新自己的<strong>路由表</strong><br><img src="https://img-blog.csdnimg.cn/b91df16e8cf14150a1f8b7c6906bec3e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>   路由选择处理机还会周期性地给其他路由器发送自己所知道的路由信息</p>
 <p><img src="https://img-blog.csdnimg.cn/36b4ef03bef54271a50116c29c3d42c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="路由信息协议RIP">路由信息协议RIP</h2>
-<p><img src="https://img-blog.csdnimg.cn/57fd983c74e044b1874d0bc9f19d35d8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/ae46ec515b1b43859864db81c302e028.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="路由信息协议RIP"><a href="#路由信息协议RIP" class="headerlink" title="路由信息协议RIP"></a>路由信息协议RIP</h2><p><img src="https://img-blog.csdnimg.cn/57fd983c74e044b1874d0bc9f19d35d8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/ae46ec515b1b43859864db81c302e028.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>RIP的基本工作过程</strong></p>
 <p>举例</p>
 <p><img src="https://img-blog.csdnimg.cn/bfa2d9cf01ff4db5879194e52601e470.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>RIP的路由条目的更新规则</strong></p>
-<p>举例1<br>
-<img src="https://img-blog.csdnimg.cn/13600c61d9e24e65bcb00b38c5d76fb6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例1<br><img src="https://img-blog.csdnimg.cn/13600c61d9e24e65bcb00b38c5d76fb6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>路由器C的表到达各目的网络的下一条都记为问号，可以理解为路由器D并不需要关心路由器C的这些内容</p>
 <p>假设路由器C的RIP更新报文发送周期到了，则路由器C将自己路由表中的相关路由信息封装到RIP更新报文中发送给路由器D</p>
@@ -636,17 +557,14 @@
 <p><img src="https://img-blog.csdnimg.cn/06b066babf7c469da8354191c17d3dc3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>举例2</p>
 <p><img src="https://img-blog.csdnimg.cn/3ac601d5f04440dfa59ebb69e4c4dbfe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>RIP存在“坏消息传播得慢”的问题</strong><br>
-<img src="https://img-blog.csdnimg.cn/1e372fbfdd814abca9d6e8e00c9b3cd1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>RIP存在“坏消息传播得慢”的问题</strong><br><img src="https://img-blog.csdnimg.cn/1e372fbfdd814abca9d6e8e00c9b3cd1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/5f0facbc6ceb4ef6ab584f7d293c9b49.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/33216e0f077541bca5e960d10f780b65.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>解决方法<br>
-<img src="https://img-blog.csdnimg.cn/af97e63e29f54035b0b3fb48a16ec171.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>解决方法<br><img src="https://img-blog.csdnimg.cn/af97e63e29f54035b0b3fb48a16ec171.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>但是，这些方法也不能完全解决“坏消息传播得慢”的问题，这是距离向量的本质决定</p>
 </blockquote>
-<p><strong>总结</strong><br>
-<img src="https://img-blog.csdnimg.cn/22e724dce6494915b9c57a4975f5d9e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>总结</strong><br><img src="https://img-blog.csdnimg.cn/22e724dce6494915b9c57a4975f5d9e1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>RIP 协议的优缺点</p>
 <p>优点：</p>
@@ -655,85 +573,64 @@
 </ol>
 <p>缺点：</p>
 <ol>
-<li>
-<p>RIP 限制了网络的规模，它能使用的最大距离为 15（16 表示不可达）。</p>
+<li><p>RIP 限制了网络的规模，它能使用的最大距离为 15（16 表示不可达）。</p>
 </li>
-<li>
-<p>路由器之间交换的路由信息是路由器中的完整路由表，因而随着网络规模的扩大，开销也就增加。</p>
+<li><p>路由器之间交换的路由信息是路由器中的完整路由表，因而随着网络规模的扩大，开销也就增加。</p>
 </li>
-<li>
-<p>“坏消息传播得慢”，使更新过程的收敛时间过长。</p>
+<li><p>“坏消息传播得慢”，使更新过程的收敛时间过长。</p>
 </li>
 </ol>
 </blockquote>
-<h2 id="开放最短路径优先OSPF">开放最短路径优先OSPF</h2>
-<p><strong>开放最短路径优先 OSPF (Open Shortest Path First)</strong></p>
+<h2 id="开放最短路径优先OSPF"><a href="#开放最短路径优先OSPF" class="headerlink" title="开放最短路径优先OSPF"></a>开放最短路径优先OSPF</h2><p><strong>开放最短路径优先 OSPF (Open Shortest Path First)</strong></p>
 <p><strong>注意</strong>：OSPF 只是一个协议的名字，它并不表示其他的路由选择协议不是“最短路径优先”。</p>
 <p><strong>概念</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/442f8a833e614d5ba2c2606ba4efdf71.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>问候（Hello）分组</strong><br>
-<img src="https://img-blog.csdnimg.cn/6ecd0bf40e384903b45babfcd1c64db4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>问候（Hello）分组</strong><br><img src="https://img-blog.csdnimg.cn/6ecd0bf40e384903b45babfcd1c64db4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>IP数据报首部中协议号字段的取值应为89，来表明IP数据报的数据载荷为OSPF分组</p>
 </blockquote>
-<p><strong>发送链路状态通告LSA</strong><br>
-<img src="https://img-blog.csdnimg.cn/e22e34b32a1f4e058f1e6bce3a9b4aa5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>发送链路状态通告LSA</strong><br><img src="https://img-blog.csdnimg.cn/e22e34b32a1f4e058f1e6bce3a9b4aa5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>洪泛法有点类似于广播，就是从一个接口进来，从其他剩余所有接口出去</p>
 </blockquote>
-<p><strong>链路状态数据库同步</strong><br>
-<img src="https://img-blog.csdnimg.cn/ba46830a8c154abfa49ee16723cb4794.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>使用SPF算法计算出各自路由器到达其他路由器的最短路径</strong><br>
-<img src="https://img-blog.csdnimg.cn/975eb6db3b3d477b8b93cc7d1ad0e9e2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><strong>OSPF五种分组类型</strong><br>
-<img src="https://img-blog.csdnimg.cn/5c16e7b099d24852884ebbdb30b92934.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>链路状态数据库同步</strong><br><img src="https://img-blog.csdnimg.cn/ba46830a8c154abfa49ee16723cb4794.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>使用SPF算法计算出各自路由器到达其他路由器的最短路径</strong><br><img src="https://img-blog.csdnimg.cn/975eb6db3b3d477b8b93cc7d1ad0e9e2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>OSPF五种分组类型</strong><br><img src="https://img-blog.csdnimg.cn/5c16e7b099d24852884ebbdb30b92934.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>OSPF的基本工作过程</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/eb743bb2601c4a8eaba531aed81e99a0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>OSPF在多点接入网络中路由器邻居关系建立</strong></p>
-<p>如果不采用其他机制，将会产生大量的多播分组<br>
-<img src="https://img-blog.csdnimg.cn/d7b4c8f9204c47019a6648d6cd6939a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>如果不采用其他机制，将会产生大量的多播分组<br><img src="https://img-blog.csdnimg.cn/d7b4c8f9204c47019a6648d6cd6939a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>若DR出现问题，则由BDR顶替DR</p>
 </blockquote>
 <p><strong>为了使OSPF能够用于规模很大的网络，OSPF把一个自治系统再划分为若干个更小的范围，叫做区域（Area）</strong></p>
 <ul>
-<li>
-<p>在该自治系统内，所有路由器都使用OSPF协议，OSPF将该自治系统再划分成4个更小的区域</p>
+<li><p>在该自治系统内，所有路由器都使用OSPF协议，OSPF将该自治系统再划分成4个更小的区域</p>
 </li>
-<li>
-<p>每个区域都有一个32比特的区域标识符</p>
+<li><p>每个区域都有一个32比特的区域标识符</p>
 </li>
-<li>
-<p>主干区域的区域标识符必须为0，主干区域用于连通其他区域</p>
+<li><p>主干区域的区域标识符必须为0，主干区域用于连通其他区域</p>
 </li>
-<li>
-<p>其他区域的区域标识符不能为0且不相同</p>
+<li><p>其他区域的区域标识符不能为0且不相同</p>
 </li>
-<li>
-<p>每个区域一般不应包含路由器超过200个</p>
+<li><p>每个区域一般不应包含路由器超过200个</p>
 </li>
-<li>
-<p>划分区域的好处就是，利用洪泛法交换链路状态信息局限于每一个区域而不是自治系统，这样减少整个网络上的通信量</p>
+<li><p>划分区域的好处就是，利用洪泛法交换链路状态信息局限于每一个区域而不是自治系统，这样减少整个网络上的通信量</p>
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/1d41803f8211482b9f71ae34ae7f4465.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>总结</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/6ee3f4faba5943448a638482de6e110b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="边界网关协议BGP">边界网关协议BGP</h2>
-<p>BGP（Border Gateway Protocol） 是<strong>不同自治系统的路由器之间</strong>交换路由信息的协议</p>
+<h2 id="边界网关协议BGP"><a href="#边界网关协议BGP" class="headerlink" title="边界网关协议BGP"></a>边界网关协议BGP</h2><p>BGP（Border Gateway Protocol） 是<strong>不同自治系统的路由器之间</strong>交换路由信息的协议</p>
 <p><img src="https://img-blog.csdnimg.cn/688016fed64249989b5839cf6c07a40a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/95fe99abaf8246e0a7ab6dd54c008ff0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/6886dfc1152c4d2f9b9086bde73e35b9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/95fe99abaf8246e0a7ab6dd54c008ff0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6886dfc1152c4d2f9b9086bde73e35b9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/a07f8365b1b54cfb8b21653f0ddfe24a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/ca4de1694f4647cda061586b45810825.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>总结</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/46456b78eeb9404aa7bb34a3109297eb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="直接封装RIP、OSPF和BGP报文的协议">直接封装RIP、OSPF和BGP报文的协议</h2>
-<p><img src="https://img-blog.csdnimg.cn/e128e0607b814301bcef8319c9405d7d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="直接封装RIP、OSPF和BGP报文的协议"><a href="#直接封装RIP、OSPF和BGP报文的协议" class="headerlink" title="直接封装RIP、OSPF和BGP报文的协议"></a>直接封装RIP、OSPF和BGP报文的协议</h2><p><img src="https://img-blog.csdnimg.cn/e128e0607b814301bcef8319c9405d7d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.7、IPv4数据报的首部格式</h1>
-<h2 id="各字段的作用-2">各字段的作用</h2>
-<ul>
+<h1 id="4-7、IPv4数据报的首部格式"><a href="#4-7、IPv4数据报的首部格式" class="headerlink" title="4.7、IPv4数据报的首部格式"></a>4.7、IPv4数据报的首部格式</h1><h2 id="各字段的作用"><a href="#各字段的作用" class="headerlink" title="各字段的作用"></a>各字段的作用</h2><ul>
 <li>一个 IP 数据报由<strong>首部</strong>和<strong>数据</strong>两部分组成。</li>
 <li><strong>首部的前一部分是固定长度，共 20 字节，是所有 IP 数据报必须具有的。</strong></li>
 <li>在首部的固定部分的后面是一些可选字段，其长度是可变的。</li>
@@ -755,12 +652,9 @@
 <p><img src="https://img-blog.csdnimg.cn/4497a4a79a394e73b515377a1b50d13d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/10411637f938418397f1c534dc3fbe6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/3e0c8cab2c4d41b484857ae6a85d7338.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="总结-16">总结</h2>
-<p><img src="https://img-blog.csdnimg.cn/d12f0a6104bc43449eabd62e8d035c0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/d12f0a6104bc43449eabd62e8d035c0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.8、网际控制报文协议ICMP</h1>
-<h2 id="概念-12">概念</h2>
-<p>架构IP网络时需要特别注意两点：</p>
+<h1 id="4-8、网际控制报文协议ICMP"><a href="#4-8、网际控制报文协议ICMP" class="headerlink" title="4.8、网际控制报文协议ICMP"></a>4.8、网际控制报文协议ICMP</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>架构IP网络时需要特别注意两点：</p>
 <ul>
 <li>确认网络是否正常工作</li>
 <li>遇到异常时进行问题诊断</li>
@@ -777,54 +671,38 @@
 <p><strong>ICMP 不是高层协议（看起来好像是高层协议，因为 ICMP 报文是装在 IP 数据报中，作为其中的数据部分），而是 IP 层的协议</strong></p>
 <p>ICMP 报文的格式</p>
 <p><img src="https://img-blog.csdnimg.cn/f97613cf82454ff5a986cfd886e87b47.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="ICMP差错报告报文">ICMP差错报告报文</h2>
-<h3 id="终点不可达">终点不可达</h3>
-<p><img src="https://img-blog.csdnimg.cn/6871f41da2cd49b5ae18bad49e081bdf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="源点抑制">源点抑制</h3>
-<p><img src="https://img-blog.csdnimg.cn/a55c48c98f664c109d345cd3f9bc6b4f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="时间超过">时间超过</h3>
-<p><img src="https://img-blog.csdnimg.cn/0b7659c9398f4af6b8e05da005a81e92.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="参数问题">参数问题</h3>
-<p><img src="https://img-blog.csdnimg.cn/2cece4bc7ec0438bafb1f2d3f5376852.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="改变路由（重定向）">改变路由（重定向）</h3>
-<p><img src="https://img-blog.csdnimg.cn/e21de8eac9494bdf88b4541e9c2910dd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="不应发送ICMP差错报告报文情况">不应发送ICMP差错报告报文情况</h3>
-<p><img src="https://img-blog.csdnimg.cn/12e433379a274f77a898f76a6c78b753.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="ICMP应用举例">ICMP应用举例</h2>
-<h3 id="分组网间探测PING（Packet-InterNet-Groper）">分组网间探测PING（Packet InterNet Groper）</h3>
-<p><img src="https://img-blog.csdnimg.cn/a91559d0369444aa9b38c11631d5dcfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h3 id="跟踪路由（traceroute）">跟踪路由（traceroute）</h3>
-<p><img src="https://img-blog.csdnimg.cn/f466fecad4f34663b7c034a920f65515.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="ICMP差错报告报文"><a href="#ICMP差错报告报文" class="headerlink" title="ICMP差错报告报文"></a>ICMP差错报告报文</h2><h3 id="终点不可达"><a href="#终点不可达" class="headerlink" title="终点不可达"></a>终点不可达</h3><p><img src="https://img-blog.csdnimg.cn/6871f41da2cd49b5ae18bad49e081bdf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="源点抑制"><a href="#源点抑制" class="headerlink" title="源点抑制"></a>源点抑制</h3><p><img src="https://img-blog.csdnimg.cn/a55c48c98f664c109d345cd3f9bc6b4f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="时间超过"><a href="#时间超过" class="headerlink" title="时间超过"></a>时间超过</h3><p><img src="https://img-blog.csdnimg.cn/0b7659c9398f4af6b8e05da005a81e92.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="参数问题"><a href="#参数问题" class="headerlink" title="参数问题"></a>参数问题</h3><p><img src="https://img-blog.csdnimg.cn/2cece4bc7ec0438bafb1f2d3f5376852.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="改变路由（重定向）"><a href="#改变路由（重定向）" class="headerlink" title="改变路由（重定向）"></a>改变路由（重定向）</h3><p><img src="https://img-blog.csdnimg.cn/e21de8eac9494bdf88b4541e9c2910dd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="不应发送ICMP差错报告报文情况"><a href="#不应发送ICMP差错报告报文情况" class="headerlink" title="不应发送ICMP差错报告报文情况"></a>不应发送ICMP差错报告报文情况</h3><p><img src="https://img-blog.csdnimg.cn/12e433379a274f77a898f76a6c78b753.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="ICMP应用举例"><a href="#ICMP应用举例" class="headerlink" title="ICMP应用举例"></a>ICMP应用举例</h2><h3 id="分组网间探测PING（Packet-InterNet-Groper）"><a href="#分组网间探测PING（Packet-InterNet-Groper）" class="headerlink" title="分组网间探测PING（Packet InterNet Groper）"></a>分组网间探测PING（Packet InterNet Groper）</h3><p><img src="https://img-blog.csdnimg.cn/a91559d0369444aa9b38c11631d5dcfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="跟踪路由（traceroute）"><a href="#跟踪路由（traceroute）" class="headerlink" title="跟踪路由（traceroute）"></a>跟踪路由（traceroute）</h3><p><img src="https://img-blog.csdnimg.cn/f466fecad4f34663b7c034a920f65515.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>tracert命令的实现原理</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/a0f4beee5f08438f84dc56356186e5b5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/64c2f9e08e824677b30c2a52ac8adcc4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/126691478fe34bfb94c9a45d2a861efb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="总结-17">总结</h2>
-<p><img src="https://img-blog.csdnimg.cn/09f0c36b682e40e0b30e8c754e3e7ff8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/09f0c36b682e40e0b30e8c754e3e7ff8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <hr>
-<h1>4.9、虚拟专用网VPN与网络地址转换NAT</h1>
-<h2 id="虚拟专用网VPN（Virtual-Private-Network）">虚拟专用网VPN（Virtual Private Network）</h2>
-<ul>
+<h1 id="4-9、虚拟专用网VPN与网络地址转换NAT"><a href="#4-9、虚拟专用网VPN与网络地址转换NAT" class="headerlink" title="4.9、虚拟专用网VPN与网络地址转换NAT"></a>4.9、虚拟专用网VPN与网络地址转换NAT</h1><h2 id="虚拟专用网VPN（Virtual-Private-Network）"><a href="#虚拟专用网VPN（Virtual-Private-Network）" class="headerlink" title="虚拟专用网VPN（Virtual Private Network）"></a>虚拟专用网VPN（Virtual Private Network）</h2><ul>
 <li>由于 <strong>IP 地址的紧缺</strong>，一个机构能够申请到的IP地址数往往远小于本机构所拥有的主机数。</li>
 <li>考虑到<strong>互联网并不很安全</strong>，一个机构内也并不需要把所有的主机接入到外部的互联网。</li>
-<li>假定在一个机构内部的计算机通信也是采用 TCP/IP 协议，那么从原则上讲，对于这些仅在<strong>机构内部使用</strong>的计算机就可以由本机构<strong>自行分配其 IP 地址</strong>。<br>
-<img src="https://img-blog.csdnimg.cn/1a6cebf13e8f4a508f0c707626e98e4d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>假定在一个机构内部的计算机通信也是采用 TCP/IP 协议，那么从原则上讲，对于这些仅在<strong>机构内部使用</strong>的计算机就可以由本机构<strong>自行分配其 IP 地址</strong>。<br><img src="https://img-blog.csdnimg.cn/1a6cebf13e8f4a508f0c707626e98e4d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/663adb762555432f87250c06ce62c13b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/78b291ec9f804f3e83f03e85b170ae4d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>上图是因特网数字分配机构IANA官网查看IPv4地址空间中特殊地址的分配方案</p>
 <p>用粉红色标出来的地址就是无需申请的、可自由分配的专用地址，或称私有地址</p>
-</blockquote>
 <p><img src="https://img-blog.csdnimg.cn/59a27415c32643c9965e472e5fb607e8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<blockquote>
 <p>私有地址只能用于一个机构的内部通信，而不能用于和因特网上的主机通信</p>
 <p>私有地址只能用作本地地址而不能用作全球地址</p>
 <p>因特网中所有路由器对目的地址是私有地址的IP数据报一律不进行转发</p>
 <p><strong>本地地址与全球地址</strong></p>
 <ul>
 <li><strong>本地地址</strong>——仅在机构内部使用的 IP 地址，可以由本机构自行分配，而不需要向互联网的管理机构申请。</li>
-<li><strong>全球地址</strong>——全球唯一的 IP 地址，必须向互联网的管理机构申请。</li>
+<li><strong>全球地址</strong>——全球唯一的 IP 地址，必须向互联网的管理机构申请。 </li>
 <li><strong>问题</strong>：在内部使用的本地地址就有可能和互联网中某个 IP 地址重合，这样就会出现地址的二义性问题。</li>
 </ul>
 </blockquote>
@@ -839,10 +717,8 @@
 <p>因此也被称为IP隧道技术</p>
 </blockquote>
 <p><img src="https://img-blog.csdnimg.cn/8ec4d90993e64a0781845cb44d1506fb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="网络地址转换NAT（Network-Address-Translation）">网络地址转换NAT（Network Address Translation）</h2>
-<p><img src="https://img-blog.csdnimg.cn/1d3bc664496e4ece8c30fe38fde48577.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>举例<br>
-<img src="https://img-blog.csdnimg.cn/b169d42d14824544ae81dc9b5e67c039.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="网络地址转换NAT（Network-Address-Translation）"><a href="#网络地址转换NAT（Network-Address-Translation）" class="headerlink" title="网络地址转换NAT（Network Address Translation）"></a>网络地址转换NAT（Network Address Translation）</h2><p><img src="https://img-blog.csdnimg.cn/1d3bc664496e4ece8c30fe38fde48577.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>举例<br><img src="https://img-blog.csdnimg.cn/b169d42d14824544ae81dc9b5e67c039.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>使用私有地址的主机，如何才能与因特网上使用全球IP地址的主机进行通信？</p>
 <p>这需要在专用网络连接到因特网的路由器上安装NAT软件</p>
@@ -870,9 +746,8 @@
 <p>否定</p>
 <p><img src="https://img-blog.csdnimg.cn/6957e3b769ea4e7a85cc7298abc968ba.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/7c73a82dda4b48e9a3a88e0629e75036.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<h2 id="总结-18">总结</h2>
-<p><img src="https://img-blog.csdnimg.cn/d28c06743a304387a6401075274357c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/">http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/24/%E8%AE%A1%E7%BD%91-%E7%89%A9%E7%90%86%E5%B1%82/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计网-物理层</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E8%BF%90%E8%BE%93%E5%B1%82/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计网-运输层</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/25/CS144-Lab1/" title="CS144-Lab1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/A9H_Q0C7KA8TRU5Q.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">CS144-Lab1</div></div></a></div><div><a href="/2022/01/14/CS144-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="CS144-环境配置"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">CS144-环境配置</div></div></a></div><div><a href="/2022/01/14/CS144-Lab0/" title="CS144-Lab0"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">CS144-Lab0</div></div></a></div><div><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E5%BA%94%E7%94%A8%E5%B1%82/" title="计网-应用层"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-23</div><div class="title">计网-应用层</div></div></a></div><div><a href="/2022/02/24/%E8%AE%A1%E7%BD%91-%E7%89%A9%E7%90%86%E5%B1%82/" title="计网-物理层"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-24</div><div class="title">计网-物理层</div></div></a></div><div><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E6%A6%82%E8%BF%B0/" title="计网-概述"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/6MRCZMDUV30F6TCA8OA.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-23</div><div class="title">计网-概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">55</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.1、网络层概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-11"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.2、网络层提供的两种服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">面向连接的虚电路服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1"><span class="toc-text">无连接的数据报服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">虚电路服务与数据报服务的对比</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.3、IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%88%B6%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">分类编制的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-12"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">划分子网的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-text">为什么要划分子网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-text">如何划分子网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-13"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">无分类编址的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80"><span class="toc-text">为什么使用无分类编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80"><span class="toc-text">如何使用无分类编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%81%9A%E5%90%88%EF%BC%88%E6%9E%84%E9%80%A0%E8%B6%85%E7%BD%91%EF%BC%89"><span class="toc-text">路由聚合（构造超网）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-14"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BA%94%E7%94%A8%E8%A7%84%E5%88%92"><span class="toc-text">IPv4地址的应用规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E9%95%BF%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81FLSM%EF%BC%88Fixed-Length-Subnet-Mask%EF%BC%89"><span class="toc-text">定长的子网掩码FLSM（Fixed Length Subnet Mask）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%95%BF%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81VLSM%EF%BC%88Variable-Length-Subnet-Mask%EF%BC%89"><span class="toc-text">变长的子网掩码VLSM（Variable Length Subnet Mask）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.4、IP数据报的发送和转发过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.5、静态路由配置及其可能产生的路由环路问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-11"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%BE%E4%BE%8B"><span class="toc-text">多种情况举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-15"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.6、路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%8D%8F%E8%AE%AERIP"><span class="toc-text">路由信息协议RIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88OSPF"><span class="toc-text">开放最短路径优先OSPF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AEBGP"><span class="toc-text">边界网关协议BGP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%B0%81%E8%A3%85RIP%E3%80%81OSPF%E5%92%8CBGP%E6%8A%A5%E6%96%87%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="toc-text">直接封装RIP、OSPF和BGP报文的协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.7、IPv4数据报的首部格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E5%AD%97%E6%AE%B5%E7%9A%84%E4%BD%9C%E7%94%A8-2"><span class="toc-text">各字段的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-16"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.8、网际控制报文协议ICMP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-12"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP%E5%B7%AE%E9%94%99%E6%8A%A5%E5%91%8A%E6%8A%A5%E6%96%87"><span class="toc-text">ICMP差错报告报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%82%B9%E4%B8%8D%E5%8F%AF%E8%BE%BE"><span class="toc-text">终点不可达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%82%B9%E6%8A%91%E5%88%B6"><span class="toc-text">源点抑制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E8%B6%85%E8%BF%87"><span class="toc-text">时间超过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">参数问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E8%B7%AF%E7%94%B1%EF%BC%88%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%89"><span class="toc-text">改变路由（重定向）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%BA%94%E5%8F%91%E9%80%81ICMP%E5%B7%AE%E9%94%99%E6%8A%A5%E5%91%8A%E6%8A%A5%E6%96%87%E6%83%85%E5%86%B5"><span class="toc-text">不应发送ICMP差错报告报文情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="toc-text">ICMP应用举例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E7%BD%91%E9%97%B4%E6%8E%A2%E6%B5%8BPING%EF%BC%88Packet-InterNet-Groper%EF%BC%89"><span class="toc-text">分组网间探测PING（Packet InterNet Groper）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9F%E8%B8%AA%E8%B7%AF%E7%94%B1%EF%BC%88traceroute%EF%BC%89"><span class="toc-text">跟踪路由（traceroute）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-17"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4.9、虚拟专用网VPN与网络地址转换NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91VPN%EF%BC%88Virtual-Private-Network%EF%BC%89"><span class="toc-text">虚拟专用网VPN（Virtual Private Network）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT%EF%BC%88Network-Address-Translation%EF%BC%89"><span class="toc-text">网络地址转换NAT（Network Address Translation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-18"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/VimTutor/" title="VimTutor"><img src="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VimTutor"/></a><div class="content"><a class="title" href="/2022/02/26/VimTutor/" title="VimTutor">VimTutor</a><time datetime="2022-02-26T01:39:56.000Z" title="发表于 2022-02-26 09:39:56">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基本使用"/></a><div class="content"><a class="title" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用">Docker基本使用</a><time datetime="2022-02-26T01:09:35.000Z" title="发表于 2022-02-26 09:09:35">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/GM0YAC5U0AH7T76VQLB23.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具"><img src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shell工具"/></a><div class="content"><a class="title" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具">Shell工具</a><time datetime="2022-02-25T15:40:20.000Z" title="发表于 2022-02-25 23:40:20">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
+<h2 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/d28c06743a304387a6401075274357c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/">http://www.misaka-9982.com/2022/02/23/%E8%AE%A1%E7%BD%91-%E7%BD%91%E7%BB%9C%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/24/%E8%AE%A1%E7%BD%91-%E7%89%A9%E7%90%86%E5%B1%82/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计网-物理层</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E8%BF%90%E8%BE%93%E5%B1%82/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/Z2Y6F24TAMZHDNEX6KP.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计网-运输层</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/25/CS144-Lab1/" title="CS144-Lab1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">CS144-Lab1</div></div></a></div><div><a href="/2022/01/14/CS144-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="CS144-环境配置"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">CS144-环境配置</div></div></a></div><div><a href="/2022/01/14/CS144-Lab0/" title="CS144-Lab0"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">CS144-Lab0</div></div></a></div><div><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E5%BA%94%E7%94%A8%E5%B1%82/" title="计网-应用层"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-23</div><div class="title">计网-应用层</div></div></a></div><div><a href="/2022/02/24/%E8%AE%A1%E7%BD%91-%E7%89%A9%E7%90%86%E5%B1%82/" title="计网-物理层"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-24</div><div class="title">计网-物理层</div></div></a></div><div><a href="/2022/02/23/%E8%AE%A1%E7%BD%91-%E6%A6%82%E8%BF%B0/" title="计网-概述"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/P305ADMH8D9FOQ8_JG.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-23</div><div class="title">计网-概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">55</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1%E3%80%81%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="toc-text">4.1、网络层概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2%E3%80%81%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%8D%E5%8A%A1"><span class="toc-text">4.2、网络层提供的两种服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">面向连接的虚电路服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1"><span class="toc-text">无连接的数据报服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">虚电路服务与数据报服务的对比</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3%E3%80%81IPv4"><span class="toc-text">4.3、IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%88%B6%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">分类编制的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">划分子网的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-text">为什么要划分子网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-text">如何划分子网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84IPv4%E5%9C%B0%E5%9D%80"><span class="toc-text">无分类编址的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80"><span class="toc-text">为什么使用无分类编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80"><span class="toc-text">如何使用无分类编址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%81%9A%E5%90%88%EF%BC%88%E6%9E%84%E9%80%A0%E8%B6%85%E7%BD%91%EF%BC%89"><span class="toc-text">路由聚合（构造超网）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-3"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BA%94%E7%94%A8%E8%A7%84%E5%88%92"><span class="toc-text">IPv4地址的应用规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E9%95%BF%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81FLSM%EF%BC%88Fixed-Length-Subnet-Mask%EF%BC%89"><span class="toc-text">定长的子网掩码FLSM（Fixed Length Subnet Mask）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%95%BF%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81VLSM%EF%BC%88Variable-Length-Subnet-Mask%EF%BC%89"><span class="toc-text">变长的子网掩码VLSM（Variable Length Subnet Mask）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-4%E3%80%81IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%8F%91%E9%80%81%E5%92%8C%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B"><span class="toc-text">4.4、IP数据报的发送和转发过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-5%E3%80%81%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%85%B6%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E8%B7%AF%E7%94%B1%E7%8E%AF%E8%B7%AF%E9%97%AE%E9%A2%98"><span class="toc-text">4.5、静态路由配置及其可能产生的路由环路问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%BE%E4%BE%8B"><span class="toc-text">多种情况举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-4"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-6%E3%80%81%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-text">4.6、路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%8D%8F%E8%AE%AERIP"><span class="toc-text">路由信息协议RIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88OSPF"><span class="toc-text">开放最短路径优先OSPF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AEBGP"><span class="toc-text">边界网关协议BGP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%B0%81%E8%A3%85RIP%E3%80%81OSPF%E5%92%8CBGP%E6%8A%A5%E6%96%87%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="toc-text">直接封装RIP、OSPF和BGP报文的协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-7%E3%80%81IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="toc-text">4.7、IPv4数据报的首部格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E5%AD%97%E6%AE%B5%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">各字段的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-5"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-8%E3%80%81%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AEICMP"><span class="toc-text">4.8、网际控制报文协议ICMP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP%E5%B7%AE%E9%94%99%E6%8A%A5%E5%91%8A%E6%8A%A5%E6%96%87"><span class="toc-text">ICMP差错报告报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%82%B9%E4%B8%8D%E5%8F%AF%E8%BE%BE"><span class="toc-text">终点不可达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%82%B9%E6%8A%91%E5%88%B6"><span class="toc-text">源点抑制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E8%B6%85%E8%BF%87"><span class="toc-text">时间超过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">参数问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E8%B7%AF%E7%94%B1%EF%BC%88%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%89"><span class="toc-text">改变路由（重定向）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%BA%94%E5%8F%91%E9%80%81ICMP%E5%B7%AE%E9%94%99%E6%8A%A5%E5%91%8A%E6%8A%A5%E6%96%87%E6%83%85%E5%86%B5"><span class="toc-text">不应发送ICMP差错报告报文情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="toc-text">ICMP应用举例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E7%BD%91%E9%97%B4%E6%8E%A2%E6%B5%8BPING%EF%BC%88Packet-InterNet-Groper%EF%BC%89"><span class="toc-text">分组网间探测PING（Packet InterNet Groper）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9F%E8%B8%AA%E8%B7%AF%E7%94%B1%EF%BC%88traceroute%EF%BC%89"><span class="toc-text">跟踪路由（traceroute）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-6"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-9%E3%80%81%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91VPN%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT"><span class="toc-text">4.9、虚拟专用网VPN与网络地址转换NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91VPN%EF%BC%88Virtual-Private-Network%EF%BC%89"><span class="toc-text">虚拟专用网VPN（Virtual Private Network）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT%EF%BC%88Network-Address-Translation%EF%BC%89"><span class="toc-text">网络地址转换NAT（Network Address Translation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-7"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/VimTutor/" title="VimTutor"><img src="https://cdn.lixingyong.com/2021/11/19/YNH040C0LZA6KDU14C.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VimTutor"/></a><div class="content"><a class="title" href="/2022/02/26/VimTutor/" title="VimTutor">VimTutor</a><time datetime="2022-02-26T01:39:56.000Z" title="发表于 2022-02-26 09:39:56">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基本使用"/></a><div class="content"><a class="title" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用">Docker基本使用</a><time datetime="2022-02-26T01:09:35.000Z" title="发表于 2022-02-26 09:09:35">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具"><img src="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shell工具"/></a><div class="content"><a class="title" href="/2022/02/25/Shell%E5%B7%A5%E5%85%B7/" title="Shell工具">Shell工具</a><time datetime="2022-02-25T15:40:20.000Z" title="发表于 2022-02-25 23:40:20">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
   let create_time = Math.round(new Date('2021-12-29 17:56:34').getTime() / 1000);
   let timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
   let second = timestamp - create_time;
