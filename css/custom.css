@@ -1,0 +1,140 @@
+/* 首页文章栏背景透明 */
+#recent-posts>.recent-post-item,.layout_page>div:first-child:not(.recent-posts),.layout_post>#page,.layout_post>#post,.read-mode .layout_post>#post {
+    background: var(--light_bg_color)
+}
+
+/* 侧边栏透明 */
+#aside-content .card-widget {
+    background: var(--light_bg_color)
+}
+
+/* 右下角按钮美化 */
+button{
+    border-radius: 7px;
+}
+
+a#to_comment{
+    border-radius: 7px;
+}
+
+/* 目录美化 */
+#aside-content #card-toc .toc-content .toc-link.active {
+    border-left-color: var(--ahzoo-deep-blue);
+    background: var(--btn-bg);
+    border-radius: 7px;
+    box-shadow: 0 8px 12px -3px rgba(73,177,245,0.2);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(73, 177, 245, 0.2);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #49b1f5;
+    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-moz-selection {
+    color: #fff;
+    background-color: #49b1f5;
+}
+
+#veditor {
+	background-image: url(https://cdn.jsdelivr.net/gh/drew233/cdn/20200409110727.webp);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: right;
+	background-color: rgba(255, 255, 255, 0);
+	resize: vertical
+}
+#veditor:focus{
+	background-position-y: 200px;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+/* 文章页H1-H6图标样式效果 */
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+    -webkit-animation: ccc 1.6s linear infinite ;
+    animation: ccc 1.6s linear infinite ;
+}
+@-webkit-keyframes ccc {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(-1turn);
+        transform: rotate(-1turn)
+    }
+}
+@keyframes ccc {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(-1turn);
+        transform: rotate(-1turn)
+    }
+}
+
+/* 小风车样式 */
+#content-inner.layout h1::before {
+    color: #ef50a8 ;
+    margin-left: -1.55rem;
+    font-size: 1.3rem;
+    margin-top: -0.23rem;
+}
+#content-inner.layout h2::before {
+    color: #fb7061 ;
+    margin-left: -1.35rem;
+    font-size: 1.1rem;
+    margin-top: -0.12rem;
+}
+#content-inner.layout h3::before {
+    color: #ffbf00 ;
+    margin-left: -1.22rem;
+    font-size: 0.95rem;
+    margin-top: -0.09rem;
+}
+#content-inner.layout h4::before {
+    color: #a9e000 ;
+    margin-left: -1.05rem;
+    font-size: 0.8rem;
+    margin-top: -0.09rem;
+}
+#content-inner.layout h5::before {
+    color: #57c850 ;
+    margin-left: -0.9rem;
+    font-size: 0.7rem;
+    margin-top: 0.0rem;
+}
+#content-inner.layout h6::before {
+    color: #5ec1e0 ;
+    margin-left: -0.9rem;
+    font-size: 0.66rem;
+    margin-top: 0.0rem;
+}
+
+/* 小风车 hover 效果 */
+#content-inner.layout h1:hover, #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
+    color: #49b1f5 ;
+}
+#content-inner.layout h1:hover::before, #content-inner.layout h2:hover::before, #content-inner.layout h3:hover::before, #content-inner.layout h4:hover::before, #content-inner.layout h5:hover::before, #content-inner.layout h6:hover::before {
+    color: #49b1f5 ;
+    -webkit-animation: ccc 3.2s linear infinite ;
+    animation: ccc 3.2s linear infinite ;
+}
+
