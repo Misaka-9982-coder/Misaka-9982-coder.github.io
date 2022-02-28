@@ -10,3 +10,47 @@
 	background-position-y: 200px;
 	transition: all 0.2s ease-in-out 0s;
 }
+
+#aside-content .card-tag-cloud a:hover {
+    color: #eee!important;
+    margin: 0 auto;
+    border-radius: 7px;
+    background: var(--btn-bg);
+}
+
+#aside-content #card-toc .toc-content .toc-link.active {
+    border-left-color: var(--ahzoo-deep-blue);
+    background: var(--btn-bg);
+    border-radius: 7px;
+    box-shadow: 0 8px 12px -3px rgba(73,177,245,0.2);
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(73, 177, 245, 0.2);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #49b1f5;
+    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-moz-selection {
+    color: #fff;
+    background-color: #49b1f5;
+}
+
+
+作者: 十玖八柒
+链接: https://blog.ahzoo.cn/p/b207201.html
+来源: 轻筏
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
