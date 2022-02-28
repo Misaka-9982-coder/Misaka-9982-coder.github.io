@@ -8,4 +8,10 @@
     background: var(--light_bg_color)
 }
 
+button{
+    border-radius: 7px;
+}
 
+a#to_comment{
+    border-radius: 7px;
+}
