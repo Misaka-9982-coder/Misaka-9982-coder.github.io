@@ -140,7 +140,7 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
 
 /* 日间模式页面调整 */
 [data-theme=light] {
-    --card-bg: rgba(255,255,255,.9) !important; /* 全局背景调整 */
+    --card-bg: rgba(255, 255, 255, 0.315) !important; /* 全局背景调整 */
 }
 
 /* 夜间模式页面调整 */
