@@ -26,5 +26,6 @@ setInterval(() => {
     if (second > 0) {
       time[4] = nol(second);
     }
+    currentTimeHtml ="<div id='runtime'>  本站已安全运行 <br>" + time[0] + ' 年 ' + time[1] + ' 天 ' + time[2] + ' : ' + time[3] + ' : ' + time[4] + '</div>';
     document.getElementById("workboard").innerHTML = currentTimeHtml;
   }, 1000);
