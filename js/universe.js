@@ -12,3 +12,8 @@ var not_home_page = document.getElementsByClassName("not-home-page");
 if (not_home_page.length != 0) {
     not_home_page[0].style.background = "transparent";
 }
+
+// 页脚跳动的心
+$(document).ready(function(e){
+    $('.copyright').html('©2021 <i class="fa-fw fas fa-heart card-announcement-animation cc_pointer"></i> By Misaka');
+})

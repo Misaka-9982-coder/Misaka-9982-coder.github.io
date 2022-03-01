@@ -6240,7 +6240,7 @@ blockquote.pullquote.right {
   background: #121212;
 }
 [data-theme='dark'] #web_bg {
-  background: url("https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/gallery/darkmodepicture6.jpg");
+  background: url("/img/darkModePic.jpeg");
 }
 .read-mode {
   --font-color: #4c4948;
