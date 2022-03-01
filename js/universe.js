@@ -7,4 +7,8 @@ var post_bg = document.getElementsByClassName("post-bg");
 if (post_bg.length != 0) {
     post_bg[0].style.background = "transparent";
 }
-
+// not-home-page
+var not_home_page = document.getElementsByClassName("not-home-page");
+if (not_home_page.length != 0) {
+    not_home_page[0].style.background = "transparent";
+}

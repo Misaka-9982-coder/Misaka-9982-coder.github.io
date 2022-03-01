@@ -177,6 +177,7 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
 #page-header:not(.not-top-img):before {
     background-color: transparent !important;
 }
+
 #page-header.post-bg:before {
     position: absolute;top: 0;
     left: 0;
