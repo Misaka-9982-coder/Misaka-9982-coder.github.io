@@ -212,3 +212,11 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     -webkit-filter: blur(0px);
   }
 }
+
+/* 鼠标选中美化 */
+#aside-content .card-tag-cloud a:hover {
+    color: #eee!important;
+    margin: 0 auto;
+    border-radius: 15px;
+    background: var(--btn-bg);
+}
