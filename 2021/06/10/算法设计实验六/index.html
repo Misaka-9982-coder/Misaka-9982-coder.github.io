@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算法设计实验六 | Misaka's blog</title><meta name="keywords" content="Algorithm"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、实验目的： 掌握最大流算法思想。 学会用最大流算法求解应用问题。  二、内容： 有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。  要求应用最大流解决上述问题，画出m&#x3D;10，n&#x3D;3的流网络图并解释说明流网络图与论文评审问题的关系。  编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。   三、实验要求 在blac">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算法设计实验六 | Misaka's blog</title><meta name="keywords" content="Algorithm"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、实验目的：  掌握最大流算法思想。 学会用最大流算法求解应用问题。  二、内容：   有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。   要求应用最大流解决上述问题，画出m&#x3D;10，n&#x3D;3的流网络图并解释说明流网络图与论文评审问题的关系。   编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。   三、实验要求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法设计实验六">
 <meta property="og:url" content="http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/index.html">
 <meta property="og:site_name" content="Misaka&#39;s blog">
-<meta property="og:description" content="一、实验目的： 掌握最大流算法思想。 学会用最大流算法求解应用问题。  二、内容： 有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。  要求应用最大流解决上述问题，画出m&#x3D;10，n&#x3D;3的流网络图并解释说明流网络图与论文评审问题的关系。  编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。   三、实验要求 在blac">
+<meta property="og:description" content="一、实验目的：  掌握最大流算法思想。 学会用最大流算法求解应用问题。  二、内容：   有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。   要求应用最大流解决上述问题，画出m&#x3D;10，n&#x3D;3的流网络图并解释说明流网络图与论文评审问题的关系。   编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。   三、实验要求">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/27/KF0UG12HDYVZ8MHLZR3NYW.png">
 <meta property="article:published_time" content="2021-06-10T13:56:20.000Z">
 <meta property="article:modified_time" content="2022-02-24T06:02:59.857Z">
 <meta property="article:author" content="Misaka">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/27/KF0UG12HDYVZ8MHLZR3NYW.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -147,50 +147,65 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法设计实验六</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-10T13:56:20.000Z" title="发表于 2021-06-10 21:56:20">2021-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-24T06:02:59.857Z" title="更新于 2022-02-24 14:02:59">2022-02-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法设计实验六"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、实验目的："><a href="#一、实验目的：" class="headerlink" title="一、实验目的："></a><strong>一、实验目的：</strong></h2><ol>
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/27/KF0UG12HDYVZ8MHLZR3NYW.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法设计实验六</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-10T13:56:20.000Z" title="发表于 2021-06-10 21:56:20">2021-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-24T06:02:59.857Z" title="更新于 2022-02-24 14:02:59">2022-02-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法设计实验六"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、实验目的：-3"><strong>一、实验目的：</strong></h2>
+<ol>
 <li>掌握最大流算法思想。</li>
 <li>学会用最大流算法求解应用问题。</li>
 </ol>
-<h2 id="二、内容："><a href="#二、内容：" class="headerlink" title="二、内容："></a><strong>二、内容：</strong></h2><ol>
-<li><p>有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。</p>
+<h2 id="二、内容：-3"><strong>二、内容：</strong></h2>
+<ol>
+<li>
+<p>有m篇论文和n个评审，每篇论文需要安排a个评审，每个评审最多评b篇论文。请设计一个论文分配方案。</p>
 </li>
-<li><p>要求应用最大流解决上述问题，画出m=10，n=3的流网络图并解释说明流网络图与论文评审问题的关系。</p>
+<li>
+<p>要求应用最大流解决上述问题，画出m=10，n=3的流网络图并解释说明流网络图与论文评审问题的关系。</p>
 </li>
-<li><p>编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。</p>
-</li>
-</ol>
-<h2 id="三、实验要求"><a href="#三、实验要求" class="headerlink" title="三、实验要求"></a><strong>三、实验要求</strong></h2><ol>
-<li><p>在blackboard提交电子版实验报告，注意实验报告的书写，整体排版。</p>
-</li>
-<li><p>实验报告的实验步骤部分需详细给出算法思想与实现代码之间的关系解释，不可直接粘贴代码（直接粘贴代码者视为该部分内容缺失）。</p>
-</li>
-<li><p>实验报告中要求证明该算法的关键定理，并说明这些定理所起的作用。</p>
-</li>
-<li><p>实验报告样式可从<a target="_blank" rel="noopener" href="http://192.168.2.3/guide.aspx">http://192.168.2.3/guide.aspx</a> 表格下载－学生适用－在校生管理－实践教学－实验：深圳大学学生实验报告）</p>
-</li>
-<li><p>源代码作为实验报告附件上传。</p>
-</li>
-<li><p>在实验课需要现场运行验证并讲解PPT。</p>
+<li>
+<p>编程实现所设计算法，计算a和b取不同值情况下的分配方案，如果没有可行方案则输出无解。</p>
 </li>
 </ol>
-<h2 id="四、问题分析"><a href="#四、问题分析" class="headerlink" title="四、问题分析"></a><strong>四、问题分析</strong></h2><p><strong>1.二分图的构建</strong></p>
-<p><code> </code>将每一篇论文、每一位评审都抽象成为一个点，就可以得到一个论文的点集和一个评审的点集。如下左图（图1），数字从0到9的十个点的集合表示论文所属的点集，x，y，z三个点表示三位评审。</p>
+<h2 id="三、实验要求-3"><strong>三、实验要求</strong></h2>
+<ol>
+<li>
+<p>在blackboard提交电子版实验报告，注意实验报告的书写，整体排版。</p>
+</li>
+<li>
+<p>实验报告的实验步骤部分需详细给出算法思想与实现代码之间的关系解释，不可直接粘贴代码（直接粘贴代码者视为该部分内容缺失）。</p>
+</li>
+<li>
+<p>实验报告中要求证明该算法的关键定理，并说明这些定理所起的作用。</p>
+</li>
+<li>
+<p>实验报告样式可从http://192.168.2.3/guide.aspx 表格下载－学生适用－在校生管理－实践教学－实验：深圳大学学生实验报告）</p>
+</li>
+<li>
+<p>源代码作为实验报告附件上传。</p>
+</li>
+<li>
+<p>在实验课需要现场运行验证并讲解PPT。</p>
+</li>
+</ol>
+<h2 id="四、问题分析"><strong>四、问题分析</strong></h2>
+<p><strong>1.二分图的构建</strong></p>
+<p><code>	</code>将每一篇论文、每一位评审都抽象成为一个点，就可以得到一个论文的点集和一个评审的点集。如下左图（图1），数字从0到9的十个点的集合表示论文所属的点集，x，y，z三个点表示三位评审。</p>
 <p><img src="https://img-blog.csdnimg.cn/8c93f35c7f21436c831dc746fe441ad9.png" alt="在这里插入图片描述"></p>
-<p>图 1    二分图的表示<br>                    <img src="https://img-blog.csdnimg.cn/dc874d9990fa45d398610b633ff74804.png" alt="在这里插入图片描述"><br>                                    图2   解决方案对应的二分图</p>
-<p><code> </code>如果一位评审评阅了这篇论文，那么我们就在这位评审和这篇论文对应的点之间连接一条边。在这个二分图中一条边表示一篇论文和一个评审的匹配。</p>
-<p><code> </code>假定每篇论文需要一位评审，每个评审最多评审4篇论文,那么我们可以得到x评审0到3号四篇论文，y评审4到7号四篇论文，z评审8,9号论文这样一种解决方案，那么画出这个解决方案的二分图就可以得到上方右图（图2）这样的一个二分图。</p>
-<p><strong>2.流网络的搭建</strong> </p>
-<p><code> </code>①虚拟源点和汇点</p>
+<p>图 1    二分图的表示<br>
+<img src="https://img-blog.csdnimg.cn/dc874d9990fa45d398610b633ff74804.png" alt="在这里插入图片描述"><br>
+图2   解决方案对应的二分图</p>
+<p><code>	</code>如果一位评审评阅了这篇论文，那么我们就在这位评审和这篇论文对应的点之间连接一条边。在这个二分图中一条边表示一篇论文和一个评审的匹配。</p>
+<p><code>	</code>假定每篇论文需要一位评审，每个评审最多评审4篇论文,那么我们可以得到x评审0到3号四篇论文，y评审4到7号四篇论文，z评审8,9号论文这样一种解决方案，那么画出这个解决方案的二分图就可以得到上方右图（图2）这样的一个二分图。</p>
+<p><strong>2.流网络的搭建</strong></p>
+<p><code>	</code>①虚拟源点和汇点</p>
 <p>要使用最大流算法解决论文评审方案分配的问题，我们首先需要有一个流网络，目前已经有了一个二分图，搭建流网络我们还需要一个源点和一个汇点。</p>
-<p><code> </code>如下图，我们分别在论文点集的左边虚拟了一个源点S ，在评审点集的右边虚拟了一个汇点T。</p>
+<p><code>	</code>如下图，我们分别在论文点集的左边虚拟了一个源点S ，在评审点集的右边虚拟了一个汇点T。</p>
 <p><img src="https://img-blog.csdnimg.cn/ebc61e2e36be467ca72c56ba87412159.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 3  虚拟源点、 汇点</p>
-<p><code> </code>②容量设置</p>
-<p><code> </code>对于一篇论文，它需要安排a位评审，所以源点和每一个论文对应的点之间的边容量上限应该设置为a，如果小于这个值那么流网络无法输出解决方案。</p>
+<p><code>	</code>②容量设置</p>
+<p><code>	</code>对于一篇论文，它需要安排a位评审，所以源点和每一个论文对应的点之间的边容量上限应该设置为a，如果小于这个值那么流网络无法输出解决方案。</p>
 <p>对于一位评审，他最多能评b篇论文，所以评审对应的点连接到汇点的边容量上限应设置为b。</p>
 <p><img src="https://img-blog.csdnimg.cn/6b7c1dcc5e374154b7fc377e62b3ff43.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 4 容量限制</p>
-<p><code> </code>论文和评审之间的边的容量应该都设置为1，一个评审不会多次评阅相同的一篇论文，而相同的一篇论文可以被所有的评审进行评阅，所以一个论文点会和所有的评审有边连接的关系，而这些边的容量为1，如果一条边的流量为1就说明这条边对应的评审评阅了这篇论文，</p>
+<p><code>	</code>论文和评审之间的边的容量应该都设置为1，一个评审不会多次评阅相同的一篇论文，而相同的一篇论文可以被所有的评审进行评阅，所以一个论文点会和所有的评审有边连接的关系，而这些边的容量为1，如果一条边的流量为1就说明这条边对应的评审评阅了这篇论文，</p>
 <p>为0则没有评阅。</p>
 <p><img src="https://img-blog.csdnimg.cn/a5ffaaca8982404781125c59b63a7ee6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 5 论文与评审之间边的容量限制。</p>
@@ -198,19 +213,19 @@
 <p><img src="https://img-blog.csdnimg.cn/da6be4f568df4e18a79e4622dfeefec5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 6 完整的流网络图</p>
 <p>③正确性证明</p>
-<p><code> </code>要对一个二分图使用最大流算法，我们只需要证明对于二分图的解空间中的任意一个可行解一定可以在流网络中找到一个对应的可行流，在流网络中的任意一个可行流一定可以在二分图的解空间中找到一个对应的可行解，这样解空间中的最大匹配就对应于流网络中的最大流</p>
+<p><code>	</code>要对一个二分图使用最大流算法，我们只需要证明对于二分图的解空间中的任意一个可行解一定可以在流网络中找到一个对应的可行流，在流网络中的任意一个可行流一定可以在二分图的解空间中找到一个对应的可行解，这样解空间中的最大匹配就对应于流网络中的最大流</p>
 <p><img src="https://img-blog.csdnimg.cn/f35d0980d8fb409e8329f78d377e957b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>（1）二分图中的任意匹配一定可以在流网络中找到一个对应的可行流。如下图，对于左边的二分图，其对应于右边的流网络，网络中的流量满足容量限制和流量守恒，所以这个流量是合法的可行流。</p>
+<p><code>	</code>（1）二分图中的任意匹配一定可以在流网络中找到一个对应的可行流。如下图，对于左边的二分图，其对应于右边的流网络，网络中的流量满足容量限制和流量守恒，所以这个流量是合法的可行流。</p>
 <p><img src="https://img-blog.csdnimg.cn/0186029b76414a218ff21d404365136c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 8  可行解对应于可行流</p>
-<p><code> </code>（2）流网络中的任意一个可行流一定可以在二分图中找到一个对应的匹配关系，流网络中的每一个流量的数值大小都是整数值，而对于两个点集之间有流量的边，单独拿出来就是对应二分图匹配关系。如下图，由于流量值都是整数，并且中间的边流量要么是零要么是一，只有这两个数可行，所以左边的流网络课以对应于右边的二分图。</p>
+<p><code>	</code>（2）流网络中的任意一个可行流一定可以在二分图中找到一个对应的匹配关系，流网络中的每一个流量的数值大小都是整数值，而对于两个点集之间有流量的边，单独拿出来就是对应二分图匹配关系。如下图，由于流量值都是整数，并且中间的边流量要么是零要么是一，只有这两个数可行，所以左边的流网络课以对应于右边的二分图。</p>
 <p><img src="https://img-blog.csdnimg.cn/b02ddacd647a4e8f8013cfe8c41881fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 9 可行流对应于可行解</p>
-<p><code> </code>由此，我们可以说明二分图解空间的最大解对应于流网络的最大流，所以我们可以使用最大流算法求解二分图的匹配方案。</p>
+<p><code>	</code>由此，我们可以说明二分图解空间的最大解对应于流网络的最大流，所以我们可以使用最大流算法求解二分图的匹配方案。</p>
 <p><strong>3.是否存在可行的匹配方案</strong></p>
-<p><code> </code>①每篇论文需要的评审数量要少于或等于评审的人数即$a ≤ n$</p>
-<p><code> </code>②论文需要的评审总次数小于等于评审们最多能评审的数量即  $a × m ≤ b × n$</p>
-<p><code> </code>满足上面两条不等式则说明存在可行的匹配方案，否则不存在可行的匹配方案</p>
+<p><code>	</code>①每篇论文需要的评审数量要少于或等于评审的人数即$a ≤ n$</p>
+<p><code>	</code>②论文需要的评审总次数小于等于评审们最多能评审的数量即  $a × m ≤ b × n$</p>
+<p><code>	</code>满足上面两条不等式则说明存在可行的匹配方案，否则不存在可行的匹配方案</p>
 <p><strong>五、算法原理描述</strong></p>
 <p><strong>1.FF方法</strong></p>
 <p>（1）<strong>算法思想</strong></p>
@@ -220,24 +235,24 @@
 <p><img src="https://img-blog.csdnimg.cn/618c40955f124263af2b1534344f0585.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>②路径$S -&gt; 2 -&gt; 4 -&gt; T$ 为一条增广路径</p>
 <p><img src="https://img-blog.csdnimg.cn/ae66ad4ee1c5439aab3dcf9eac32ef98.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt=""></p>
-<p><code> </code>③    增广路径$S -&gt; 2 -&gt; 3 -&gt; 1 -&gt; 4 -&gt; T$</p>
+<p><code>	</code>③	增广路径$S -&gt; 2 -&gt; 3 -&gt; 1 -&gt; 4 -&gt; T$</p>
 <p><img src="https://img-blog.csdnimg.cn/0153820e870e49c8a8d4d41507df9bc1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>④再无增广路径，发送出去的流量值之和为最大流</p>
+<p><code>	</code>④再无增广路径，发送出去的流量值之和为最大流</p>
 <p><img src="https://img-blog.csdnimg.cn/5f0454bae8ab4eee9a5f4ee09194245b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>（2）<strong>最坏情况分析</strong></p>
-<p><code> </code>存在某些特殊的边可能会导致算法效率降低，如下图，有可能先找到增广路径$S-&gt;2-&gt;1-&gt;T$，然后找到增广路径$S-&gt;1-&gt;2-&gt;T$，接着增广$S-&gt;2-&gt;1-&gt;T$，依次重复增广两百万次才完成对这个流网络的增广。</p>
+<p><code>	</code>（2）<strong>最坏情况分析</strong></p>
+<p><code>	</code>存在某些特殊的边可能会导致算法效率降低，如下图，有可能先找到增广路径$S-&gt;2-&gt;1-&gt;T$，然后找到增广路径$S-&gt;1-&gt;2-&gt;T$，接着增广$S-&gt;2-&gt;1-&gt;T$，依次重复增广两百万次才完成对这个流网络的增广。</p>
 <p><img src="https://img-blog.csdnimg.cn/e15da56f47f341f58d06875a7d787924.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>（3）<strong>伪代码描述</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/ffe25fc81ea24fc09834ec9cfdb3655e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>（4）<strong>算法时间复杂度</strong></p>
-<p><code> </code>找到一条增广路径的时间复杂度为$O(E)$，有上述最坏情况分析可得，算法整体的时间复杂度为$O( E |f<em>| )$，其中， $|f</em>|$为最大流，$E$为边数</p>
+<p><code>	</code>（4）<strong>算法时间复杂度</strong></p>
+<p><code>	 </code>找到一条增广路径的时间复杂度为$O(E)$，有上述最坏情况分析可得，算法整体的时间复杂度为$O( E |f*| )$，其中， $|f*|$为最大流，$E$为边数</p>
 <p><strong>2.EK算法</strong></p>
 <p>（1）<strong>算法思想</strong></p>
-<p><code> </code>采用BFS的方式搜索增广路径来实现FF方法，可以确保每次找到的增广路径都是长度最短的路径，如上述FF方法的最坏情况，使用BFS的搜索方式则只需要搜索两条增广路径就能结束算法。如下图，算法增广完$S -&gt; 2 -&gt; 1 -&gt; T$和$S -&gt; 1 -&gt; 2-&gt;T$这两条路径就结束。</p>
+<p><code>	  </code>采用BFS的方式搜索增广路径来实现FF方法，可以确保每次找到的增广路径都是长度最短的路径，如上述FF方法的最坏情况，使用BFS的搜索方式则只需要搜索两条增广路径就能结束算法。如下图，算法增广完$S -&gt; 2 -&gt; 1 -&gt; T$和$S -&gt; 1 -&gt; 2-&gt;T$这两条路径就结束。</p>
 <p><img src="https://img-blog.csdnimg.cn/4cec67086e3740d18ff1016a807b7e87.png" alt="在这里插入图片描述"></p>
 <p>（2）<strong>伪代码描述</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/05032cfec9c3473fa442250bbf091b50.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>（3）<strong>算法时间复杂度</strong></p>
+<p><code>	</code>（3）<strong>算法时间复杂度</strong></p>
 <p>查阅资料得EK算法的时间复杂度为$O(V E^2)$，其中， $V$为点数，$E$为边数</p>
 <p><strong>3.Dinic算法</strong></p>
 <p>（1）<strong>算法思想</strong></p>
@@ -248,26 +263,27 @@
 <p>我们每次找增广路的时候，都只找比当前点层数多 1的点进行增广（这样就可以确保我们找到的增广路是最短的），即DFS搜索。</p>
 <p>如下图，1、2、3三个点形成环，如果使用FF方法，那么就有可能会在这环上不断绕圈，而采用BFS分层，并严格按照层数多1的方式搜索路径，则会避免这种情况。</p>
 <p><img src="https://img-blog.csdnimg.cn/949c4f56c2904ffc94bb3c24053d18cc.png" alt="在这里插入图片描述"></p>
-<p><code> </code>如图17，我们对流网络分层完之后可以找到如图18左侧的一条增广路径，对其进行增广，得到右侧的残留网络，很明显，这个分层图依旧存在增广路径。如果是EK算法，则在这个时候会重新遍历整个流网络搜索增广路径，而Dinic算法采用dfs的方式在这个基础之上搜索增广路径，如图19至图21所示，最后得到图21右侧没有增广路径的残留网络，才会重新使用BFS对流网络重新分层以寻找增广路径。</p>
+<p><code>	</code>如图17，我们对流网络分层完之后可以找到如图18左侧的一条增广路径，对其进行增广，得到右侧的残留网络，很明显，这个分层图依旧存在增广路径。如果是EK算法，则在这个时候会重新遍历整个流网络搜索增广路径，而Dinic算法采用dfs的方式在这个基础之上搜索增广路径，如图19至图21所示，最后得到图21右侧没有增广路径的残留网络，才会重新使用BFS对流网络重新分层以寻找增广路径。</p>
 <p><img src="https://img-blog.csdnimg.cn/ee4cfd9c17904f2798081749f4febc9b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>图 18<br><img src="https://img-blog.csdnimg.cn/499581d3c3384235bd9d4cdd471cf778.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>图 18<br>
+<img src="https://img-blog.csdnimg.cn/499581d3c3384235bd9d4cdd471cf778.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 19</p>
 <p><img src="https://img-blog.csdnimg.cn/3dc38799c0a54224a54add566f4662a5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 20</p>
 <p><img src="https://img-blog.csdnimg.cn/df15e4138e004959b11b431748240864.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>图 21</p>
 <p>（2）<strong>算法优化</strong></p>
-<p><code> </code>①多路增广</p>
-<p><code> </code>每次找到一条增广路的时候，如果残余流量没有用完的话，我们就可以利用残余部分流量，再找出一条增广路。这样就可以在一次 DFS 中找出多条增广路，大大提高了算法的效率。</p>
+<p><code>	</code>①多路增广</p>
+<p><code>	</code>每次找到一条增广路的时候，如果残余流量没有用完的话，我们就可以利用残余部分流量，再找出一条增广路。这样就可以在一次 DFS 中找出多条增广路，大大提高了算法的效率。</p>
 <p>如下图22，对于S发送到1号点的流量50份单位流量，然后对路径$1 -&gt; 3 -&gt; T$进行增广，之后1号点还剩下24份流量，接着对路径$1 -&gt; 4 -&gt; T$进行增广，1号点还剩下9份流量，再将剩余的流量发送到$1 -&gt; 5 -&gt; T$这条路径上，这样一次DFS就实现了对多条路径的增广。</p>
 <p><img src="https://img-blog.csdnimg.cn/a93f97080a38432f86e200e1888b27e1.png" alt="在这里插入图片描述"></p>
-<p><code> </code>②废点优化</p>
-<p><code> </code>对于一个点，如果所有流入他的边都已经饱和了，那么之后的增广过程中一定不会再用到这个点，将这个点废弃掉，层数设置为-1，就不会再次搜索到这个点了。</p>
-<p><code> </code>如下图，在多路增广的过程中，流入点1的所有边的流量都已经饱和了，将1号点的层数设置为-1，本次BFS构建出来的分层图不再搜索1号点。</p>
+<p><code>	</code>②废点优化</p>
+<p><code>	</code>对于一个点，如果所有流入他的边都已经饱和了，那么之后的增广过程中一定不会再用到这个点，将这个点废弃掉，层数设置为-1，就不会再次搜索到这个点了。</p>
+<p><code>	</code>如下图，在多路增广的过程中，流入点1的所有边的流量都已经饱和了，将1号点的层数设置为-1，本次BFS构建出来的分层图不再搜索1号点。</p>
 <p><img src="https://img-blog.csdnimg.cn/cf693d05654442db81f1913f064ab324.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>③当前弧优化</p>
-<p><code> </code>如果一条边已经被增广过并且达到饱和，那么它就没有可能被增广第二次。那么，我们下一次进行增广的时候，就可以不必再走那些已经被增广过的边。</p>
-<p><code>`如下图，假定这个网络首先增广路径</code>2 ~ k – a<code>和</code>2 ~ k – b<code>并且</code>k - a<code>和</code>k - b<code>这两条边达到饱和，那么在增广路径</code>1 ~ k<code>的时候，不再需要考虑</code>k - a<code>和</code>k - b<code>这两条边，只需要从</code>k - c`这条边开始增广。</p>
+<p><code>	</code>③当前弧优化</p>
+<p><code>	</code>如果一条边已经被增广过并且达到饱和，那么它就没有可能被增广第二次。那么，我们下一次进行增广的时候，就可以不必再走那些已经被增广过的边。</p>
+<p><code>	</code>如下图，假定这个网络首先增广路径<code>2 ~ k – a</code> 和<code>2 ~ k – b</code>并且<code>k - a</code>和<code>k - b</code>这两条边达到饱和，那么在增广路径<code>1 ~ k</code> 的时候，不再需要考虑<code>k - a</code>和<code>k - b</code>这两条边，只需要从<code>k - c</code>这条边开始增广。</p>
 <p><img src="https://img-blog.csdnimg.cn/a55b092bccde42b5a49183033158a5a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>（3）<strong>伪代码描述</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/a0412cb69ea84bd5803808ceb91f7206.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -289,13 +305,13 @@
 <p>1.先假装s有无限多的水(余流)，从s向周围点推流（把该点的余流推给周围点），并让周围点入队</p>
 <p>2.不断地取队首元素，对队首元素推流</p>
 <p>3.队列为空时结束算法，t点的余流即为最大流。</p>
-<p><code> </code>注意事项    </p>
+<p><code>	</code>注意事项</p>
 <p>①在开始预流推进前要先把S的高度改为n（点数），避免一开始S推流过去的点就直接把余流倒流回S。</p>
-<p><code> </code>②S和T不能进入队列 </p>
+<p><code>	</code>②S和T不能进入队列</p>
 <p>③推的流量不能超过边的容量也不能超过该点余流</p>
-<p><code> </code>④如果$（u，v）$在推流完之后满流，则将这条边在残留网络中删除。</p>
+<p><code>	</code>④如果$（u，v）$在推流完之后满流，则将这条边在残留网络中删除。</p>
 <p>（3）<strong>算法过程</strong></p>
-<p><code> </code>对于下面的流网络，我们使用红色数字表示余流，蓝色数字表示高度。荧光底色标记着发生变化的数值</p>
+<p><code>	</code>对于下面的流网络，我们使用红色数字表示余流，蓝色数字表示高度。荧光底色标记着发生变化的数值</p>
 <p><img src="https://img-blog.csdnimg.cn/7c68bdf0aeac4d24bf6f23385dc4166c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>首先，网络中有六个点，先将源点S的高度设置为6，然后向与源点连接的点推送流量，源点的余流为-11，1号点的余流为5，3号点的余流为6，（S,1）和（S,2）的边权设置为0。</p>
 <p><img src="https://img-blog.csdnimg.cn/ee0e11cc9eb1438a8d51f1089ba0dc83.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
@@ -305,7 +321,7 @@
 <p><img src="https://img-blog.csdnimg.cn/7275da4a43f54cd7ace37a064a4e90cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>与1号点连接的边都达到饱和状态，不能继续执行推流操作，继续抬高1号点的高度</p>
 <p><img src="https://img-blog.csdnimg.cn/e099110f95a44e85ad35b59668a58969.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p><code> </code>依此类推，不断地对流网络中的点执行推流，然后重新设置高度，直到整个网络中除了源点和汇点其他的点都没有余流，那么这个时候汇点中的流量值就是最大流的流量值</p>
+<p><code>	</code>依此类推，不断地对流网络中的点执行推流，然后重新设置高度，直到整个网络中除了源点和汇点其他的点都没有余流，那么这个时候汇点中的流量值就是最大流的流量值</p>
 <p><img src="https://img-blog.csdnimg.cn/b24b8993343c4e5e86e17fb83567972a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/1b6d710056de4ddba4fda8671c71a2c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>（4）<strong>算法优化</strong></p>
@@ -317,20 +333,25 @@
 <p>2.选择溢出结点（除 S,T）中高度最高的结点u，并对它所有可以推送的边进行推送；</p>
 <p>3.如果 u仍溢出，对它重贴标签，回到步骤 2；</p>
 <p>4.如果没有溢出的结点，算法结束。</p>
-<p><code> </code>②BFS优化</p>
-<p><code> </code>在初始化高度的时候进行优化。具体来说，我们初始化 h(u)为u到t的最短距离；特别的，h（s） = n（n为顶点数）。在 BFS 的同时我们可以顺带地检查图的连通性，排除无解的情况。</p>
-<p><code> </code>如下图，通过从汇点T 开始BFS整个流网络可以得到右边节点带有高度的流网络<br><img src="https://img-blog.csdnimg.cn/2bc33dfeeeae4a0f93c7f6af64fc3282.png" alt="在这里插入图片描述"></p>
-<p><code> </code>③GAP优化</p>
-<p><code> </code>HLPP 推送的条件是h（u）= h（v）+ 1，而如果在算法的某一时刻，h(u) = k的结点个数为0，那么对于h(u) &gt; k的结点就永远无法推送超额流到汇点T，因此只能送回源点S，那么我们就在这时直接让他们的高度变成n + 1，以尽快推送回源点S，减少重贴标签的操作。</p>
-<p><code> </code>如下图，算法在某个时刻将1号点的高度从2抬高到3，然后发现图中高度为2的节点数量为0，那么我们将0号点和1号点的高度设置为6，以使得它们的余流加快回流到源点S<br><img src="https://img-blog.csdnimg.cn/9ab7b21be55a4c228995a3d773541717.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>（5）<strong>伪代码描述</strong><br><img src="https://img-blog.csdnimg.cn/2132257d5e8c4cbb8237c6f67b7a6ce8.png" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/3a81e24235b2486080483f234fdeb904.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/e005f466bd9a43eba83f08927119bb1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/50dbb3cbab4b4a769e2133fb927780fd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><code>	</code>②BFS优化</p>
+<p><code>	</code>在初始化高度的时候进行优化。具体来说，我们初始化 h(u)为u到t的最短距离；特别的，h（s） = n（n为顶点数）。在 BFS 的同时我们可以顺带地检查图的连通性，排除无解的情况。</p>
+<p><code>	</code>如下图，通过从汇点T 开始BFS整个流网络可以得到右边节点带有高度的流网络<br>
+<img src="https://img-blog.csdnimg.cn/2bc33dfeeeae4a0f93c7f6af64fc3282.png" alt="在这里插入图片描述"></p>
+<p><code>	</code>③GAP优化</p>
+<p><code>	</code>HLPP 推送的条件是h（u）= h（v）+ 1，而如果在算法的某一时刻，h(u) = k的结点个数为0，那么对于h(u) &gt; k的结点就永远无法推送超额流到汇点T，因此只能送回源点S，那么我们就在这时直接让他们的高度变成n + 1，以尽快推送回源点S，减少重贴标签的操作。</p>
+<p><code>	</code>如下图，算法在某个时刻将1号点的高度从2抬高到3，然后发现图中高度为2的节点数量为0，那么我们将0号点和1号点的高度设置为6，以使得它们的余流加快回流到源点S<br>
+<img src="https://img-blog.csdnimg.cn/9ab7b21be55a4c228995a3d773541717.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>（5）<strong>伪代码描述</strong><br>
+<img src="https://img-blog.csdnimg.cn/2132257d5e8c4cbb8237c6f67b7a6ce8.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/3a81e24235b2486080483f234fdeb904.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/e005f466bd9a43eba83f08927119bb1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_16,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/50dbb3cbab4b4a769e2133fb927780fd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>（3）<strong>算法时间复杂度</strong></p>
 <p>查阅资料得EK算法的时间复杂度为 $O（V^2E^{1/2}）$，其中， V为点数，E为边数</p>
-<h2 id="六、效率分析（时间单位：us）"><a href="#六、效率分析（时间单位：us）" class="headerlink" title="六、效率分析（时间单位：us）"></a><strong>六、效率分析（时间单位：us）</strong></h2><p>由于最大流算法的时间复杂度上界比较宽松，并且本实验的流网络结构较为简单且层数固定，因此不作理论效率的比较，只通过不同参数的变化分析时间效率的变化；</p>
+<h2 id="六、效率分析（时间单位：us）"><strong>六、效率分析（时间单位：us）</strong></h2>
+<p>由于最大流算法的时间复杂度上界比较宽松，并且本实验的流网络结构较为简单且层数固定，因此不作理论效率的比较，只通过不同参数的变化分析时间效率的变化；</p>
 <p>1.其他值固定，改变a的值</p>
 <p>时间单位：ms</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -373,16 +394,15 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>b = 25, n = 500, m = 500</p>
-<p><img src="https://img-blog.csdnimg.cn/0d4957b4375945e180b6be3d25a26e0d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/f3cdeb6c71054a458ad02a4ac4d6961a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0d4957b4375945e180b6be3d25a26e0d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/f3cdeb6c71054a458ad02a4ac4d6961a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>a增大，EK和HLPP需要遍历的边和点数量增大，EK，HLPP 所需时间增多</p>
 <p>对 Dinic 的效率影响不大</p>
-<ol>
+<ol start="2">
 <li>其他值固定，改变b的值</li>
 </ol>
 <p>时间单位：ms</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -425,16 +445,15 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>a = 5, n = 500, m = 500</p>
-<p><img src="https://img-blog.csdnimg.cn/68e905bab92a4fbe8ee59bc6deaf098e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/578f2de909fa4ce487e6824436fa1909.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/68e905bab92a4fbe8ee59bc6deaf098e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/578f2de909fa4ce487e6824436fa1909.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>b增大，增广路径随b的增大而增加，EK，HLPP 所需时间减少</p>
 <p>对 Dinic 的效率影响不大</p>
-<ol>
+<ol start="3">
 <li>其他值固定，改变n的值</li>
 </ol>
 <p>时间单位：ms</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -477,14 +496,13 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>a = 5, b = 25, m = 500</p>
-<p><img src="https://img-blog.csdnimg.cn/47b6ba52243149dfb7620e051bb6a43a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c1e82ce4c0ef4a0aab3ac8dd0afa41c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/47b6ba52243149dfb7620e051bb6a43a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/c1e82ce4c0ef4a0aab3ac8dd0afa41c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>n增大，增广路数量增大，EK，HLPP 所需时间增大</p>
 <p>对 Dinic 的效率影响不大</p>
 <p>\4. 其他值固定，改变m的值</p>
 <p>时间单位：ms</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -527,23 +545,24 @@
 </tr>
 </tbody>
 </table>
-</div>
-<p>a = 25, b = 25, n = 500 </p>
-<p><img src="https://img-blog.csdnimg.cn/37fbebbf5e7b454a8759eaa5b0881565.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/f7955dae44194215bd703c54f4c76a35.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>a = 25, b = 25, n = 500</p>
+<p><img src="https://img-blog.csdnimg.cn/37fbebbf5e7b454a8759eaa5b0881565.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_19,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/f7955dae44194215bd703c54f4c76a35.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>m增大，增广路数量增大，EK，HLPP 所需时间增大</p>
 <p>对 Dinic的效率影响不大</p>
 <p>在上面的数据测试中，可以发现本实验的几种最大流算法中Dinic算法的表现最为优异，主要原因是Dinic算法的多路增广在这个实验构建的流网络效果最佳，以及Dinic实际上只需要在这个网络中使用一次BFS构建分层图就可以多次进行多路增广，所以即便Dinic的时间复杂度为$O(V^2E)$依旧表现优异。</p>
 <p>EK算法则是由于每次寻找增广路都需要进行一次BFS搜索，并且论文点集和评审点集之间的边相对来说比较稠密，所以相同规模的图EK算法在这三个算法之中效率最低。</p>
 <p>再看时间复杂度为$O（V^2E^{1/2}）$的HLPP算法，HLPP算法的时间复杂度在这个三个算法中最低，但是其他算法的时间复杂上界较为宽松，而HLPP算法实际运行是比较贴近它自身的时间复杂度的。由于本实验的流网络结构比较简单，而且层数只有四层，所以HLPP的各种优化在计算最大流的优势反而在这个实验之中体现不出来，并且对应的操作带来的时间消耗使得HLPP在这个流网络中的各项效率均差于Dinic算法。</p>
-<h2 id="七、实验心得"><a href="#七、实验心得" class="headerlink" title="七、实验心得"></a><strong>七、实验心得</strong></h2><ol>
+<h2 id="七、实验心得"><strong>七、实验心得</strong></h2>
+<ol>
 <li><strong>网络流算法的普遍化及专门化</strong></li>
 </ol>
-<p><code> </code>我们可以利用网络流去找出最大流是最简单及最普通的问题，它提供了在一指定的图中由源点到汇点的最大可能总流量。还有很多其它问题可以利用最大流算法去解决，假设它们可以适当地塑造成流网络的模样，例如二分图匹配（Bipartite Matching）、任务分配问题（Assignment Problem）和运输问题（Transportation Problem）。</p>
-<ol>
+<p><code>  </code>我们可以利用网络流去找出最大流是最简单及最普通的问题，它提供了在一指定的图中由源点到汇点的最大可能总流量。还有很多其它问题可以利用最大流算法去解决，假设它们可以适当地塑造成流网络的模样，例如二分图匹配（Bipartite Matching）、任务分配问题（Assignment Problem）和运输问题（Transportation Problem）。</p>
+<ol start="2">
 <li><strong>流网络的建立</strong></li>
 </ol>
-<p><code> </code>如果我们能找到问题的解空间中可行解和流网络中可行流之间一一对应的关系，那我们就可以使用最大流算法来求解问题的最大可行解</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/">http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/12/CPP-OJ/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CPP-OJ</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/20/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E4%BA%94/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/6MRCZMDUV30F6TCA8OA.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法设计实验五</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/27/Acwing-%E5%AF%92%E5%81%87%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022/" title="Acwing-寒假每日一题2022"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-27</div><div class="title">Acwing-寒假每日一题2022</div></div></a></div><div><a href="/2021/10/29/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/" title="第四讲 数学知识"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-29</div><div class="title">第四讲 数学知识</div></div></a></div><div><a href="/2021/04/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E4%BA%8C/" title="算法设计实验二"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/1F890Y6UTUL762D6F.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-10</div><div class="title">算法设计实验二</div></div></a></div><div><a href="/2021/05/03/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%9B%9B/" title="算法设计实验四"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/1F890Y6UTUL762D6F.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-03</div><div class="title">算法设计实验四</div></div></a></div><div><a href="/2021/11/21/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="第五讲 动态规划"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-21</div><div class="title">第五讲 动态规划</div></div></a></div><div><a href="/2021/10/23/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="第一讲 基础算法"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-23</div><div class="title">第一讲 基础算法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%EF%BC%9A"><span class="toc-text">一、实验目的：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="toc-text">二、内容：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82"><span class="toc-text">三、实验要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">四、问题分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%88%E7%8E%87%E5%88%86%E6%9E%90%EF%BC%88%E6%97%B6%E9%97%B4%E5%8D%95%E4%BD%8D%EF%BC%9Aus%EF%BC%89"><span class="toc-text">六、效率分析（时间单位：us）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%AE%9E%E9%AA%8C%E5%BF%83%E5%BE%97"><span class="toc-text">七、实验心得</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/28/Socket-Programming/" title="Socket Programming"><img src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket Programming"/></a><div class="content"><a class="title" href="/2022/02/28/Socket-Programming/" title="Socket Programming">Socket Programming</a><time datetime="2022-02-28T03:34:40.000Z" title="发表于 2022-02-28 11:34:40">2022-02-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/VimTutor/" title="VimTutor"><img src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VimTutor"/></a><div class="content"><a class="title" href="/2022/02/26/VimTutor/" title="VimTutor">VimTutor</a><time datetime="2022-02-26T01:39:56.000Z" title="发表于 2022-02-26 09:39:56">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基本使用"/></a><div class="content"><a class="title" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用">Docker基本使用</a><time datetime="2022-02-26T01:09:35.000Z" title="发表于 2022-02-26 09:09:35">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
+<p><code>  </code>如果我们能找到问题的解空间中可行解和流网络中可行流之间一一对应的关系，那我们就可以使用最大流算法来求解问题的最大可行解</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/">http://www.misaka-9982.com/2021/06/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%85%AD/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/27/KF0UG12HDYVZ8MHLZR3NYW.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/12/CPP-OJ/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CPP-OJ</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/20/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E4%BA%94/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法设计实验五</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/27/Acwing-%E5%AF%92%E5%81%87%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022/" title="Acwing-寒假每日一题2022"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-27</div><div class="title">Acwing-寒假每日一题2022</div></div></a></div><div><a href="/2021/10/29/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/" title="第四讲 数学知识"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-29</div><div class="title">第四讲 数学知识</div></div></a></div><div><a href="/2021/04/10/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E4%BA%8C/" title="算法设计实验二"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-10</div><div class="title">算法设计实验二</div></div></a></div><div><a href="/2021/05/03/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E5%9B%9B/" title="算法设计实验四"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-03</div><div class="title">算法设计实验四</div></div></a></div><div><a href="/2021/11/21/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="第五讲 动态规划"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-21</div><div class="title">第五讲 动态规划</div></div></a></div><div><a href="/2021/10/28/Acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="第二讲 数据结构"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/A9H_Q0C7KA8TRU5Q.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-28</div><div class="title">第二讲 数据结构</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!</div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!<div class="twopeople"><div class="twopeople"><div class="container"style="height:200px;"><canvas class="illo"width="800"height="800"style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="/js/twopeople1.js"></script><script src="/js/zdog.dist.js"></script><script id="rendered-js"src="/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center}canvas{display:block;margin:0 auto;cursor:move}</style></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%EF%BC%9A-3"><span class="toc-text">一、实验目的：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E5%AE%B9%EF%BC%9A-3"><span class="toc-text">二、内容：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82-3"><span class="toc-text">三、实验要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">四、问题分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%88%E7%8E%87%E5%88%86%E6%9E%90%EF%BC%88%E6%97%B6%E9%97%B4%E5%8D%95%E4%BD%8D%EF%BC%9Aus%EF%BC%89"><span class="toc-text">六、效率分析（时间单位：us）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%AE%9E%E9%AA%8C%E5%BF%83%E5%BE%97"><span class="toc-text">七、实验心得</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/28/Socket-Programming/" title="Socket Programming"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket Programming"/></a><div class="content"><a class="title" href="/2022/02/28/Socket-Programming/" title="Socket Programming">Socket Programming</a><time datetime="2022-02-28T03:34:40.000Z" title="发表于 2022-02-28 11:34:40">2022-02-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/VimTutor/" title="VimTutor"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VimTutor"/></a><div class="content"><a class="title" href="/2022/02/26/VimTutor/" title="VimTutor">VimTutor</a><time datetime="2022-02-26T01:39:56.000Z" title="发表于 2022-02-26 09:39:56">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/1F890Y6UTUL762D6F.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker基本使用"/></a><div class="content"><a class="title" href="/2022/02/26/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Docker基本使用">Docker基本使用</a><time datetime="2022-02-26T01:09:35.000Z" title="发表于 2022-02-26 09:09:35">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git基本使用"/></a><div class="content"><a class="title" href="/2022/02/25/Git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Git基本使用">Git基本使用</a><time datetime="2022-02-25T15:58:31.000Z" title="发表于 2022-02-25 23:58:31">2022-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具"><img src="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vim工具"/></a><div class="content"><a class="title" href="/2022/02/25/Vim%E5%B7%A5%E5%85%B7/" title="Vim工具">Vim工具</a><time datetime="2022-02-25T15:51:57.000Z" title="发表于 2022-02-25 23:51:57">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/27/KF0UG12HDYVZ8MHLZR3NYW.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div><div id="running-time"><script>setInterval(()=>{
   let create_time = Math.round(new Date('2021-12-29 17:56:34').getTime() / 1000);
   let timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
   let second = timestamp - create_time;
@@ -700,7 +719,31 @@ if ('Valine' === 'Disqus' || !true) {
     loadDisqus()
   }
 }
-</script></div><script src="/js/jq.js"></script><script src="/js/fish.js"></script><script src="/js/butterflycirclemagic.js"></script><script src="/js/valine.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+</script></div><script src="/js/jq.js"></script><script src="/js/fish.js"></script><script src="/js/butterflycirclemagic.js"></script><script src="/js/valine.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="/img/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
   function gitcalendar_injector_config(){
       var parent_div_git = document.getElementById('recent-posts');
       var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
