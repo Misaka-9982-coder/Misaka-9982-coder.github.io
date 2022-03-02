@@ -188,10 +188,49 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     content: '';
 }
 
-/* 鼠标选中美化 */
-#aside-content .card-tag-cloud a:hover {
-    color: #eee!important;
-    margin: 0 auto;
-    border-radius: 15px;
-    background: var(--btn-bg);
+span.current {
+    border-radius: 7px;
+}
+
+.post_cover.right_radius {
+    width: 180px;
+    height: 180px;
+    position: relative;
+}
+.post_cover.right_radius:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow:0 0 20px 12px #ffffff inset;
+}
+.post_cover.right_radius img{
+    width: 180px;
+    height: 180px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+.post_cover.left_radius {
+    width: 180px;
+    height: 180px;
+    position: relative;
+}
+.post_cover.left_radius:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow:0 0 20px 12px #ffffff inset;
+}
+.post_cover.left_radius img{
+    width: 180px;
+    height: 180px;
+    display: block;
+    margin-bottom: 20px;
 }
