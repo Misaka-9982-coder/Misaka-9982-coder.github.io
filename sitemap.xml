@@ -620,14 +620,14 @@
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/Docker/</loc>
+    <loc>http://www.misaka-9982.com/tags/Git/</loc>
     <lastmod>2022-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/Git/</loc>
+    <loc>http://www.misaka-9982.com/tags/Hexo/</loc>
     <lastmod>2022-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -641,7 +641,7 @@
   </url>
   
   <url>
-    <loc>http://www.misaka-9982.com/tags/Hexo/</loc>
+    <loc>http://www.misaka-9982.com/tags/Docker/</loc>
     <lastmod>2022-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
