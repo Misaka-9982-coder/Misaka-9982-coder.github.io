@@ -448,3 +448,7 @@ span.current {
     filter: none;
   }
 }
+
+a.button--animated#card-info-btn, a.button--animated#card-info-btn::before {
+    border-radius: 7px;
+}
