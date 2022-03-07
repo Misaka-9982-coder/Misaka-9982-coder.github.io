@@ -452,3 +452,8 @@ span.current {
 a.button--animated#card-info-btn, a.button--animated#card-info-btn::before {
     border-radius: 7px;
 }
+
+div.timenode .meta p {
+  font-weight: bold;
+  padding-left: 24px;
+}
