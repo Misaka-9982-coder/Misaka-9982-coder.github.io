@@ -450,10 +450,27 @@ span.current {
 }
 
 a.button--animated#card-info-btn, a.button--animated#card-info-btn::before {
-    border-radius: 7px;
+  border-radius: 7px;
 }
 
 div.timenode .meta p {
-  font-weight: bold;
   padding-left: 24px;
+}
+
+div.timenode>div.body {
+  background: #FFB74D; /*默认模式访客气泡配色*/
+  padding: 10px;
+  color: #fff; /*默认模式访客气泡字体配色*/
+  border-radius: 10px;
+  font-size: 16px !important;
+  width: fit-content;
+  max-width: 100%;
+  position: relative !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+[data-theme="dark"] div.timenode>div.body {
+  background: #000;
+  color: #fff;
 }
