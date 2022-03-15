@@ -474,3 +474,7 @@ div.timenode>div.body {
   background: #000;
   color: #fff;
 }
+
+div.aside-list>div.aside-list-item>a>img{
+  border-radius: 7px;
+}
