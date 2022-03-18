@@ -1,3 +1,7 @@
+http://www.misaka-9982.com/2022/03/18/SICP-Chapter-5/
+http://www.misaka-9982.com/2022/03/18/SICP-Chapter-4/
+http://www.misaka-9982.com/2022/03/18/SICP-Chapter-3/
+http://www.misaka-9982.com/2022/03/18/SICP-Chapter-2/
 http://www.misaka-9982.com/2022/03/18/SICP-Chapter-1/
 http://www.misaka-9982.com/2022/03/17/6-S081-Lab-System-Calls/
 http://www.misaka-9982.com/2022/03/15/6-S081-Lab-Xv6-and-Unix-utilities/
