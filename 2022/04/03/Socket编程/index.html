@@ -1,0 +1,856 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Socket编程 | Misaka's blog</title><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="IP Address 网络编程模型  InetAddress  InetAddress类主要是用来得到所指定的网络地址 InetAddress类没有直接显式的构造函数。要生成一个InetAddress对象，必须运用一个可用的工厂方法。工厂方法（factory method）仅是一个类中的静态方法返回一个该类实例的约定。这是在一个带有各种参数列表的重载构造函数中完成的，当持有惟一方法名时可使结果更清">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket编程">
+<meta property="og:url" content="http://www.misaka-9982.com/2022/04/03/Socket%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Misaka&#39;s blog">
+<meta property="og:description" content="IP Address 网络编程模型  InetAddress  InetAddress类主要是用来得到所指定的网络地址 InetAddress类没有直接显式的构造函数。要生成一个InetAddress对象，必须运用一个可用的工厂方法。工厂方法（factory method）仅是一个类中的静态方法返回一个该类实例的约定。这是在一个带有各种参数列表的重载构造函数中完成的，当持有惟一方法名时可使结果更清">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png">
+<meta property="article:published_time" content="2022-04-03T05:33:35.000Z">
+<meta property="article:modified_time" content="2022-04-03T05:35:06.341Z">
+<meta property="article:author" content="Misaka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/04/03/Socket%E7%BC%96%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":150,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Socket编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-03 13:35:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Socket编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-03T05:33:35.000Z" title="发表于 2022-04-03 13:33:35">2022-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-03T05:35:06.341Z" title="更新于 2022-04-03 13:35:06">2022-04-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Socket编程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>IP Address</h1>
+<h2 id="网络编程模型">网络编程模型</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403113204888.png" alt="image-20220403113204888"></p>
+<h2 id="InetAddress">InetAddress</h2>
+<ul>
+<li><code>InetAddress</code>类主要是用来得到所指定的网络地址</li>
+<li><code>InetAddress</code>类没有直接显式的构造函数。要生成一个InetAddress对象，必须运用一个可用的工厂方法。工厂方法（<code>factory method</code>）仅是一个类中的静态方法返回一个该类实例的约定。这是在一个带有各种参数列表的重载构造函数中完成的，当持有惟一方法名时可使结果更清晰。</li>
+<li><code>InetAddress</code>有三个方法可以用来创建<code>InetAddress</code>的实例
+<ul>
+<li><code>static InetAddress getLocalHost( ) throws UnknownHostException</code></li>
+<li><code>static InetAddress getByName(String hostName) throws UnknownHostException</code></li>
+<li><code>static InetAddress[ ] getAllByName(String hostName) throws UnknownHostException</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="InetAddress类的非静态方法">InetAddress类的非静态方法</h2>
+<ol>
+<li><code>boolean equals(Object other)</code><br>
+如果对象具有和other相同的Internet地址则返回true。</li>
+<li><code>byte[ ] getAddress( )</code><br>
+返回此InetAddress对象的原始 IP 地址。</li>
+<li><code>String getHostAddress( )</code><br>
+返回与InetAddress对象相关的主机地址的字符串。</li>
+<li><code>String getHostName( )</code><br>
+返回与InetAddress对象相关的主机名的字符串。</li>
+<li><code>int hashCode( )</code><br>
+返回调用对象的散列码。</li>
+<li><code>boolean isMulticastAddress( )</code><br>
+如果Internet地址是一个多播地址则返回true；否则返回false。</li>
+<li><code>String toString( )</code><br>
+返回主机名字符串和IP地址。</li>
+</ol>
+<h2 id="URL">URL</h2>
+<ul>
+<li>URL类封装了使用统一资源定位器(Uniform Resource Locator)访问一个WWW上的资源的方法。这个类可以生成一个寻址或指向某个资源的对象。URL类生成的对象指向WWW资源（Web页、文本文件、图形文件、声频片段等等)</li>
+<li>URL的基本表示方法是：<code>Protocol://hostname:port/resourcename#anchor</code>，即 <code>协议://主机名：端口/资源名#标记</code></li>
+</ul>
+<h2 id="构造方法">构造方法</h2>
+<ol>
+<li>public URL (String spec)
+<ul>
+<li>通过一个表示URL地址的字符串可以构造一个URL对象。如以下语句：</li>
+<li><code>URL urlBase=new URL(&quot;http://www. 263.net/&quot;);</code></li>
+</ul>
+</li>
+<li>public URL(URL context, String spec)
+<ul>
+<li>通过基URL和相对URL构造一个URL对象。如以下语句：</li>
+<li>`URL net263=new URL (“<a target="_blank" rel="noopener" href="http://www.263.net/">http://www.263.net/</a>”);``</li>
+<li>``URL index263=new URL(net263, “index.html”)`</li>
+</ul>
+</li>
+<li>public URL(String protocol, String host, String file);<br>
+<code>URL  url=new URL(&quot;http&quot;, &quot;www.gamelan.com&quot;, &quot;/pages/Gamelan.net. html&quot;);</code></li>
+<li>public URL(String protocol, String host, int port, String file);<br>
+<code>URL gamelan=new URL(&quot;http&quot;, &quot;www.gamelan.com&quot;, 80, &quot;Pages/Gamelan.network.html&quot;); </code></li>
+</ol>
+<h2 id="URL常用方法">URL常用方法</h2>
+<ul>
+<li><code>public String getProtocol()</code> 	获取该URL的协议名。</li>
+<li><code>public String getHost()</code> 		获取该URL的主机名。</li>
+<li><code>public int getPort()</code>            获取该URL的端口号，如果没有设置端口，返回-1。</li>
+<li><code>public String getFile()</code> 		获取该URL的文件名。</li>
+<li><code>public String getQuery()</code> 		获取该URL的查询信息。</li>
+<li><code>public String getPath()</code> 		获取该URL的路径。</li>
+<li><code>public String getAuthority()</code> 	获取该URL的权限信息。</li>
+<li><code>public String getUserInfo()</code> 	获得使用者的信息。</li>
+<li><code>public String getRef()</code> 		    获得该URL的引用。</li>
+</ul>
+<h2 id="URL类的应用">URL类的应用</h2>
+<ul>
+<li>
+<p>URL类经常用于下载网络资源，URL通过构造函数（构造函数为URL地址）可以得到一个对象，该对象的openStream()方法可以得到InputStream对象，得到InputStream就可以把网站上的资源下载下来了</p>
+</li>
+<li>
+<p>下面是一个实例，使用URL类下载某个网站上的一张图片并保存到本地。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestURL</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String aregs[ ])</span><span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        URL url=<span class="keyword">new</span> URL(<span class="string">&quot;http://images.sohu.com/uiue/sohu_logo/beijing2008/sohu.gif&quot;</span>);</span><br><span class="line">        InputStream in=url.openStream();</span><br><span class="line">        FileOutputStream fout=<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">&quot;sohu.gif&quot;</span>));</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(a&gt;-<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            a=in.read();</span><br><span class="line">            fout.write(a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>运行成功后，在当前目录生成一个gif图片</p>
+</li>
+</ul>
+<h2 id="URLConnection">URLConnection</h2>
+<ul>
+<li>URL类中的openConnection()方法可生成一个URLConnection对象，URLConnection类的实例可用于读取和写入此URL引用的资源。</li>
+<li>在网络编程工作中，JAVA的URLConnection是一个常用的类，它提供了一个非常方便的接口，只要提供需要连接的主机的URL地址，使用URL类的openConnection()方法就可以得到一个HttpURLConnection的对象，其中HttpURLConnection类是URLConnection类的子类，然后在此基础上分析HTTP内容，完成相关任务。在这种方式下，使用者不必考虑底层的实现细节，避免了烦琐的Socket类的代码编写，因此比较常用。</li>
+</ul>
+<h2 id="URLConnection常用方法">URLConnection常用方法</h2>
+<ul>
+<li><code>String getHeaderField(String name)</code><br>
+返回指定的头字段的值。</li>
+<li><code>InputStream getInputStream()</code><br>
+返回在此打开的连接读取的输入流。</li>
+<li><code>String getContentEncoding()</code><br>
+返回content-encoding头字段的值。</li>
+<li><code>int getContentLength()</code><br>
+返回content-length头字段的值。</li>
+<li><code>String getContentType()</code><br>
+返回content-type头字段的值。</li>
+<li><code>long getDate()</code><br>
+返回date头字段的值。</li>
+</ul>
+<h2 id="练习">练习</h2>
+<ol>
+<li>
+<p>使用InetAddress类的方法获取本地机的名称和IP地址</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ipaddress;</span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IPAddress</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InetAddress inetAddress = InetAddress.getLocalHost();</span><br><span class="line">            String hostName = inetAddress.getHostName();</span><br><span class="line">            String hostAddress = inetAddress.getHostAddress();</span><br><span class="line">            System.out.println(hostName);</span><br><span class="line">            System.out.println(hostAddress);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MacBook-Air.local</span><br><span class="line">192.168.0.101</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用InetAddress类的方法获取网站www.csdn.net的IP地址，如果存在多个IP地址，要求全部返回。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ipaddress;</span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CSDNAddress</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InetAddress[] inetAddresses = InetAddress.getAllByName(<span class="string">&quot;www.csdn.net&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (InetAddress inetAddress: inetAddresses) &#123;</span><br><span class="line">                String hostName = inetAddress.getHostName();</span><br><span class="line">                String hostAddress = inetAddress.getHostAddress();</span><br><span class="line">                System.out.println(hostName + <span class="string">&quot; &quot;</span> + hostAddress);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.csdn.net 39.106.226.142</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用URL类下载深圳大学首页http://www.szu.edu.cn，并统计下载得到网页文件的大小</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ipaddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SZUurl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        URL url = <span class="keyword">new</span> URL(<span class="string">&quot;http://www.szu.edu.cn&quot;</span>);</span><br><span class="line">        URLConnection connection = url.openConnection();</span><br><span class="line">        <span class="keyword">int</span> size = connection.getContentLength();</span><br><span class="line">        InputStream in = url.openStream();</span><br><span class="line">        FileOutputStream fout = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">&quot;szu.html&quot;</span>));</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(a &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">            a = in.read();</span><br><span class="line">            fout.write(a);</span><br><span class="line">        &#125;</span><br><span class="line">        fout.close();</span><br><span class="line">        System.out.println(size + <span class="string">&quot;B&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">137 B</span><br></pre></td></tr></table></figure>
+<p>此时目录结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tree      </span><br><span class="line">.</span><br><span class="line">├── Network.iml</span><br><span class="line">├── out</span><br><span class="line">│   └── production</span><br><span class="line">│       └── Network</span><br><span class="line">│           └── com</span><br><span class="line">│               └── ipaddress</span><br><span class="line">│                   ├── CSDNAddress.class</span><br><span class="line">│                   ├── IPAddress.class</span><br><span class="line">│                   └── SZUurl.class</span><br><span class="line">├── src</span><br><span class="line">│   └── com</span><br><span class="line">│       └── ipaddress</span><br><span class="line">│           ├── CSDNAddress.java</span><br><span class="line">│           ├── IPAddress.java</span><br><span class="line">│           └── SZUurl.java</span><br><span class="line">└── szu.html</span><br><span class="line"></span><br><span class="line">8 directories, 8 files</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1>网络聊天室</h1>
+<h2 id="套接字-Socket">套接字(Socket)</h2>
+<ul>
+<li>用于实现网络上客户端程序和服务器程序之间的连接。</li>
+<li>套接字负责网络上进程之间的通信</li>
+<li>客户端程序可以向套接字里写入请求，然后服务器会处理这个请求，并把处理结果通过套接字送回。</li>
+<li>服务器应用程序一般会侦听一个特定端口，用来等待客户的连接请求，当一个连接请求到达时，客户和服务器会建立一个通信连接，在连接过程中，客户被分配一个本地端口号并与一个Socket连接，客户通过写Socket来通知服务器，再通过读取Socket来获取服务器发送过来的信息。</li>
+<li>类似地，服务器也获取一个本地端口号，它需要一个新的端口号来侦听原始端口上的其他连接请求。服务器也给它的本地端口连接一个Socket，通过读写它来与客户通信。</li>
+<li>Socket可以根据通信性质分类，这种性质对于用户是可见的。</li>
+<li>应用程序一般仅在同一类的套接字之间进行通信。不过只要底层的通信协议允许，不同类型的套接字之间也可以通信。</li>
+<li>目前可以使用两种套接字，即流套接字和数据报套接字。
+<ul>
+<li>流套接字提供了双向的、有序的、无重复的并且无记录边界的数据流服务。</li>
+<li>TCP是一种流套接字协议</li>
+<li>数据报套接字支持双向的数据流，但并不保证是可靠、有序、无重复的，也就是说，一个以数据报套接字来接收信息的进程有可能发现信息重复了，或者和发出的顺序不同了。数据报套接字的一个重要特点是它保留了记录边界。</li>
+<li>UDP即是一种数据报套接字协议。</li>
+</ul>
+</li>
+</ul>
+<h2 id="端口">端口</h2>
+<ul>
+<li>是一个逻辑概念。每一个服务器都运行在该主机的一个对外开放的端口上。</li>
+<li>一个主机上可以有多种服务器，也就是有多个端口。程序员可以在创建自己的服务器程序时使用其它端口（即除了系统默认的端口）。</li>
+<li>端口常以数字编号，作为客户可指定一个端口号，用这个端口号来连接相应的服务器以接收服务。</li>
+<li>如果把 IP 地址看作电话号码，则端口类似电话的分机号码</li>
+</ul>
+<p><code>cmd &gt; netstat –na</code> 可以查看本机的端口使用情况。</p>
+<h2 id="Socket">Socket</h2>
+<p>Socket是网络上运行的程序之间双向通信链路的最后终结点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403124721918.png" alt="image-20220403124721918"></p>
+<p>IP与端口的组合得出一个套接字,可以完全分辨Internet上运行的程序</p>
+<h2 id="Socket通信—TCP">Socket通信—TCP</h2>
+<ul>
+<li>一对一的Socket C/S通信
+<ul>
+<li>TCP是一种可靠的、基于连接的网络协议，在Internet上大都采用TCP/IP协议进行互联。网络上的两个进程采用C/S模式进行通信。</li>
+<li>当两台主机准备进行交谈时，都必须建立一个Socket，其中一方作为服务器打开一个Socket并侦听来自网络的连接请求，另一个作为客户，它向网络上的服务器发送请求，通过Socket与服务器传递信息，要建立连接，只需指定主机的IP地址和端口即可。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Socket-工作模式">Socket 工作模式</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403124838800.png" alt="image-20220403124838800"></p>
+<h2 id="使用TCP协议的Socket编程">使用TCP协议的Socket编程</h2>
+<ol>
+<li>
+<p>概述</p>
+<ul>
+<li>Java提供Socket和ServerSocket类作为标准的TCP套接字编程技术，通过它们实现主机与主机之间(应用程序间)的对话。位于：java.net包中。</li>
+<li>使用Socket进行C/S程序设计的一般连接过程：
+<ol>
+<li>Server端Listen(监听)某个端口是否有连接请求，</li>
+<li>Client端向Server端发出Connect(连接)请求，</li>
+<li>Server端向Client端发回Accept（接受）消息。</li>
+<li>连接建立后，Server端和Client端都可以通过套接字类提供的一些方法与对方通信。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Socket类的构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Socket</span><span class="params">(String host, <span class="keyword">int</span> port)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Socket</span><span class="params">(InetAddress address, <span class="keyword">int</span> port)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Socket</span><span class="params">(String host, <span class="keyword">int</span> port, InetAddress localAddr, <span class="keyword">int</span> localPort)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//在指定的机器上的指定端口上运行  </span></span></span><br></pre></td></tr></table></figure>
+<p>上述方法都将抛出例外IOException，程序中需要捕获处理。</p>
+</li>
+<li>
+<p>Socket的常见方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Socket的输入/输出流管理；抛出例外IOException。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> InputStream <span class="title">getInputStream</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdownInput</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> OutputStream <span class="title">getOutputStream</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdownOutput</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//关闭Socket</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function"><span class="comment">//设置/获取Socket数据：</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> InetAddress <span class="title">getInetAddress</span><span class="params">()</span>   返回此套接字链接的地址对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> InetAddress <span class="title">getLocalAddress</span><span class="params">()</span>  返回此套接字本地的地址对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPort</span><span class="params">()</span>    返回此套接字链接地址的端口</span></span><br></pre></td></tr></table></figure>
+<p>上述方法都将抛出例外SocketException，程序中需要捕获处理。</p>
+</li>
+<li>
+<p>ServerSocket类</p>
+<p>构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ServerSocket</span><span class="params">(<span class="keyword">int</span> port)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ServerSocket</span><span class="params">(<span class="keyword">int</span> port, <span class="keyword">int</span> backlog)</span>    <span class="comment">//支持指定数目的连接</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ServerSocket</span><span class="params">(<span class="keyword">int</span> port, <span class="keyword">int</span> backlog, InetAddress bindAddr)</span>  <span class="comment">//在指定的机器上运行  </span></span></span><br></pre></td></tr></table></figure>
+<p>主要方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Socket <span class="title">accept</span><span class="params">()</span>：等待客户端的连接</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span>：关闭Socket</span></span><br></pre></td></tr></table></figure>
+<p>设置/获取Socket数据的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> InetAddress  <span class="title">getInetAddress</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLocalPort</span><span class="params">()</span>, ...  </span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>Socket通信程序基本结构都一样，包括以下四个基本步骤：</p>
+<ol>
+<li>在客户方和服务器方创建Socket/ServerSocket实例。</li>
+<li>打开连接到Socket的输入/输出流。</li>
+<li>利用输入/输出流，按照一定的协议对Socket进行读/写操作。</li>
+<li>关闭输入/输出流和Socket。</li>
+</ol>
+<p>通常，程序员的主要工作是针对所要完成的功能在第3步进行编程，第1、2、4步对所有的通信程序来说几乎都是一样的。</p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403125523379.png" alt="image-20220403125523379"></p>
+<h2 id="Socket-2">Socket</h2>
+<ul>
+<li>
+<p>创建Socket</p>
+<p>下面是一个典型的创建客户端Socket的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    Socket socket=<span class="keyword">new</span> Socket(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">1432</span>); </span><br><span class="line">    <span class="comment">//127.0.0.1是TCP/IP协议中默认的本机地址</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(IOException e)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Error:&quot;</span>+e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>创建服务器应用程序</p>
+<ul>
+<li>
+<p>用于服务器的类和方法</p>
+<ul>
+<li>要创建服务器，你需要创建ServerSocket对象监听客户请求的特定端口。</li>
+<li>当它认出有效请求，服务器Socket获得客户创建的Socket对象。用这Socket产生位于服务器和客户机之间的通信。</li>
+</ul>
+</li>
+<li>
+<p>ServerSocket类</p>
+<ul>
+<li>ServerSocket类的构造函数带两个参数 :第一个是端口号码 ;第二个参数表示可连接的最大数。</li>
+<li>ServerSocket类提供如下方法：
+<ul>
+<li>监听连接</li>
+<li>返回地址和本机端口</li>
+<li>返回表示Socket的串</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>创建服务器<br>
+构造函数的代码给出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    server = <span class="keyword">new</span> ServerSocket(<span class="number">1432</span>);</span><br><span class="line">    <span class="comment">//创建一个ServerSocket在端口1432监听客户请求</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;can not listen to:&quot;</span> + e);</span><br><span class="line">    <span class="comment">//出错，打印出错信息</span></span><br><span class="line">&#125; </span><br><span class="line">System.out.println(<span class="string">&quot;Server started…&quot;</span>);</span><br><span class="line"><span class="keyword">this</span>.start(); <span class="comment">//启动线程</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>监听客户请求</p>
+<p>ServerSocket对象通过accept()方法来监听客户的请求，如果接收到客户的请求，则产生一个Socket对象，并继续执行后面的代码；如果没有接收到客户请求，则产生一个错误信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Socket socket = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    socket = server.accept();</span><br><span class="line">    <span class="comment">//使用accept()阻塞等待客户请求，有客户</span></span><br><span class="line">    <span class="comment">//请求到来则产生一个Socket对象，并继续执行</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;can not listen to:&quot;</span> + e);</span><br><span class="line">    <span class="comment">//出错，打印出错信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>服务器的输入和输出流<br>
+服务器端用到了以下的输入和输出流：</p>
+<ul>
+<li>BufferedReader对象用来表示从客户端输入到服务器的流</li>
+<li>PrintWriter对象表示服务器端输出到客户端的流</li>
+<li>BufferedReader对象表示从系统标准输入设备输入到服务器端的流。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader is = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line"><span class="comment">//由Socket对象得到输入流，并构造相应的BufferedReader对象</span></span><br><span class="line">PrintWriter os = <span class="keyword">new</span> PrintWriter(socket.getOutputStream());</span><br><span class="line"><span class="comment">//由Socket对象得到输出流，并构造PrintWriter对象</span></span><br><span class="line">BufferedReader sin = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line"><span class="comment">//由系统标准输入设备构造BufferedReader对象</span></span><br><span class="line">&#123;            </span><br><span class="line">    <span class="keyword">new</span> Server();</span><br><span class="line">&#125;　　　　　　　　　　</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>完整的服务器程序</p>
+<ul>
+<li>服务器程序创建了一个BufferedReader对象(is)和一个PrintStream对象（os）。is使用getInputStream()方法检索客户端的输入；os使用getOutputStream()方法使得服务器可以把输出写到客户端。这样一来，就开始了双向通信。</li>
+<li>当客户连接到服务器时，服务器在标准输出上打印从客户端读入的字符串，然后由BufferedReader对象sin的readline()方法从标准输入读入一字符串，并发送到客户端程序。当有一方输入”bye”时，通信结束。</li>
+<li>到了结束的时候，服务器中断循环。关闭客户套接字。关闭套接字很重要，如果让连接开着，很快就将耗尽服务器的内存。</li>
+</ul>
+</li>
+<li>
+<p>ObjectInputStream类</p>
+<ul>
+<li>
+<p>ObjectInputStream类中包含从持久的存储介质中读出类的对象的功能。持久的存储介质可以是磁盘或套接字。</p>
+</li>
+<li>
+<p>这由ObjectInputStream类的readObject()方法来完成。readObject()方法的语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fp=<span class="keyword">new</span> FileInputStream(“data.txt”);</span><br><span class="line">ObjectInputStream istream = <span class="keyword">new</span> ObjectInputStream(fp);</span><br><span class="line">Date date = (Date)istream.readObject(); </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>一般步骤</p>
+<ol>
+<li>选择创建网络服务器应用程序所需的类和方法。</li>
+<li>确定用户定义的类，它们的目的，方法。</li>
+<li>确定用户定义的类中的数据类型和变量。</li>
+<li>确定服务器的IP地址和端口号。</li>
+<li>确定查询参数。</li>
+<li>确定要处理的异常。</li>
+<li>确定异常的出错信息。</li>
+</ol>
+</li>
+</ul>
+<h2 id="数据报通讯-UDP">数据报通讯(UDP)</h2>
+<h3 id="概述">概述</h3>
+<ul>
+<li>
+<p>UDP通信是一种无连接的数据报通信。使用该协议，两个程序进行通信时不用建立连接；数据以独立的包为单位发送，包的容量限定在64KB以内；每个数据报需要有完整的收/发地址，可以随时进行收/发数据报，但不保证传送顺序和内容准确；数据报可能会被丢失、延误等。UDP通信是不可靠的通信，但通信速度较快，常常被应用在某些要求实时交互，准确性要求不高，但传输速度要求较高的场合（如视频会议系统等）。</p>
+</li>
+<li>
+<p>Java中，基于UDP协议实现网络通信的类有三个：</p>
+<ul>
+<li>
+<p>用于表示通信数据的数据报类：DatagramPacket</p>
+</li>
+<li>
+<p>用于进行端到端通信的类：DatagramSocket</p>
+</li>
+<li>
+<p>用于广播通信的类：MulticastSocket。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403131547914.png" alt="image-20220403131547914"></p>
+<h3 id="基于UDP通信的基本模式">基于UDP通信的基本模式</h3>
+<ul>
+<li>将数据打包，发往目的地</li>
+<li>接受别人发来的数据包，察看数据包内容</li>
+</ul>
+<h4 id="发送数据包">发送数据包</h4>
+<ol>
+<li>
+<p>用DatagramPacket类将数据打包,即创建数据包对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DatagramPacket(<span class="keyword">byte</span> data[], <span class="keyword">int</span> length, InetAddtress address,<span class="keyword">int</span> port)</span><br><span class="line">Address: 目标主机地址    Port:目标主机端口</span><br></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span> data[]=“近来好吗”.getByte();</span><br><span class="line">InetAddress address=inetAddress.getByname(www.sina.com.cn);</span><br><span class="line">DatagramPacket data_pack=<span class="keyword">new</span> DatagramPacket(data,data.length,address,<span class="number">980</span>);</span><br></pre></td></tr></table></figure>
+<p>注： data_pack常用方法：</p>
+<ul>
+<li>Public int getPort();</li>
+<li>public InetAddress getAddress();</li>
+<li>public byte[] getData();</li>
+</ul>
+</li>
+<li>
+<p>用DatagramSocket类的构造方法DatagramSocket()创建一个对象，该对象负责发送数据包。例：</p>
+<ul>
+<li>DatagramSocket mail_out=new DatagramSocket();</li>
+<li>Mail_out.send(data_pack);</li>
+</ul>
+</li>
+</ol>
+<h4 id="接收数据">接收数据</h4>
+<p>DatagramSocket mail_in=new DatagramSocket(int port);<br>
+注意：mail_in的主要方法：</p>
+<ul>
+<li>Receive(DatagramPacket pack) //接收数据包给pack, 例如：</li>
+<li>DatagramPacket pack=new DatagramPacket(data,length)</li>
+<li>Mail_in.receive(pack);</li>
+</ul>
+<h2 id="练习-2">练习</h2>
+<h3 id="练习1">练习1</h3>
+<ul>
+<li>
+<p>利用Socket类和ServerSocket类编写一个C/S程序，实现C/S通信。</p>
+</li>
+<li>
+<p>客户端向服务器端发送Time命令，服务器端接受到该字符串后将服务器端当前时间返回给客户端；客户端向服务器端发送Exit命令，服务器端向客户端返回“Bye”后退出。</p>
+</li>
+<li>
+<p>编写完整程序；一个服务器端程序，一个客户端程序。服务器端和客户端都需要打印出接受到的消息和发出的命令。</p>
+</li>
+<li>
+<p>下图为运行结果示例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403132403985.png" alt="image-20220403132403985"></p>
+</li>
+</ul>
+<h3 id="练习2">练习2</h3>
+<ul>
+<li>
+<p>编写一数据报通信程序，实现简单的聊天功能。</p>
+</li>
+<li>
+<p>“聊天内容”和“输入文本”分别为当前聊天的历史信息和当前要传送出去的聊天文本。“确定”、“清空”、“退出”三个按钮分别实现发送当前聊天文本、清空当前聊天文本和退出系统的功能。</p>
+</li>
+<li>
+<p>界面可参考如下格式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403132507303.png" alt="image-20220403132507303"></p>
+</li>
+</ul>
+<h1>TCP 文件传输</h1>
+<h2 id="Java对网络编程的支持">Java对网络编程的支持</h2>
+<h3 id="java-net包中的主要的类和可能产生的例外包括：">java.net包中的主要的类和可能产生的例外包括：</h3>
+<ul>
+<li>面向应用层的类：
+<ul>
+<li>URL</li>
+<li>URLConnection</li>
+</ul>
+</li>
+<li>面向传输层/IP层的类：
+<ul>
+<li>TCP协议相关类：
+<ul>
+<li>Socket</li>
+<li>ServerSocket</li>
+</ul>
+</li>
+<li>UDP协议相关类：
+<ul>
+<li>DatagramPacket</li>
+<li>DatagramSocket</li>
+<li>MulticastSocket</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表示IP 地址的类：
+<ul>
+<li>InetAddress</li>
+</ul>
+</li>
+<li>可能产生的异常：
+<ul>
+<li>BindException</li>
+<li>ConnectException</li>
+<li>MalformedURLException</li>
+<li>NoRouteToHostException</li>
+<li>ProtocolException</li>
+<li>SocketException</li>
+<li>UnknownHostException</li>
+<li>UnknownServiceException</li>
+</ul>
+</li>
+</ul>
+<h2 id="练习-3">练习</h2>
+<ul>
+<li>
+<p>利用Socket类和ServerSocket类，编写一个C/S程序，实现网络文件传输。</p>
+</li>
+<li>
+<p>客户端向服务器端发送请求，服务器端当接受到客户端的请求之后，先向其传输文件名，当客户端接受完毕之后，向客户端传输文件</p>
+</li>
+<li>
+<p>客户端连上服务器后接收传输文件，并进行改名（文件名可自行定义）存在本地。</p>
+</li>
+<li>
+<p>编写完整程序；一个服务器端程序，一个客户端程序。服务器端和客户端都需要打印出交互过程。</p>
+</li>
+<li>
+<p>下图为运行结果示例</p>
+<ul>
+<li>
+<p>服务器端运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403132839233.png" alt="image-20220403132839233"></p>
+</li>
+<li>
+<p>客服端运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Misaka-9982-coder/img_hosting/img/image-20220403132858447.png" alt="image-20220403132858447"></p>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/04/03/Socket%E7%BC%96%E7%A8%8B/">http://www.misaka-9982.com/2022/04/03/Socket%E7%BC%96%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/LTO3_YLBNGAUCO.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">FTP文件传输协议分析</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">IP Address</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-text">网络编程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InetAddress"><span class="toc-text">InetAddress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InetAddress%E7%B1%BB%E7%9A%84%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">InetAddress类的非静态方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL"><span class="toc-text">URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">URL常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL%E7%B1%BB%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">URL类的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConnection"><span class="toc-text">URLConnection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConnection%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">URLConnection常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">网络聊天室</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97-Socket"><span class="toc-text">套接字(Socket)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3"><span class="toc-text">端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket"><span class="toc-text">Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket%E9%80%9A%E4%BF%A1%E2%80%94TCP"><span class="toc-text">Socket通信—TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">Socket 工作模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8TCP%E5%8D%8F%E8%AE%AE%E7%9A%84Socket%E7%BC%96%E7%A8%8B"><span class="toc-text">使用TCP协议的Socket编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket-2"><span class="toc-text">Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E9%80%9A%E8%AE%AF-UDP"><span class="toc-text">数据报通讯(UDP)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EUDP%E9%80%9A%E4%BF%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%BC%8F"><span class="toc-text">基于UDP通信的基本模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-text">发送数据包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="toc-text">接收数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-2"><span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A01"><span class="toc-text">练习1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A02"><span class="toc-text">练习2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">TCP 文件传输</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%AF%B9%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-text">Java对网络编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-net%E5%8C%85%E4%B8%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E7%9A%84%E7%B1%BB%E5%92%8C%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E4%BE%8B%E5%A4%96%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-text">java.net包中的主要的类和可能产生的例外包括：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-3"><span class="toc-text">练习</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程"><img src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket编程"/></a><div class="content"><a class="title" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程">Socket编程</a><time datetime="2022-04-03T05:33:35.000Z" title="发表于 2022-04-03 13:33:35">2022-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析"><img src="https://cdn.lixingyong.com/2021/11/19/LTO3_YLBNGAUCO.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FTP文件传输协议分析"/></a><div class="content"><a class="title" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析">FTP文件传输协议分析</a><time datetime="2022-03-26T09:21:08.000Z" title="发表于 2022-03-26 17:21:08">2022-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver"><img src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS144-Lab2: the TCP receiver"/></a><div class="content"><a class="title" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver">CS144-Lab2: the TCP receiver</a><time datetime="2022-03-24T13:27:50.000Z" title="发表于 2022-03-24 21:27:50">2022-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Wireshark基本使用"/></a><div class="content"><a class="title" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用">Wireshark基本使用</a><time datetime="2022-03-20T16:06:34.000Z" title="发表于 2022-03-21 00:06:34">2022-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/19/Compilers-Lab1/" title="Compilers-Lab1"><img src="https://cdn.lixingyong.com/2021/11/19/YNH040C0LZA6KDU14C.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Compilers-Lab1"/></a><div class="content"><a class="title" href="/2022/03/19/Compilers-Lab1/" title="Compilers-Lab1">Compilers-Lab1</a><time datetime="2022-03-19T08:05:40.000Z" title="发表于 2022-03-19 16:05:40">2022-03-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        if(typeof window.mediumZoom!='undefined'){
+          const zoomComment = mediumZoom(document.querySelectorAll('.tk-content :not(a)>img'))
+          zoomComment.on('open', e => {
+            const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
+            zoomComment.update({
+              background: photoBg
+            })
+          })
+        }
+        if(GLOBAL_CONFIG.lightbox === 'fancybox'){
+            const addFancybox = function (ele) {
+              const runFancybox = (ele) => {
+                ele.each(function (i, o) {
+                  const $this = $(o)
+                  const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
+                  const dataCaption = $this.attr('alt') || ''
+                  $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+                })
+
+                $().fancybox({
+                  selector: '[data-fancybox]',
+                  loop: true,
+                  transitionEffect: 'slide',
+                  protect: true,
+                  buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+                  hash: false
+                })
+              }
+
+              if (typeof $.fancybox === 'undefined') {
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
+                $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
+                  runFancybox($(ele))
+                })
+              } else {
+                runFancybox($(ele))
+              }
+            }
+          addFancybox(document.querySelectorAll('.tk-content :not(a)>img'))
+        }
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://www.misaka-9982.com/2022/04/03/Socket%E7%BC%96%E7%A8%8B/'
+    this.page.identifier = '2022/04/03/Socket编程/'
+    this.page.title = 'Socket编程'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Twikoo' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  function gitcalendar_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      console.log('已挂载gitcalendar')
+      }
+
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+        gitcalendar_injector_config()
+        GitCalendarInit("https://git-api-4yazkln1p-misaka-9982-coder.vercel.app/api?Misaka-9982-coder",['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'],'Misaka-9982-coder')
+    }
+  </script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
