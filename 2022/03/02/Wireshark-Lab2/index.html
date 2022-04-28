@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wireshark-Lab2 HTTP | Misaka's blog</title><meta name="keywords" content="Network,Wireshark"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab2:HTTP在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET&#x2F;response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。 1.基本HTTP GE">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wireshark-Lab2 HTTP | Misaka's blog</title><meta name="keywords" content="Network,Wireshark"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab2:HTTP 在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET&#x2F;response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。 1.基本HTTP G">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Wireshark-Lab2 HTTP">
 <meta property="og:url" content="http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/index.html">
 <meta property="og:site_name" content="Misaka&#39;s blog">
-<meta property="og:description" content="Lab2:HTTP在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET&#x2F;response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。 1.基本HTTP GE">
+<meta property="og:description" content="Lab2:HTTP 在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET&#x2F;response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。 1.基本HTTP G">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png">
 <meta property="article:published_time" content="2022-03-02T08:31:28.000Z">
 <meta property="article:modified_time" content="2022-03-20T13:49:52.400Z">
 <meta property="article:author" content="Misaka">
 <meta property="article:tag" content="Network">
 <meta property="article:tag" content="Wireshark">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -148,8 +148,11 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Wireshark-Lab2 HTTP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-02T08:31:28.000Z" title="发表于 2022-03-02 16:31:28">2022-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-20T13:49:52.400Z" title="更新于 2022-03-20 21:49:52">2022-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Wireshark-Lab2 HTTP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Lab2-HTTP"><a href="#Lab2-HTTP" class="headerlink" title="Lab2:HTTP"></a>Lab2:HTTP</h1><p>在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET/response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。</p>
-<h3 id="1-基本HTTP-GET-response交互"><a href="#1-基本HTTP-GET-response交互" class="headerlink" title="1.基本HTTP GET/response交互"></a>1.基本HTTP GET/response交互</h3><p>我们开始探索HTTP，方法是下载一个非常简单的HTML文件<br>非常短，并且不包含嵌入的对象。执行以下操作：</p>
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Wireshark-Lab2 HTTP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-02T08:31:28.000Z" title="发表于 2022-03-02 16:31:28">2022-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-20T13:49:52.400Z" title="更新于 2022-03-20 21:49:52">2022-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Wireshark-Lab2 HTTP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Lab2:HTTP</h1>
+<p>在介Wireshark实验-入门里，我们已经初步使用了Wireshark包嗅探器，我们现在可以操作Wireshark来查看网络协议。在这个实验中，我们会探索HTTP协议的几个方面：基本的GET/response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性。在开始这些实验之前，您可能想查看书中第2.2节。</p>
+<h3 id="1-基本HTTP-GET-response交互">1.基本HTTP GET/response交互</h3>
+<p>我们开始探索HTTP，方法是下载一个非常简单的HTML文件<br>
+非常短，并且不包含嵌入的对象。执行以下操作：</p>
 <ol>
 <li>启动您的浏览器。</li>
 <li>启动Wireshark数据包嗅探器，如Wireshark实验-入门所述（还没开始数据包捕获）。在display-filter-specification窗口中输入“http”（只是字母，不含引号标记），这样就在稍后的分组列表窗口中只捕获HTTP消息。（我们只对HTTP协议感兴趣，不想看到其他所有的混乱的数据包）。</li>
@@ -158,49 +161,57 @@
 <li>停止Wireshark数据包捕获。</li>
 </ol>
 <p>你的Wireshark窗口应该类似于图1所示的窗口。如果你无法连接网络并运行Wireshark，您可以根据后面的步骤下载已捕获的数据包：</p>
-<p>下载zip文件 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a> </p>
+<p>下载zip文件 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a></p>
 <p>解压缩文件 http-ethereal-trace-1。这个zip文件中的数据是由本书作者之一使用Wireshark在作者电脑上收集的，并且是按照Wireshark实验中的步骤做的。 如果你下载了数据文件，你可以将其加载到Wireshark中，并使用文件菜单选择打开并查看数据，然后选择http-ethereal-trace-1文件。 结果显示应与图1类似。（在不同的操作系统上，或不同的Wireshark版本上，Wireshark的界面会不同）。</p>
 <p><img src="https://img-blog.csdnimg.cn/017a1b99ba90452b9f8a5161234026d9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><strong>图1：Wireshark显示 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/HTTPwireshark-file1.html">http://gaia.cs.umass.edu/wireshark-labs/HTTPwireshark-file1.html</a> 已被您的浏览器打开</strong></p>
-<p>图1中的示例在分组列表窗口中显示了两个被捕获的HTTP消息：GET消息（从您的浏览器发送到gaia.cs.umass.edu 的web服务器）和从服务器到浏览器的响应消息。分组内容窗口显示所选消息的详细信息（在这种情况下为HTTP OK消息，其在分组列表窗口中高亮显示）。回想一下，因为HTTP消息被装载在TCP报文段内，该报文段是在IP分组封装吗，进而在以太网帧，和帧中封装，所以界面中显示了帧，以太网，IP，TCP分组信息以及HTTP报文信息。我们想最小化非HTTP数据的显示（我们这里只对HTTP感兴趣，这些其他协议将在以后的实验中研究），所以确保帧，以太网，IP和TCP行的信息被隐藏，注意左边有一个加号或一个向右的三角形（这意味着有信息被隐藏），而HTTP行具有减号或向下三角形（表示显示有关HTTP消息的所有信息）。</p>
+<p>图1中的示例在分组列表窗口中显示了两个被捕获的HTTP消息：GET消息（<a target="_blank" rel="noopener" href="http://xn--gaia-z25f82pn9csshz01ap32a0fv906c05q.cs.umass.edu">从您的浏览器发送到gaia.cs.umass.edu</a> 的web服务器）和从服务器到浏览器的响应消息。分组内容窗口显示所选消息的详细信息（在这种情况下为HTTP OK消息，其在分组列表窗口中高亮显示）。回想一下，因为HTTP消息被装载在TCP报文段内，该报文段是在IP分组封装吗，进而在以太网帧，和帧中封装，所以界面中显示了帧，以太网，IP，TCP分组信息以及HTTP报文信息。我们想最小化非HTTP数据的显示（我们这里只对HTTP感兴趣，这些其他协议将在以后的实验中研究），所以确保帧，以太网，IP和TCP行的信息被隐藏，注意左边有一个加号或一个向右的三角形（这意味着有信息被隐藏），而HTTP行具有减号或向下三角形（表示显示有关HTTP消息的所有信息）。</p>
 <p>（注意：您应该忽略与favicon.ico相关的任何HTTP GET和response。 如果你看到一个关于这个文件的引用，这是你的浏览器自动询问服务器是否有一个图标文件应显示在浏览器的URL旁边。 我们会忽略这个引起麻烦的引用。）</p>
 <p>通过查看HTTP GET和响应消息中的信息，回答以下问题。 在回答以下问题时，您应该打印出GET和响应消息（请参阅Wireshark-入门实验以获取信息），并指出您在消息中的哪个具体位置找到了回答以下问题的信息。 当您上交作业时，请注明输出，显示您在哪些地方表示了您的答案（例如，对于我们的课程，我们要求学生用笔标记纸质副本，或用彩色字体在电子副本的中注释文本）。</p>
 <ol>
-<li>您的浏览器是否运行HTTP版本1.0或1.1？服务器运行什么版本的HTTP？<ul>
+<li>您的浏览器是否运行HTTP版本1.0或1.1？服务器运行什么版本的HTTP？
+<ul>
 <li>浏览器和服务器的HTTP版本都是1.1。</li>
 <li><img src="https://img-blog.csdnimg.cn/98e463c78c224872b81826b643201827.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>您的浏览器会从接服务器接受哪种语言（如果有的话）？<ul>
+<li>您的浏览器会从接服务器接受哪种语言（如果有的话）？
+<ul>
 <li>en-US, zh-CN</li>
 <li><img src="https://img-blog.csdnimg.cn/aca48d5cd51349f0a7bf8d83d9b0262a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>您的计算机的IP地址是什么？ gaia.cs.umass.edu服务器地址呢？<ul>
+<li>您的计算机的IP地址是什么？ gaia.cs.umass.edu服务器地址呢？
+<ul>
 <li>本机：192…</li>
 <li>gaia.cs.umass.edu服务器地址：128.119.245.12</li>
 </ul>
 </li>
-<li>服务器返回到浏览器的状态代码是什么？<ul>
+<li>服务器返回到浏览器的状态代码是什么？
+<ul>
 <li>Expert Info (Chat/Sequence): HTTP/1.1 200 OK\r\n</li>
 </ul>
 </li>
-<li>服务器上HTML文件的最近一次修改是什么时候？<ul>
+<li>服务器上HTML文件的最近一次修改是什么时候？
+<ul>
 <li>Thu, 03 Mar 2022 06:59:01 GMT</li>
 </ul>
 </li>
-<li>服务器返回多少字节的内容到您的浏览器？<ul>
+<li>服务器返回多少字节的内容到您的浏览器？
+<ul>
 <li>128</li>
 <li><img src="https://img-blog.csdnimg.cn/ae9c9a534cec42058f2f2d1298fb63df.png" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>通过检查数据包内容窗口中的原始数据，你是否看到有协议头在数据包列表窗口中未显示？ 如果是，请举一个例子。<ul>
+<li>通过检查数据包内容窗口中的原始数据，你是否看到有协议头在数据包列表窗口中未显示？ 如果是，请举一个例子。
+<ul>
 <li>TCP, DNS, SSL</li>
 </ul>
 </li>
 </ol>
 <p>在您对上述问题5的回答中，您可能会惊讶地发现您刚才检索的文档在下载文档之前最近一次修改是一分钟前。 那是因为（对于这个特定文件），gaia.cs.umass.edu服务器将文件的最后修改时间设置为当前时间，并且每分钟执行一次。 因此，如果您在两次访问之间等待一分钟，则该文件看起来已被修改，因此您的浏览器将下载文档的“新”副本。</p>
-<h3 id="2-HTTP条件Get-response交互"><a href="#2-HTTP条件Get-response交互" class="headerlink" title="2.HTTP条件Get/response交互"></a>2.HTTP条件Get/response交互</h3><p>回顾书的第2.2.5节，大多数Web浏览器使用对象缓存，从而在检索HTTP对象时执行条件GET。执行以下步骤之前，请确保浏览器的缓存为空。（要在Firefox下执行此操作，请选择“工具” - &gt; “清除最近历史记录”，然后检查缓存框，对于Internet Explorer，选择“工具” - &gt;“Internet选项” - &gt;“删除文件”；这些操作将从浏览器缓存中删除缓存文件。 现在按下列步骤操作：</p>
+<h3 id="2-HTTP条件Get-response交互">2.HTTP条件Get/response交互</h3>
+<p>回顾书的第2.2.5节，大多数Web浏览器使用对象缓存，从而在检索HTTP对象时执行条件GET。执行以下步骤之前，请确保浏览器的缓存为空。（要在Firefox下执行此操作，请选择“工具” - &gt; “清除最近历史记录”，然后检查缓存框，对于Internet Explorer，选择“工具” - &gt;“Internet选项” - &gt;“删除文件”；这些操作将从浏览器缓存中删除缓存文件。 现在按下列步骤操作：</p>
 <ul>
 <li>启动您的浏览器，并确保您的浏览器的缓存被清除，如上所述。</li>
 <li>启动Wireshark数据包嗅探器。</li>
@@ -210,36 +221,39 @@
 <li>（注意：如果无法连接网络并运行Wireshark，则可以使用http-ethereal-trace-2数据包跟踪来回答以下问题；请参见上文注释。）</li>
 </ul>
 <p>回答下列问题：</p>
-<ol>
-<li>检查第一个从您浏览器到服务器的HTTP GET请求的内容。您在HTTP GET中看到了“IF-MODIFIED-SINCE”行吗？<ul>
+<ol start="8">
+<li>
+<p>检查第一个从您浏览器到服务器的HTTP GET请求的内容。您在HTTP GET中看到了“IF-MODIFIED-SINCE”行吗？</p>
+<ul>
 <li>没有“IF-MODIFIED-SINCE”</li>
 <li><img src="https://img-blog.csdnimg.cn/590fa5c40e314e548a961fbb08900b54.png" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-</ol>
-<ol>
-<li>检查服务器响应的内容。服务器是否显式返回文件的内容？ 你是怎么知道的？<ul>
+<li>
+<p>检查服务器响应的内容。服务器是否显式返回文件的内容？ 你是怎么知道的？</p>
+<ul>
 <li>显式返回文件的内容，因为返回了如下内容：</li>
 <li><img src="https://img-blog.csdnimg.cn/6df3aacddaf84a7ba175e098f3c86e88.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-</ol>
-<ol>
-<li>现在，检查第二个HTTP GET请求的内容。 您在HTTP GET中看到了“IF-MODIFIED-SINCE:”行吗？ 如果是，“IF-MODIFIED-SINCE:”头后面包含哪些信息？<ul>
+<li>
+<p>现在，检查第二个HTTP GET请求的内容。 您在HTTP GET中看到了“IF-MODIFIED-SINCE:”行吗？ 如果是，“IF-MODIFIED-SINCE:”头后面包含哪些信息？</p>
+<ul>
 <li>是</li>
 <li><img src="https://img-blog.csdnimg.cn/186f3f43f0084c2d9980c6767f7ecedc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-</ol>
-<ol>
-<li>针对第二个HTTP GET，从服务器响应的HTTP状态码和短语是什么？服务器是否明确地返回文件的内容？请解释。<ul>
+<li>
+<p>针对第二个HTTP GET，从服务器响应的HTTP状态码和短语是什么？服务器是否明确地返回文件的内容？请解释。</p>
+<ul>
 <li>HTTP/1.1 304 Not Modified\r\n</li>
 <li>没有直接返回文件内容，因为不包含Line-based text data。</li>
 <li><img src="https://img-blog.csdnimg.cn/6b1f7ef66ae04f969d815f449a2a69c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
 </ol>
-<h3 id="3-检索长文件"><a href="#3-检索长文件" class="headerlink" title="3.检索长文件"></a>3.检索长文件</h3><p>在我们到目前为止的例子中，检索的文档是简短的HTML文件。 接下来我们来看看当我们下载一个长的HTML文件时会发生什么。 按以下步骤操作：</p>
+<h3 id="3-检索长文件">3.检索长文件</h3>
+<p>在我们到目前为止的例子中，检索的文档是简短的HTML文件。 接下来我们来看看当我们下载一个长的HTML文件时会发生什么。 按以下步骤操作：</p>
 <ul>
 <li>启动您的浏览器，并确保您的浏览器缓存被清除，如上所述。</li>
 <li>启动Wireshark数据包嗅探器</li>
@@ -249,52 +263,61 @@
 </ul>
 <p>在分组列表窗口中，您应该看到您的HTTP GET消息，然后是对您的HTTP GET请求的多个分组的TCP响应。这个多分组响应值得进行一点解释。回顾第2.2节（见文中的图2.9），HTTP响应消息由状态行组成，后跟标题行，后跟一个空行，后跟实体主体。在我们的HTTP GET这种情况下，响应中的实体主体是整个请求的HTML文件。在我们的例子中，HTML文件相当长，4500字节太大，一个TCP数据包不能容纳。因此，单个HTTP响应消息由TCP分成几个部分，每个部分包含在单独的TCP报文段中（参见书中的图1.24）。在Wireshark的最新版本中，Wireshark将每个TCP报文段指定为独立的数据包，并且单个HTTP响应在多个TCP数据包之间分段的事实由Wireshark显示的Info列中的“重组PDU的TCP段”指示。 Wireshark的早期版本使用“继续”短语表示HTTP消息的整个内容被多个TCP段打断。我们在这里强调，HTTP中没有“继续”消息！</p>
 <p>回答下列问题：</p>
-<ol>
-<li>您的浏览器发送多少HTTP GET请求消息？哪个数据包包含了美国权利法案的消息？<ul>
+<ol start="12">
+<li>您的浏览器发送多少HTTP GET请求消息？哪个数据包包含了美国权利法案的消息？
+<ul>
 <li>一个HTTP GET请求，第91个数据包。</li>
 <li><img src="https://img-blog.csdnimg.cn/fd3f3ee9d05a49dbbece89559ead829d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>哪个数据包包含响应HTTP GET请求的状态码和短语？<ul>
+<li>哪个数据包包含响应HTTP GET请求的状态码和短语？
+<ul>
 <li>第91个数据包</li>
 <li><img src="https://img-blog.csdnimg.cn/519740e483e84205bc5fb56bfc9e1117.png" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>响应中的状态码和短语是什么？<ul>
+<li>响应中的状态码和短语是什么？
+<ul>
 <li>200 OK</li>
 </ul>
 </li>
-<li>需要多少包含数据的TCP段来执行单个HTTP响应和权利法案文本？<ul>
+<li>需要多少包含数据的TCP段来执行单个HTTP响应和权利法案文本？
+<ul>
 <li>4个</li>
 <li><img src="https://img-blog.csdnimg.cn/96d09ca7454b41f186a9d780638e5376.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
 </ol>
-<h3 id="4-具有嵌入对象的HTML文档"><a href="#4-具有嵌入对象的HTML文档" class="headerlink" title="4.具有嵌入对象的HTML文档"></a>4.具有嵌入对象的HTML文档</h3><p>现在我们已经看到Wireshark如何显示捕获的大型HTML文件的数据包流量，我们可以看看当浏览器使用嵌入的对象下载文件时，会发生什么，即包含其他对象的文件（在下面的例子中是图像文件） 的服务器。<br>执行以下操作：</p>
+<h3 id="4-具有嵌入对象的HTML文档">4.具有嵌入对象的HTML文档</h3>
+<p>现在我们已经看到Wireshark如何显示捕获的大型HTML文件的数据包流量，我们可以看看当浏览器使用嵌入的对象下载文件时，会发生什么，即包含其他对象的文件（在下面的例子中是图像文件） 的服务器。<br>
+执行以下操作：</p>
 <ul>
 <li>启动您的浏览器。</li>
 <li>启动Wireshark数据包嗅探器。</li>
-<li>在浏览器中输入以下URL <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html">http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html</a> 您的浏览器应显示包含两个图像的短HTML文件。这两个图像在基本HTML文件中被引用。也就是说，图像本身不包含在HTML文件中；相反，图像的URL包含在已下载的HTML文件中。如书中所述，您的浏览器将不得不从指定的网站中检索这些图标。我们的出版社的图标是从 www.aw-bc.com 网站检索的。而我们第5版（我们最喜欢的封面之一）的封面图像存储在manic.cs.umass.edu服务器。</li>
+<li>在浏览器中输入以下URL <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html">http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html</a> 您的浏览器应显示包含两个图像的短HTML文件。这两个图像在基本HTML文件中被引用。也就是说，图像本身不包含在HTML文件中；相反，图像的URL包含在已下载的HTML文件中。如书中所述，您的浏览器将不得不从指定的网站中检索这些图标。我们的出版社的图标是从 <a target="_blank" rel="noopener" href="http://www.aw-bc.com">www.aw-bc.com</a> 网站检索的。而我们第5版（我们最喜欢的封面之一）的封面图像存储在manic.cs.umass.edu服务器。</li>
 <li>停止Wireshark数据包捕获，并在display-filter-specification窗口中输入“http”，以便只显示捕获的HTTP消息。</li>
 <li>（注意：如果无法连接网络并运行Wireshark，则可以使用http-ethereal-trace-4数据包跟踪来回答以下问题；请参见上文注释。）</li>
 </ul>
 <p>回答下列问题：</p>
-<ol>
-<li>您的浏览器发送了几个HTTP GET请求消息？ 这些GET请求发送到哪个IP地址？<ul>
+<ol start="16">
+<li>您的浏览器发送了几个HTTP GET请求消息？ 这些GET请求发送到哪个IP地址？
+<ul>
 <li>3个</li>
-<li>128.119.245.12（原始网页，<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html）">http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html）</a></li>
-<li>128.119.245.12（图1，<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/pearson.png）">http://gaia.cs.umass.edu/pearson.png）</a></li>
-<li>178.79.137.164（图2，<a target="_blank" rel="noopener" href="http://kurose.cslash.net/8E_cover_small.jpg）">http://kurose.cslash.net/8E_cover_small.jpg）</a></li>
+<li>128.119.245.12（原始网页，<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html%EF%BC%89">http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html）</a></li>
+<li>128.119.245.12（图1，<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/pearson.png%EF%BC%89">http://gaia.cs.umass.edu/pearson.png）</a></li>
+<li>178.79.137.164（图2，<a target="_blank" rel="noopener" href="http://kurose.cslash.net/8E_cover_small.jpg%EF%BC%89">http://kurose.cslash.net/8E_cover_small.jpg）</a></li>
 <li><img src="https://img-blog.csdnimg.cn/e0c24ee6b88f4a9dae094fc695f83950.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>浏览器从两个网站串行还是并行下载了两张图片？请说明。<ul>
+<li>浏览器从两个网站串行还是并行下载了两张图片？请说明。
+<ul>
 <li>串行，两个数据包的到达时间不一样</li>
 <li><img src="https://img-blog.csdnimg.cn/61d8649fab9947b184b84bb2126c4edd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
 </ol>
-<h3 id="5-HTTP认证"><a href="#5-HTTP认证" class="headerlink" title="5.HTTP认证"></a>5.HTTP认证</h3><p>最后，我们尝试访问受密码保护的网站，并检查网站的HTTP消息交换的序列。URL <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/protected_pages/HTTP-wireshark-file5.html">http://gaia.cs.umass.edu/wireshark-labs/protected_pages/HTTP-wireshark-file5.html</a> 是受密码保护的。用户名是“wireshark-students”（不包含引号），密码是“network”（再次不包含引号）。所以让我们访问这个“安全的”受密码保护的网站。执行以下操作：</p>
+<h3 id="5-HTTP认证">5.HTTP认证</h3>
+<p>最后，我们尝试访问受密码保护的网站，并检查网站的HTTP消息交换的序列。URL <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/protected_pages/HTTP-wireshark-file5.html">http://gaia.cs.umass.edu/wireshark-labs/protected_pages/HTTP-wireshark-file5.html</a> 是受密码保护的。用户名是“wireshark-students”（不包含引号），密码是“network”（再次不包含引号）。所以让我们访问这个“安全的”受密码保护的网站。执行以下操作：</p>
 <ul>
 <li>请确保浏览器的缓存被清除，如上所述，然后关闭你的浏览器，再然后启动浏览器</li>
 <li>启动Wireshark数据包嗅探器。</li>
@@ -304,21 +327,26 @@
 </ul>
 <p>现在来看看Wireshark输出。 您可能需要首先阅读HTTP身份验证相关信息，方法是在 <a target="_blank" rel="noopener" href="http://frontier.userland.com/stories/storyReader$2159">http://frontier.userland.com/stories/storyReader$2159</a> 上查看“HTTP Access Authentication Framework ”上的易读材料。</p>
 <p>回答下列问题：</p>
-<ol>
-<li><p>对于您的浏览器的初始HTTP GET消息，服务器响应（状态码和短语）是什么响应？</p>
+<ol start="18">
+<li>
+<p>对于您的浏览器的初始HTTP GET消息，服务器响应（状态码和短语）是什么响应？</p>
 <ul>
 <li>401 Unauthorized</li>
 </ul>
 </li>
-<li><p>当您的浏览器第二次发送HTTP GET消息时，HTTP GET消息中包含哪些新字段？</p>
+<li>
+<p>当您的浏览器第二次发送HTTP GET消息时，HTTP GET消息中包含哪些新字段？</p>
 <ul>
-<li><p>第一次发送：</p>
+<li>
+<p>第一次发送：</p>
 <p><img src="https://img-blog.csdnimg.cn/8162fe960c5e4ca99f6426569ed95bff.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
-<li><p>第二次发送：</p>
+<li>
+<p>第二次发送：</p>
 <p><img src="https://img-blog.csdnimg.cn/4d2a4b30bdf14b68b56aed604601b674.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
-<li><p>多了<code>Cache-Control</code>，<code>Authorization</code>两个字段。</p>
+<li>
+<p>多了<code>Cache-Control</code>，<code>Authorization</code>两个字段。</p>
 <p><img src="https://img-blog.csdnimg.cn/b1a3e32a0e334f4f90ca25501948f5a9.png" alt="在这里插入图片描述"></p>
 </li>
 </ul>
@@ -326,7 +354,7 @@
 </li>
 </ol>
 <p>不要害怕！ 正如我们将在第8章中看到的，有一些方法可以使WWW访问更加安全。然而，我们显然需要一些超出基本HTTP认证框架的知识！</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/">http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a><a class="post-meta__tags" href="/tags/Wireshark/">Wireshark</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/03/Wireshark-Lab3/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Wireshark-Lab3 DNS</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/02/Wireshark-Lab1/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Wireshark-Lab1 Getting Started</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/02/Wireshark-Lab1/" title="Wireshark-Lab1 Getting Started"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Wireshark-Lab1 Getting Started</div></div></a></div><div><a href="/2022/03/14/Wireshark-Lab12/" title="Wireshark-Lab12 SSL"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">Wireshark-Lab12 SSL</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab4/" title="Wireshark-Lab4 UDP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab4 UDP</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab6/" title="Wireshark-Lab6 IP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab6 IP</div></div></a></div><div><a href="/2022/03/03/Wireshark-Lab3/" title="Wireshark-Lab3 DNS"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">Wireshark-Lab3 DNS</div></div></a></div><div><a href="/2022/03/12/Wireshark-Lab9/" title="Wireshark-Lab9 NAT"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/6MRCZMDUV30F6TCA8OA.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-12</div><div class="title">Wireshark-Lab9 NAT</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-HTTP"><span class="toc-text">Lab2:HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%ACHTTP-GET-response%E4%BA%A4%E4%BA%92"><span class="toc-text">1.基本HTTP GET&#x2F;response交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-HTTP%E6%9D%A1%E4%BB%B6Get-response%E4%BA%A4%E4%BA%92"><span class="toc-text">2.HTTP条件Get&#x2F;response交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%A3%80%E7%B4%A2%E9%95%BF%E6%96%87%E4%BB%B6"><span class="toc-text">3.检索长文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%B7%E6%9C%89%E5%B5%8C%E5%85%A5%E5%AF%B9%E8%B1%A1%E7%9A%84HTML%E6%96%87%E6%A1%A3"><span class="toc-text">4.具有嵌入对象的HTML文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-HTTP%E8%AE%A4%E8%AF%81"><span class="toc-text">5.HTTP认证</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/05/CS144-Lab3/" title="CS144-Lab3: the TCP sender"><img src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS144-Lab3: the TCP sender"/></a><div class="content"><a class="title" href="/2022/04/05/CS144-Lab3/" title="CS144-Lab3: the TCP sender">CS144-Lab3: the TCP sender</a><time datetime="2022-04-05T10:36:14.000Z" title="发表于 2022-04-05 18:36:14">2022-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程"><img src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket编程"/></a><div class="content"><a class="title" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程">Socket编程</a><time datetime="2022-04-03T05:33:35.000Z" title="发表于 2022-04-03 13:33:35">2022-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析"><img src="https://cdn.lixingyong.com/2021/11/19/LTO3_YLBNGAUCO.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FTP文件传输协议分析"/></a><div class="content"><a class="title" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析">FTP文件传输协议分析</a><time datetime="2022-03-26T09:21:08.000Z" title="发表于 2022-03-26 17:21:08">2022-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver"><img src="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS144-Lab2: the TCP receiver"/></a><div class="content"><a class="title" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver">CS144-Lab2: the TCP receiver</a><time datetime="2022-03-24T13:27:50.000Z" title="发表于 2022-03-24 21:27:50">2022-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Wireshark基本使用"/></a><div class="content"><a class="title" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用">Wireshark基本使用</a><time datetime="2022-03-20T16:06:34.000Z" title="发表于 2022-03-21 00:06:34">2022-03-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/">http://www.misaka-9982.com/2022/03/02/Wireshark-Lab2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a><a class="post-meta__tags" href="/tags/Wireshark/">Wireshark</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/03/Wireshark-Lab3/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Wireshark-Lab3 DNS</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/02/Wireshark-Lab1/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/0UFG3WV7W1OP1W18543.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Wireshark-Lab1 Getting Started</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/02/Wireshark-Lab1/" title="Wireshark-Lab1 Getting Started"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/0UFG3WV7W1OP1W18543.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Wireshark-Lab1 Getting Started</div></div></a></div><div><a href="/2022/03/14/Wireshark-Lab12/" title="Wireshark-Lab12 SSL"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/CZTBBOMKAMSS_NIK3DX5M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">Wireshark-Lab12 SSL</div></div></a></div><div><a href="/2022/03/03/Wireshark-Lab3/" title="Wireshark-Lab3 DNS"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">Wireshark-Lab3 DNS</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab4/" title="Wireshark-Lab4 UDP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9IP0OI8M8RP8NC0X20.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab4 UDP</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab6/" title="Wireshark-Lab6 IP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab6 IP</div></div></a></div><div><a href="/2022/03/12/Wireshark-Lab9/" title="Wireshark-Lab9 NAT"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-12</div><div class="title">Wireshark-Lab9 NAT</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Lab2:HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%ACHTTP-GET-response%E4%BA%A4%E4%BA%92"><span class="toc-text">1.基本HTTP GET&#x2F;response交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-HTTP%E6%9D%A1%E4%BB%B6Get-response%E4%BA%A4%E4%BA%92"><span class="toc-text">2.HTTP条件Get&#x2F;response交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%A3%80%E7%B4%A2%E9%95%BF%E6%96%87%E4%BB%B6"><span class="toc-text">3.检索长文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%B7%E6%9C%89%E5%B5%8C%E5%85%A5%E5%AF%B9%E8%B1%A1%E7%9A%84HTML%E6%96%87%E6%A1%A3"><span class="toc-text">4.具有嵌入对象的HTML文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-HTTP%E8%AE%A4%E8%AF%81"><span class="toc-text">5.HTTP认证</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/05/CS144-Lab3/" title="CS144-Lab3: the TCP sender"><img src="https://cdn.lixingyong.com/2021/11/19/6MRCZMDUV30F6TCA8OA.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS144-Lab3: the TCP sender"/></a><div class="content"><a class="title" href="/2022/04/05/CS144-Lab3/" title="CS144-Lab3: the TCP sender">CS144-Lab3: the TCP sender</a><time datetime="2022-04-05T10:36:14.000Z" title="发表于 2022-04-05 18:36:14">2022-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket编程"/></a><div class="content"><a class="title" href="/2022/04/03/Socket%E7%BC%96%E7%A8%8B/" title="Socket编程">Socket编程</a><time datetime="2022-04-03T05:33:35.000Z" title="发表于 2022-04-03 13:33:35">2022-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析"><img src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FTP文件传输协议分析"/></a><div class="content"><a class="title" href="/2022/03/26/FTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="FTP文件传输协议分析">FTP文件传输协议分析</a><time datetime="2022-03-26T09:21:08.000Z" title="发表于 2022-03-26 17:21:08">2022-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver"><img src="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS144-Lab2: the TCP receiver"/></a><div class="content"><a class="title" href="/2022/03/24/CS144-Lab2/" title="CS144-Lab2: the TCP receiver">CS144-Lab2: the TCP receiver</a><time datetime="2022-03-24T13:27:50.000Z" title="发表于 2022-03-24 21:27:50">2022-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用"><img src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Wireshark基本使用"/></a><div class="content"><a class="title" href="/2022/03/21/Wireshark%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Wireshark基本使用">Wireshark基本使用</a><time datetime="2022-03-20T16:06:34.000Z" title="发表于 2022-03-21 00:06:34">2022-03-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
@@ -501,30 +529,6 @@ if ('Twikoo' === 'Disqus' || !true) {
   }
 }
 </script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
-  function butterfly_clock_injector_config(){
-    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
-    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
-    console.log('已挂载butterfly_clock')
-    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
-    }
-  var elist = 'null'.split(',');
-  var cpage = location.pathname;
-  var epage = 'all';
-  var flag = 0;
-
-  for (var i=0;i<elist.length;i++){
-    if (cpage.includes(elist[i])){
-      flag++;
-    }
-  }
-
-  if ((epage ==='all')&&(flag == 0)){
-    butterfly_clock_injector_config();
-  }
-  else if (epage === cpage){
-    butterfly_clock_injector_config();
-  }
-  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax>
   function butterfly_footer_beautify_injector_config(){
     var parent_div_git = document.getElementById('footer-wrap');
     var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
@@ -564,7 +568,31 @@ for(var i = 0;i<arr.length;i++){
     arr[i].setAttribute('data-wow-delay', '');
     arr[i].setAttribute('data-wow-offset', '');
     arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
   function gitcalendar_injector_config(){
       var parent_div_git = document.getElementById('recent-posts');
       var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
