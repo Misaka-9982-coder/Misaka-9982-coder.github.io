@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wireshark-Lab5 TCP | Misaka's blog</title><meta name="keywords" content="Network,Wireshark"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab5:TCP在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wireshark-Lab5 TCP | Misaka's blog</title><meta name="keywords" content="Network,Wireshark"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab5:TCP 在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Wireshark-Lab5 TCP">
 <meta property="og:url" content="http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/index.html">
 <meta property="og:site_name" content="Misaka&#39;s blog">
-<meta property="og:description" content="Lab5:TCP在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP">
+<meta property="og:description" content="Lab5:TCP 在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png">
 <meta property="article:published_time" content="2022-03-04T09:40:23.000Z">
 <meta property="article:modified_time" content="2022-03-20T13:50:06.878Z">
 <meta property="article:author" content="Misaka">
 <meta property="article:tag" content="Network">
 <meta property="article:tag" content="Wireshark">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -148,51 +148,65 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">91</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Wireshark-Lab5 TCP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-04T09:40:23.000Z" title="发表于 2022-03-04 17:40:23">2022-03-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-20T13:50:06.878Z" title="更新于 2022-03-20 21:50:06">2022-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Wireshark-Lab5 TCP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Lab5-TCP"><a href="#Lab5-TCP" class="headerlink" title="Lab5:TCP"></a>Lab5:TCP</h1><p>在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP 的接收器发送流量控制的机制。 我们还将简要地观察 TCP 连线的设置，我们还会研究计算机和服务器之间 TCP 连线的性能（吞吐量和往返时间）。</p>
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">91</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Wireshark-Lab5 TCP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-04T09:40:23.000Z" title="发表于 2022-03-04 17:40:23">2022-03-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-20T13:50:06.878Z" title="更新于 2022-03-20 21:50:06">2022-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Wireshark-Lab5 TCP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Lab5:TCP</h1>
+<p>在本实验中，我们将详细研究著名的 TCP 协议的行为。 我们将通过从您的电脑向远程服务器传输一份 150KB 的文件（一份 Lewis Carrol 的“爱丽丝梦游仙境”文本），并分析 TCP 传输内容的发送和接收过程来实现。 我们将研究 TCP 对序列和确认号的使用，以提供可靠的数据传输；我们将看到 TCP 的拥塞控制算法 – 慢启动和拥塞避免 – 在过程中，我们将看看 TCP 的接收器发送流量控制的机制。 我们还将简要地观察 TCP 连线的设置，我们还会研究计算机和服务器之间 TCP 连线的性能（吞吐量和往返时间）。</p>
 <p>在开始本实验之前，您应该先查看课本中的第 3.5 和 3.7 节。</p>
-<h2 id="1-Capturing-a-bulk-TCP-transfer-from-your-computer-to-a-remote-server-捕获从计算机到远程服务器的批量-TCP-传输"><a href="#1-Capturing-a-bulk-TCP-transfer-from-your-computer-to-a-remote-server-捕获从计算机到远程服务器的批量-TCP-传输" class="headerlink" title="1. Capturing a bulk TCP transfer from your computer to a remote server (捕获从计算机到远程服务器的批量 TCP 传输)"></a>1. Capturing a bulk TCP transfer from your computer to a remote server (捕获从计算机到远程服务器的批量 TCP 传输)</h2><p>在开始我们对 TCP 的探索之前，我们需要使用 Wireshark 来获取文件从计算机到远程服务器的 TCP 传输的数据包内容。您可以通过访问一个网页，在网页上输入您计算机上⬀储的文件名称（包含 Alice in Wonderland 的 ASCII 文本），然后使用HTTP POST 方法将文件传输到 Web 服务器（见文中第 2.2.3 节）。我们使用POST 方法而不是 GET 方法，因为我们希望将大量数据从您的计算机传输到另一台计算机。当然，我们将在此期间运行 Wireshark 以获取从您的计算机发送和接收的 TCP 区段的内容。</p>
+<h2 id="1-Capturing-a-bulk-TCP-transfer-from-your-computer-to-a-remote-server-捕获从计算机到远程服务器的批量-TCP-传输">1. Capturing a bulk TCP transfer from your computer to a remote server (捕获从计算机到远程服务器的批量 TCP 传输)</h2>
+<p>在开始我们对 TCP 的探索之前，我们需要使用 Wireshark 来获取文件从计算机到远程服务器的 TCP 传输的数据包内容。您可以通过访问一个网页，在网页上输入您计算机上⬀储的文件名称（包含 Alice in Wonderland 的 ASCII 文本），然后使用HTTP POST 方法将文件传输到 Web 服务器（见文中第 2.2.3 节）。我们使用POST 方法而不是 GET 方法，因为我们希望将大量数据从您的计算机传输到另一台计算机。当然，我们将在此期间运行 Wireshark 以获取从您的计算机发送和接收的 TCP 区段的内容。</p>
 <p>执行以下步骤：</p>
 <ul>
-<li><p>启动 Web 浏览器。 在 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/alice.txt">http://gaia.cs.umass.edu/wireshark-labs/alice.txt</a> 查看Alice in Wonderland 的 ASCII 档案文件。 将此文件⬀储在计算机上的某个位置。</p>
+<li>
+<p>启动 Web 浏览器。 在 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/alice.txt">http://gaia.cs.umass.edu/wireshark-labs/alice.txt</a> 查看Alice in Wonderland 的 ASCII 档案文件。 将此文件⬀储在计算机上的某个位置。</p>
 </li>
-<li><p>接下来去 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/TCP-wireshark-file1.html">http://gaia.cs.umass.edu/wireshark-labs/TCP-wireshark-file1.html</a>. </p>
+<li>
+<p>接下来去 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/TCP-wireshark-file1.html">http://gaia.cs.umass.edu/wireshark-labs/TCP-wireshark-file1.html</a>.</p>
 </li>
-<li><p>你将会看到如下图的网页</p>
+<li>
+<p>你将会看到如下图的网页</p>
 <p><img src="https://img-blog.csdnimg.cn/7f72f2e4a60840eaaeb0db0dd2670e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
-<li><p>使用此表单中的“Browse…”按钮在计算机上输入包含 Alice in Wonderland 的文件名(完整路径名)(或手动执行)。这个时候请不要按下“Upload alice.txt file”按钮。</p>
+<li>
+<p>使用此表单中的“Browse…”按钮在计算机上输入包含 Alice in Wonderland 的文件名(完整路径名)(或手动执行)。这个时候请不要按下“Upload alice.txt file”按钮。</p>
 </li>
-<li><p>启动 Wireshark 并开始数据包捕获 (Capture-&gt; Start)，然后在 Wireshark 数据包捕获选项视窗上按 OK (我们不需要在此处选择任何选项)(详细操作因Wireshark 版本略有不同)。 </p>
+<li>
+<p>启动 Wireshark 并开始数据包捕获 (Capture-&gt; Start)，然后在 Wireshark 数据包捕获选项视窗上按 OK (我们不需要在此处选择任何选项)(详细操作因Wireshark 版本略有不同)。</p>
 </li>
-<li><p>返回浏览器，按“Upload alice.txt file”按钮将文件上传到 gaia.cs.umass.edu服务器。文件上传后，浏览器窗口中会显示一条简短的祝贺消息。</p>
+<li>
+<p>返回浏览器，按“Upload alice.txt file”按钮将文件上传到 gaia.cs.umass.edu服务器。文件上传后，浏览器窗口中会显示一条简短的祝贺消息。</p>
 </li>
-<li><p>停止 Wireshark 数据包捕获。 您的 Wireshark 视窗内容应该类似于下面显示的内容。</p>
+<li>
+<p>停止 Wireshark 数据包捕获。 您的 Wireshark 视窗内容应该类似于下面显示的内容。</p>
 <p><img src="https://img-blog.csdnimg.cn/35dd698f4be34c9aa725848091c634f3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 </li>
-<li><p>如果您无法在实际的网路上运行 Wireshark，则可以下载在作者的计算机上执行上述步骤时捕获的数据包跟踪文件。当您探索下面的问题时，即使您已经捕获了自己的传输内容并使用它来回答下面的问题，您也可能会发现这份下载的跟踪包很有参考价值。</p>
+<li>
+<p>如果您无法在实际的网路上运行 Wireshark，则可以下载在作者的计算机上执行上述步骤时捕获的数据包跟踪文件。当您探索下面的问题时，即使您已经捕获了自己的传输内容并使用它来回答下面的问题，您也可能会发现这份下载的跟踪包很有参考价值。</p>
 </li>
 </ul>
-<h2 id="2-A-first-look-at-the-captured-trace-跟蹤包的初步觀察"><a href="#2-A-first-look-at-the-captured-trace-跟蹤包的初步觀察" class="headerlink" title="2. A first look at the captured trace (跟蹤包的初步觀察)"></a>2. A first look at the captured trace (跟蹤包的初步觀察)</h2><p>在详细分析 TCP 连接的行为之前，让我们先概观看一下跟踪包的内容。</p>
+<h2 id="2-A-first-look-at-the-captured-trace-跟蹤包的初步觀察">2. A first look at the captured trace (跟蹤包的初步觀察)</h2>
+<p>在详细分析 TCP 连接的行为之前，让我们先概观看一下跟踪包的内容。</p>
 <ul>
 <li>首先，在 Wireshark 视窗顶部的显示的过滤器指定窗口中输入“tcp”（小写，无引号，并且不要忘记在输入后按 enter 键！），过滤 Wireshark 视窗中显示的数据包。</li>
 </ul>
-<p>您应该看到的是计算机和 gaia.cs.umass.edu 之间的一系列 TCP 和 HTTP 讯息。您应该看到包含 SYN 讯息的初始三次握手。您应该看到 HTTP POST 讯息。根据您使用的 Wireshark 的版本，您可能会看到从您的计算机向 gaia.cs.umass.edu 发送一系列“HTTP Continuation”讯息。 回想一下我们在早期的 HTTP Wireshark 实验室中的讨论，这不是 HTTP Continuation 消息 – 这是 Wireshark 指示有多个 TCP 区段用于承载单个 HTTP 讯息的方式。在 Wireshark 的最新版本中，您将在 Wireshark显示的 Info 列中看到“[重新组装的 PDU 的 TCP 段]”，以指示此 TCP 区段包含属于上层协议讯息的数据（在我们的示例中为，HTTP）。您还应该看到从gaia.cs.umass.edu 返回到您的计算机的 TCP ACK 区段。</p>
+<p>您应该看到的是计算机和 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 之间的一系列 TCP 和 HTTP 讯息。您应该看到包含 SYN 讯息的初始三次握手。您应该看到 HTTP POST 讯息。根据您使用的 Wireshark 的版本，您可能会看到从您的计算机向 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 发送一系列“HTTP Continuation”讯息。 回想一下我们在早期的 HTTP Wireshark 实验室中的讨论，这不是 HTTP Continuation 消息 – 这是 Wireshark 指示有多个 TCP 区段用于承载单个 HTTP 讯息的方式。在 Wireshark 的最新版本中，您将在 Wireshark显示的 Info 列中看到“[重新组装的 PDU 的 TCP 段]”，以指示此 TCP 区段包含属于上层协议讯息的数据（在我们的示例中为，HTTP）。<a target="_blank" rel="noopener" href="http://xn--gaia-z25f72pn8zuzdzy7deu4bycj.cs.umass.edu">您还应该看到从gaia.cs.umass.edu</a> 返回到您的计算机的 TCP ACK 区段。</p>
 <p>利用下载的 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a> 档案，打开其中的 Wireshark 捕获的数据包文件 tcp-ethereal-trace-1 来回答以下问题（即下载跟踪包并打开 Wireshark 中的跟踪包；见附注 2）。在回答问题时，您应该提交用于回答问题的跟踪内的数据包的列印输出。 加上适当的注释以解释您的答案。 要印出数据包，请使用文件 - &gt;列印，选择仅选定数据包，选择数据包摘要行，然后选择回答问题所需的最小数据包详细信息量。</p>
 <ol>
-<li>将文件传输到 gaia.cs.umass.edu 的客户端计算机（源）使用的 IP 地址和TCP 端口号是什么？ 要回答这个问题，最简单的方法是使用“所选数据包标头的详细信息”视窗，选择 HTTP 讯息并探索用于携带此 HTTP 讯息的TCP 数据包的详细信息（如果你不确定是哪一个 Wireshark 视窗。请参阅“Getting Started with Wireshark”实验中的图 2 ）<ul>
+<li>将文件传输到 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 的客户端计算机（源）使用的 IP 地址和TCP 端口号是什么？ 要回答这个问题，最简单的方法是使用“所选数据包标头的详细信息”视窗，选择 HTTP 讯息并探索用于携带此 HTTP 讯息的TCP 数据包的详细信息（如果你不确定是哪一个 Wireshark 视窗。请参阅“Getting Started with Wireshark”实验中的图 2 ）
+<ul>
 <li>分析作者提供的抓包结果</li>
 <li>作者 IP：192.168.1.102，TCP 发送端口 1161</li>
 <li><img src="https://img-blog.csdnimg.cn/15a46ca332724289898549afe6c04b3c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>gaia.cs.umass.edu 的 IP 地址是什么？ 在哪个端口号上发送和接收此连接的TCP 区段？<ul>
+<li><a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 的 IP 地址是什么？ 在哪个端口号上发送和接收此连接的TCP 区段？
+<ul>
 <li>接收 IP：128.119.245.12，TCP 接受端口 80</li>
 </ul>
 </li>
 </ol>
 <p>如果您能够连网并使用 Wireshark 创建自己的跟踪包，请回答以下问题：</p>
-<ol>
-<li><p>客户端计算机（源）将文件传输到 gaia.cs.umass.edu 所使用的 IP 地址和TCP 端口号是多少？</p>
+<ol start="3">
+<li>
+<p>客户端计算机（源）将文件传输到 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 所使用的 IP 地址和TCP 端口号是多少？</p>
 <ul>
 <li>略</li>
 </ul>
@@ -200,29 +214,33 @@
 </ol>
 <p>由于本实验是关于 TCP 而不是 HTTP，让我们更改 Wireshark 的“捕获数据包列表”视窗，以便显示有关包含 HTTP 讯息的 TCP 区段的信息，而不是 HTTP 讯息。 要让 Wireshark 执行此操作，请选择 Analyze-&gt; Enabled Protocols。 然后取消勾选 HTTP 框，并选择确定。 您现在应该看到一个 Wireshark 窗口，如下所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/428c4709b2f44481b977ef85992cdc5d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>这就是我们正在寻找的 – 在您的计算机和 gaia.cs.umass.edu 之间发送的一系列 TCP区段。我们将使用您捕获的数据包跟踪（和/或 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a> 中的数据包跟踪 tcp-ethereal-trace-1：请参阅前面的脚注 ）</p>
+<p>这就是我们正在寻找的 – 在您的计算机和 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 之间发送的一系列 TCP区段。我们将使用您捕获的数据包跟踪（和/或 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark">http://gaia.cs.umass.edu/wireshark</a>-labs/wireshark-traces.zip 中的数据包跟踪 tcp-ethereal-trace-1：请参阅前面的脚注 ）</p>
 <p>在本实验的其余部分研究 TCP 行为。</p>
-<h2 id="3-TCP-Basics-TCP-基础"><a href="#3-TCP-Basics-TCP-基础" class="headerlink" title="3. TCP Basics (TCP 基础)"></a>3. TCP Basics (TCP 基础)</h2><p>回答下列关于 TCP 区段的问题：</p>
-<ol>
-<li><p>用于在客户端计算机和 gaia.cs.umass.edu 之间启动 TCP 连接的 TCP SYN 区段的序列号是什么？ 将区段标识为 SYN 区段的区段有什么功能？</p>
+<h2 id="3-TCP-Basics-TCP-基础">3. TCP Basics (TCP 基础)</h2>
+<p>回答下列关于 TCP 区段的问题：</p>
+<ol start="4">
+<li>
+<p>用于在客户端计算机和 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 之间启动 TCP 连接的 TCP SYN 区段的序列号是什么？ 将区段标识为 SYN 区段的区段有什么功能？</p>
 <ul>
 <li>SYN相对序列号为 0， 绝对序列号为 232129012</li>
 <li><img src="https://img-blog.csdnimg.cn/ec3ec05b2ccd4e28b5e781534f173286.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
-<li>根据三次握手，客户端应该发送 SYN 请求请求建立连接，我找到发送的第一个请求并且发现客户端（我的电脑）将 SYN 标志标 0 用来请求建立连接。$Sequence  number =232129012$ 这是个随机值，这一步也是三次握手的第一步</li>
+<li>根据三次握手，客户端应该发送 SYN 请求请求建立连接，我找到发送的第一个请求并且发现客户端（我的电脑）将 SYN 标志标 0 用来请求建立连接。$Sequence \ number =232129012$ 这是个随机值，这一步也是三次握手的第一步</li>
 <li><img src="https://img-blog.csdnimg.cn/766bc92a8b814bd494a7567c464f41e9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>gaia.cs.umass.edu 发送给客户端计算机以回复 SYN 的 SYNACK 区段的序列号是多少？ SYNACK 区段中的 Acknowledgment 栏位的值是多少？Gaia.cs.umass.edu 是如何确定此 Acknowledgment 的数值的？ 在将区段标识为 SYNACK 区段的区段在连线中有什么功能？</p>
+<li>
+<p><a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 发送给客户端计算机以回复 SYN 的 SYNACK 区段的序列号是多少？ SYNACK 区段中的 Acknowledgment 栏位的值是多少？<a target="_blank" rel="noopener" href="http://Gaia.cs.umass.edu">Gaia.cs.umass.edu</a> 是如何确定此 Acknowledgment 的数值的？ 在将区段标识为 SYNACK 区段的区段在连线中有什么功能？</p>
 <ul>
-<li>SYN 为 0 </li>
-<li>$Acknowledgment  = 1 (232129013)$</li>
-<li>$Acknowledgment$  为 客户端的 $Sequence Number  (232129012) + 1$</li>
+<li>SYN 为 0</li>
+<li>$Acknowledgment \ = 1\ (232129013)$</li>
+<li>$Acknowledgment$  为 客户端的 $Sequence Number \ (232129012) + 1$</li>
 <li><img src="https://img-blog.csdnimg.cn/c3d9fa73b055497bbfbd421bfd3be251.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 <li>意思是服务器接收到我的连接请求并且发 SYN-ACK 确认，这是三次握手的第二步。</li>
 <li><img src="https://img-blog.csdnimg.cn/f12141ab51e04aa7a3f6ef4dcc4215b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>包含 HTTP POST 命令的 TCP 区段的序列号是多少？ 请注意，为了找到POST 命令，您需要深入了解 Wireshark 窗口底部的数据包内容⫿段，在其DATA 栏位中查找带有“POST”的区段。</p>
+<li>
+<p>包含 HTTP POST 命令的 TCP 区段的序列号是多少？ 请注意，为了找到POST 命令，您需要深入了解 Wireshark 窗口底部的数据包内容⫿段，在其DATA 栏位中查找带有“POST”的区段。</p>
 <ul>
 <li>$Seqence Number = 1$</li>
 <li>Info 一栏中 <code>[PSH, ACK]</code> 里面的 <code>PSH</code> 即包含 <code>HTTP POST</code> 命令</li>
@@ -230,84 +248,161 @@
 <li><img src="https://img-blog.csdnimg.cn/7ca5e0f19b724c9ab01c579fba05102d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>将包含 HTTP POST 的 TCP 区段视为 TCP 连接中的第一个区段。在这个TCP 连线中前六个 TCP 区段的序列号是什么（包括包含 HTTP POST 的段）？ 每区段发送的时间是什么时候？ 收到的每个区段的 ACK 是什么时候？ 鉴于发送每个 TCP 区段的时间与收到确认的时间之间的差异，六个区段中每个区段的 RTT 值是多少？ 收到每个 ACK 后，EstimatedRTT 值（参见本节中的第 3.5.3 节，第 242 页）是什么？ 假设第一个 EstimatedRTT 的值等于第一个区段的测量 RTT，然后使用课本第 242 页的 EstimatedRTT 公式计算所有后续区段。（译注：中译本的页数可能不同）</p>
-<p><strong>注意：</strong>Wireshark有一个很好的功能，允许您为发送的每个 TCP 区段绘制RTT。 在从客户端发送到gaia.cs.umass.edu服务器的“捕获的数据包列表”窗口中选择一个TCP段。 然后选择：Statistics-&gt; TCP  Stream Graph-&gt; Round Trip Time Graph。</p>
+<li>
+<p>将包含 HTTP POST 的 TCP 区段视为 TCP 连接中的第一个区段。在这个TCP 连线中前六个 TCP 区段的序列号是什么（包括包含 HTTP POST 的段）？ 每区段发送的时间是什么时候？ 收到的每个区段的 ACK 是什么时候？ 鉴于发送每个 TCP 区段的时间与收到确认的时间之间的差异，六个区段中每个区段的 RTT 值是多少？ 收到每个 ACK 后，EstimatedRTT 值（参见本节中的第 3.5.3 节，第 242 页）是什么？ 假设第一个 EstimatedRTT 的值等于第一个区段的测量 RTT，然后使用课本第 242 页的 EstimatedRTT 公式计算所有后续区段。（译注：中译本的页数可能不同）</p>
+<p>**注意：**Wireshark有一个很好的功能，允许您为发送的每个 TCP 区段绘制RTT。 在从客户端发送到gaia.cs.umass.edu服务器的“捕获的数据包列表”窗口中选择一个TCP段。 然后选择：Statistics-&gt; TCP  Stream Graph-&gt; Round Trip Time Graph。</p>
 <p><img src="https://img-blog.csdnimg.cn/12c8d76625344d6582a0884ea5729e1a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/6d017f996ef84feeab2be6fcc768b47a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/395da35ec378499ba13d8667f3d14d25.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>ACK时间在SEQ/ACK analysis字段中，其中<code>frame</code>后的数字为对应的 PSH 帧的回应</p>
 <p><img src="https://img-blog.csdnimg.cn/8264d85fd4744d24b20a659751f8d110.png" alt="在这里插入图片描述"></p>
-<p>| PSH No | 序列号 | 发送时间 | 回应 No |   ACK时间   |     RTT     |    EstimatedRTT     |<br>| :——: | :——: | :———: | :——-: | :————-: | :————-: | :————————-: |<br>|   4    |   1    | 0.026477 |    6    | 0.053937000 | 0.027460000 |       0.02746       |<br>|   5    |  566   | 0.041737 |    9    | 0.077294000 | 0.035557000 |     0.028472125     |<br>|   7    |  2026  | 0.054026 |   12    | 0.124085000 | 0.070059000 |   0.033670484375    |<br>|   8    |  3486  | 0.054690 |   14    | 0.169118000 | 0.114428000 |  0.043765173828125  |<br>|   10   |  4946  | 0.077405 |   15    | 0.217299000 | 0.139894000 | 0.05578127709960937 |<br>|   11   |  6406  | 0.078157 |   16    | 0.267802000 | 0.189645000 | 0.07251424246215821 |</p>
-<p>$EstimatedRTT = 0.875 <em> EstimatedRTT + 0.125 </em> SampleRTT$</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">PSH No</th>
+<th style="text-align:center">序列号</th>
+<th style="text-align:center">发送时间</th>
+<th style="text-align:center">回应 No</th>
+<th style="text-align:center">ACK时间</th>
+<th style="text-align:center">RTT</th>
+<th style="text-align:center">EstimatedRTT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.026477</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">0.053937000</td>
+<td style="text-align:center">0.027460000</td>
+<td style="text-align:center">0.02746</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">566</td>
+<td style="text-align:center">0.041737</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">0.077294000</td>
+<td style="text-align:center">0.035557000</td>
+<td style="text-align:center">0.028472125</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">2026</td>
+<td style="text-align:center">0.054026</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">0.124085000</td>
+<td style="text-align:center">0.070059000</td>
+<td style="text-align:center">0.033670484375</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3486</td>
+<td style="text-align:center">0.054690</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">0.169118000</td>
+<td style="text-align:center">0.114428000</td>
+<td style="text-align:center">0.043765173828125</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">4946</td>
+<td style="text-align:center">0.077405</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">0.217299000</td>
+<td style="text-align:center">0.139894000</td>
+<td style="text-align:center">0.05578127709960937</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">6406</td>
+<td style="text-align:center">0.078157</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">0.267802000</td>
+<td style="text-align:center">0.189645000</td>
+<td style="text-align:center">0.07251424246215821</td>
+</tr>
+</tbody>
+</table>
+<p>$EstimatedRTT = 0.875 * EstimatedRTT + 0.125 * SampleRTT$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 1</strong>:</p>
 <p>$EstimatedRTT = RTT for Segment 1 = 0.02746 second$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 2</strong>:</p>
-<p>$EstimatedRTT = 0.875 <em> 0.02746 + 0.125 </em> 0.035557 = 0.0285$</p>
+<p>$EstimatedRTT = 0.875 * 0.02746 + 0.125 * 0.035557 = 0.0285$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 3</strong>:</p>
-<p>$EstimatedRTT = 0.875 <em> 0.0285 + 0.125 </em> 0.070059 = 0.0337$</p>
+<p>$EstimatedRTT = 0.875 * 0.0285 + 0.125 * 0.070059 = 0.0337$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 4</strong>:</p>
-<p>$EstimatedRTT = 0.875 <em> 0.0337+ 0.125 </em> 0.11443 = 0.0438$</p>
+<p>$EstimatedRTT = 0.875 * 0.0337+ 0.125 * 0.11443 = 0.0438$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 5</strong>:</p>
-<p>$EstimatedRTT = 0.875 <em> 0.0438 + 0.125 </em> 0.13989 = 0.0558$</p>
+<p>$EstimatedRTT = 0.875 * 0.0438 + 0.125 * 0.13989 = 0.0558$</p>
 <p>EstimatedRTT <strong>after the receipt of the ACK of segment 6</strong>:</p>
-<p>$EstimatedRTT = 0.875 <em> 0.0558 + 0.125 </em> 0.18964 = 0.0725$</p>
+<p>$EstimatedRTT = 0.875 * 0.0558 + 0.125 * 0.18964 = 0.0725$</p>
 </li>
-<li><p>前六个 TCP 区段的长度是多少？</p>
-<p>Segment 1 sequence length: $566 - 1 = 565$    </p>
+<li>
+<p>前六个 TCP 区段的长度是多少？</p>
+<p>Segment 1 sequence length: $566 - 1 = 565$</p>
 <p>Segment 2 sequence length: $2026 - 566 = 1460$</p>
 <p>Segment 3 sequence length: $3486 - 2026 = 1460$</p>
 <p>Segment 4 sequence length: $4946 - 3486 = 1460$</p>
 <p>Segment 5 sequence length: $6406 - 4946 = 1460$</p>
 <p>Segment 6 sequence length: $7866 - 6406 = 1460$</p>
 </li>
-<li><p>对于整个跟踪包，收到的最小可用缓冲区空间量是多少？ 缺少接收器缓冲区空间是否会限制发送方传送 TCP 区段？</p>
+<li>
+<p>对于整个跟踪包，收到的最小可用缓冲区空间量是多少？ 缺少接收器缓冲区空间是否会限制发送方传送 TCP 区段？</p>
 <ul>
-<li>The minimum amount of buffer space (receiver window) advertised at gaia.cs.umass.edu for the entire trace is 5840 bytes,which shows in the first acknowledgement from the server. This receiver window grows steadily until a maximum receiver buffer size of 62780 bytes. The sender is never throttled due to lacking of receiver buffer space by inspecting this trace.</li>
+<li>The minimum amount of buffer space (receiver window) advertised at <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> for the entire trace is 5840 bytes,which shows in the first acknowledgement from the server. This receiver window grows steadily until a maximum receiver buffer size of 62780 bytes. The sender is never throttled due to lacking of receiver buffer space by inspecting this trace.</li>
 <li>在gaia.cs.umass.edu为整个跟踪通告的最小缓冲区空间量(接收器窗口)是5840字节，这显示在来自服务器的第一个确认中。该接收器窗口稳步增长，直到最大接收器缓冲器大小达到62780字节。通过检查此跟踪，发送器永远不会因为接收器缓冲区空间不足而受到抑制。</li>
 <li><img src="https://img-blog.csdnimg.cn/218ae55b12c6492cab3bd3c53a28ab98.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>在跟踪文件中是否有重传的区段？ 为了回答这个问题，您检查了什么（在跟踪包中）？</p>
+<li>
+<p>在跟踪文件中是否有重传的区段？ 为了回答这个问题，您检查了什么（在跟踪包中）？</p>
 <ul>
 <li>There are no retransmitted segments in the trace file. We can verify this by checking the sequence numbers of the TCP segments in the trace file. In the TimeSequence-Graph (Stevens) of this trace, all sequence numbers from the source (192.168.1.102) to the destination (128.119.245.12) are increasing monotonically with respect to time. If there is a retransmitted segment, the sequence number of this retransmitted segment should be smaller than those of its neighboring segments.</li>
 <li>跟踪文件中没有重新传输的段。我们可以通过检查跟踪文件中TCP数据段的序列号来验证这一点。在该轨迹的时间序列图(Stevens)中，从源(192.168.1.102)到目的地(128.119.245.12)的所有序列号都随着时间单调递增。如果存在重传数据段，则该重传数据段的序列号应小于其相邻数据段的序列号。</li>
 <li><img src="https://img-blog.csdnimg.cn/b1e1f9cfb3f34de9b93ebf3d1194b4e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>接收器通常在 ACK 中确认多少数据？ 您是否可以识别接收方每隔一个接收到的区段才发送确认的情况（参见本文第 250 页的表 3.2）。</p>
+<li>
+<p>接收器通常在 ACK 中确认多少数据？ 您是否可以识别接收方每隔一个接收到的区段才发送确认的情况（参见本文第 250 页的表 3.2）。</p>
 <ul>
 <li><img src="https://img-blog.csdnimg.cn/9da14e673884481081d15f8a43a29d1a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt=""></li>
-<li>The difference between the acknowledged sequence numbers of two consecutive ACKs indicates the data received by the server between these two ACKs. By inspecting the amount of acknowledged data by each ACK, there are cases where the receiver is ACKing every other segment. For example, segment of No. 80 acknowledged data with 2920 bytes = 1460*2 bytes. </li>
+<li>The difference between the acknowledged sequence numbers of two consecutive ACKs indicates the data received by the server between these two ACKs. By inspecting the amount of acknowledged data by each ACK, there are cases where the receiver is ACKing every other segment. For example, segment of No. 80 acknowledged data with 2920 bytes = 1460*2 bytes.</li>
 <li>两个连续ACK的确认序列号之间的差异表示服务器在这两个ACK之间接收的数据。通过检查每个ACK确认的数据量，可能会出现接收方每隔一个数据段进行ACK的情况。例如，第80号确认数据的段，2920字节=1460*2字节。</li>
 <li><img src="https://img-blog.csdnimg.cn/611d1d01db7d401aa18ac03116321850.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li><p>TCP 连接的吞吐量（每单位时间传输的⫿节数）是多少？ 解释你如何计算这个值。</p>
+<li>
+<p>TCP 连接的吞吐量（每单位时间传输的⫿节数）是多少？ 解释你如何计算这个值。</p>
 <ul>
-<li>Solution: The computation of TCP throughput largely depends on the selection of averaging time period. As a common throughput computation, in this question, we select the average time period as the whole connection time. Then, the average throughput for this TCP connection is computed as the ratio between the total amount data and the total transmission time. The total amount data transmitted can be computed by the difference between the sequence number of the first TCP segment (i.e. 1 byte for No. 4 segment) and the acknowledged sequence number of the last ACK (164091 bytes for No. 202 segment). Therefore, the total data are 164091 - 1 = 164090 bytes. The whole transmission time is the difference of the time instant of the first TCP segment (i.e., 0.026477 second for No.4 segment) and the time instant of the last ACK (i.e., 5.455830 second for No. 202 segment). Therefore, the total transmission time is 5.455830 - 0.026477 = 5.4294 seconds. Hence, the throughput for the TCP connection is computed as 164090/5.4294 = 30.222 KByte/sec. </li>
+<li>Solution: The computation of TCP throughput largely depends on the selection of averaging time period. As a common throughput computation, in this question, we select the average time period as the whole connection time. Then, the average throughput for this TCP connection is computed as the ratio between the total amount data and the total transmission time. The total amount data transmitted can be computed by the difference between the sequence number of the first TCP segment (i.e. 1 byte for No. 4 segment) and the acknowledged sequence number of the last ACK (164091 bytes for No. 202 segment). Therefore, the total data are 164091 - 1 = 164090 bytes. The whole transmission time is the difference of the time instant of the first TCP segment (i.e., 0.026477 second for No.4 segment) and the time instant of the last ACK (i.e., 5.455830 second for No. 202 segment). Therefore, the total transmission time is 5.455830 - 0.026477 = 5.4294 seconds. Hence, the throughput for the TCP connection is computed as 164090/5.4294 = 30.222 KByte/sec.</li>
 <li>TCP吞吐量的计算在很大程度上取决于平均时间段的选择。作为一种常见的吞吐量计算，在本问题中，我们选择平均时间周期作为整个连接时间。然后，该TCP连接的平均吞吐量被计算为总数据量与总传输时间之间的比率。可以通过第一个TCP数据段的序列号(即，对于第4号数据段为1字节)和最后一个确认确认的序列号(对于第202号数据段，为164091字节)之间的差来计算发送的总数据量。因此，总数据为164091-1=164090字节。整个传输时间是第一个TCP报文段的时刻(即，对于4号报文段为0.026477秒)和最后一个确认的时刻(即，对于202号报文段为5.455830秒)的时间差。因此，总传输时间为5.455830-0.026477=5.4294秒。因此，tcp连接的吞吐量计算为164090/5.4294=30.222千字节/秒。</li>
 <li>统计图结果：</li>
 <li><img src="https://img-blog.csdnimg.cn/92b64825f08d49c4816dd3be7f8e8400.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
 </ol>
-<h2 id="4-TCP-congestion-control-in-action-TCP-壅塞控制"><a href="#4-TCP-congestion-control-in-action-TCP-壅塞控制" class="headerlink" title="4.TCP congestion control in action (TCP 壅塞控制)"></a>4.TCP congestion control in action (TCP 壅塞控制)</h2><p>现在让我们检查从客户端服务器的每单位时间发送的数据量。 而不是（繁琐地！）从 Wireshark 窗口中的原始数据计算这些数值，我们将使用 Wireshark 的TCP 图形工具 – 时序图（Stevens） - 来绘制数据。</p>
-<p>在 Wireshark 的“捕获数据包列表”窗口中选择一个 TCP 区段。然后选择菜单：Statistics-&gt; TCP Stream Graph-&gt; Time-Sequence-Graph（Stevens）。您应该看到一个类似于下图的图，该图是根据 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a> 中的跟踪数据包 tcp-ethereal-trace-1 中捕获的资料所创建的。（见前面的附注）：</p>
+<h2 id="4-TCP-congestion-control-in-action-TCP-壅塞控制">4.TCP congestion control in action (TCP 壅塞控制)</h2>
+<p>现在让我们检查从客户端服务器的每单位时间发送的数据量。 而不是（繁琐地！）从 Wireshark 窗口中的原始数据计算这些数值，我们将使用 Wireshark 的TCP 图形工具 – 时序图（Stevens） - 来绘制数据。</p>
+<p>在 Wireshark 的“捕获数据包列表”窗口中选择一个 TCP 区段。然后选择菜单：Statistics-&gt; TCP Stream Graph-&gt; Time-Sequence-Graph（Stevens）。您应该看到一个类似于下图的图，该图是根据 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark">http://gaia.cs.umass.edu/wireshark</a>-labs/wireshark-traces.zip 中的跟踪数据包 tcp-ethereal-trace-1 中捕获的资料所创建的。（见前面的附注）：</p>
 <p><img src="https://img-blog.csdnimg.cn/059ee1eec1df41bb97fa5e06369958f2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 <p>这里，每个点代表一个发送的 TCP 区段，绘制区段的序列号与发送的时间。 请注意，堆叠在一起的一组点表示发送方背靠背发送的一系列数据包。</p>
 <p>根据在 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip</a> 中的数据跟踪包tcp-ethereal-trace-1 内容回答以下有关 TCP 区段的问题</p>
-<ol>
-<li>使用时序图（Stevens）绘图工具查看从客户端发送到 gaia.cs.umass.edu 服务器的区段的序列号与时间关系图。您能否确定 TCP 的慢启动阶段的开始和结束位置，以及拥塞避免接管的位置？ 评论测量数据与我们在文本中研究的 TCP 的理想化行为的不同之处。<ul>
+<ol start="13">
+<li>使用时序图（Stevens）绘图工具查看从客户端发送到 <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> 服务器的区段的序列号与时间关系图。您能否确定 TCP 的慢启动阶段的开始和结束位置，以及拥塞避免接管的位置？ 评论测量数据与我们在文本中研究的 TCP 的理想化行为的不同之处。
+<ul>
 <li>一开始是慢启动，后续应该没有拥塞的情况</li>
 <li><img src="https://img-blog.csdnimg.cn/b1e1f9cfb3f34de9b93ebf3d1194b4e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATUlOR2dvUw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
 </ul>
 </li>
-<li>根据你使用 Wireshark 所收集到的资料（将文件从计算机传输到gaia.cs.umass.edu 时的跟踪包信息），回答问题 13 中的两个问题。<ul>
+<li>根据你使用 Wireshark 所收集到的资料（<a target="_blank" rel="noopener" href="http://xn--gaia-z25fhipki0tnxyfxv1iekq1fcu3bdtl.cs.umass.edu">将文件从计算机传输到gaia.cs.umass.edu</a> 时的跟踪包信息），回答问题 13 中的两个问题。
+<ul>
 <li>略</li>
 </ul>
 </li>
 </ol>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/">http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a><a class="post-meta__tags" href="/tags/Wireshark/">Wireshark</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/04/Wireshark-Lab6/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Wireshark-Lab6 IP</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/04/Wireshark-Lab4/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Wireshark-Lab4 UDP</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/02/Wireshark-Lab1/" title="Wireshark-Lab1 Getting Started"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Wireshark-Lab1 Getting Started</div></div></a></div><div><a href="/2022/03/14/Wireshark-Lab12/" title="Wireshark-Lab12 SSL"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GM0YAC5U0AH7T76VQLB23.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">Wireshark-Lab12 SSL</div></div></a></div><div><a href="/2022/03/03/Wireshark-Lab3/" title="Wireshark-Lab3 DNS"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">Wireshark-Lab3 DNS</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab4/" title="Wireshark-Lab4 UDP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab4 UDP</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab6/" title="Wireshark-Lab6 IP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab6 IP</div></div></a></div><div><a href="/2022/03/12/Wireshark-Lab9/" title="Wireshark-Lab9 NAT"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-12</div><div class="title">Wireshark-Lab9 NAT</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">91</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab5-TCP"><span class="toc-text">Lab5:TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Capturing-a-bulk-TCP-transfer-from-your-computer-to-a-remote-server-%E6%8D%95%E8%8E%B7%E4%BB%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%89%B9%E9%87%8F-TCP-%E4%BC%A0%E8%BE%93"><span class="toc-text">1. Capturing a bulk TCP transfer from your computer to a remote server (捕获从计算机到远程服务器的批量 TCP 传输)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-A-first-look-at-the-captured-trace-%E8%B7%9F%E8%B9%A4%E5%8C%85%E7%9A%84%E5%88%9D%E6%AD%A5%E8%A7%80%E5%AF%9F"><span class="toc-text">2. A first look at the captured trace (跟蹤包的初步觀察)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-TCP-Basics-TCP-%E5%9F%BA%E7%A1%80"><span class="toc-text">3. TCP Basics (TCP 基础)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-congestion-control-in-action-TCP-%E5%A3%85%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">4.TCP congestion control in action (TCP 壅塞控制)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img src="https://cdn.lixingyong.com/2021/11/19/LTO3_YLBNGAUCO.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 4"/></a><div class="content"><a class="title" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4">CS61A Homework 4</a><time datetime="2022-05-21T05:54:01.000Z" title="发表于 2022-05-21 13:54:01">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/CS61A-Lab-5/" title="CS61A Lab 5"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 5"/></a><div class="content"><a class="title" href="/2022/05/21/CS61A-Lab-5/" title="CS61A Lab 5">CS61A Lab 5</a><time datetime="2022-05-20T16:43:41.000Z" title="发表于 2022-05-21 00:43:41">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/20/CS61A-Lab-4/" title="CS61A Lab 4"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 4"/></a><div class="content"><a class="title" href="/2022/05/20/CS61A-Lab-4/" title="CS61A Lab 4">CS61A Lab 4</a><time datetime="2022-05-20T15:27:05.000Z" title="发表于 2022-05-20 23:27:05">2022-05-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CS61A-Proj-1/" title="CS61A Proj 1"><img src="https://cdn.lixingyong.com/2021/11/19/0UFG3WV7W1OP1W18543.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Proj 1"/></a><div class="content"><a class="title" href="/2022/05/19/CS61A-Proj-1/" title="CS61A Proj 1">CS61A Proj 1</a><time datetime="2022-05-19T11:24:49.000Z" title="发表于 2022-05-19 19:24:49">2022-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CS61A-Lab-2/" title="CS61A Lab 2"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 2"/></a><div class="content"><a class="title" href="/2022/05/19/CS61A-Lab-2/" title="CS61A Lab 2">CS61A Lab 2</a><time datetime="2022-05-19T11:07:23.000Z" title="发表于 2022-05-19 19:07:23">2022-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/27/Z2V70TZ1IW97Q1YFH.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/">http://www.misaka-9982.com/2022/03/04/Wireshark-Lab5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Network/">Network</a><a class="post-meta__tags" href="/tags/Wireshark/">Wireshark</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/04/Wireshark-Lab6/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/Z2Y6F24TAMZHDNEX6KP.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Wireshark-Lab6 IP</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/04/Wireshark-Lab4/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Wireshark-Lab4 UDP</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/02/Wireshark-Lab1/" title="Wireshark-Lab1 Getting Started"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Wireshark-Lab1 Getting Started</div></div></a></div><div><a href="/2022/03/14/Wireshark-Lab12/" title="Wireshark-Lab12 SSL"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/Z2Y6F24TAMZHDNEX6KP.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">Wireshark-Lab12 SSL</div></div></a></div><div><a href="/2022/03/03/Wireshark-Lab3/" title="Wireshark-Lab3 DNS"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">Wireshark-Lab3 DNS</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab4/" title="Wireshark-Lab4 UDP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/4U3Y681YHY7H2Y8VK.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab4 UDP</div></div></a></div><div><a href="/2022/03/04/Wireshark-Lab6/" title="Wireshark-Lab6 IP"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/Z2Y6F24TAMZHDNEX6KP.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Wireshark-Lab6 IP</div></div></a></div><div><a href="/2022/03/12/Wireshark-Lab9/" title="Wireshark-Lab9 NAT"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/Z2Y6F24TAMZHDNEX6KP.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-12</div><div class="title">Wireshark-Lab9 NAT</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">91</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Lab5:TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Capturing-a-bulk-TCP-transfer-from-your-computer-to-a-remote-server-%E6%8D%95%E8%8E%B7%E4%BB%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%89%B9%E9%87%8F-TCP-%E4%BC%A0%E8%BE%93"><span class="toc-text">1. Capturing a bulk TCP transfer from your computer to a remote server (捕获从计算机到远程服务器的批量 TCP 传输)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-A-first-look-at-the-captured-trace-%E8%B7%9F%E8%B9%A4%E5%8C%85%E7%9A%84%E5%88%9D%E6%AD%A5%E8%A7%80%E5%AF%9F"><span class="toc-text">2. A first look at the captured trace (跟蹤包的初步觀察)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-TCP-Basics-TCP-%E5%9F%BA%E7%A1%80"><span class="toc-text">3. TCP Basics (TCP 基础)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-congestion-control-in-action-TCP-%E5%A3%85%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">4.TCP congestion control in action (TCP 壅塞控制)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 4"/></a><div class="content"><a class="title" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4">CS61A Homework 4</a><time datetime="2022-05-21T05:54:01.000Z" title="发表于 2022-05-21 13:54:01">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/CS61A-Lab-5/" title="CS61A Lab 5"><img src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 5"/></a><div class="content"><a class="title" href="/2022/05/21/CS61A-Lab-5/" title="CS61A Lab 5">CS61A Lab 5</a><time datetime="2022-05-20T16:43:41.000Z" title="发表于 2022-05-21 00:43:41">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/20/CS61A-Lab-4/" title="CS61A Lab 4"><img src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 4"/></a><div class="content"><a class="title" href="/2022/05/20/CS61A-Lab-4/" title="CS61A Lab 4">CS61A Lab 4</a><time datetime="2022-05-20T15:27:05.000Z" title="发表于 2022-05-20 23:27:05">2022-05-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CS61A-Proj-1/" title="CS61A Proj 1"><img src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Proj 1"/></a><div class="content"><a class="title" href="/2022/05/19/CS61A-Proj-1/" title="CS61A Proj 1">CS61A Proj 1</a><time datetime="2022-05-19T11:24:49.000Z" title="发表于 2022-05-19 19:24:49">2022-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CS61A-Lab-2/" title="CS61A Lab 2"><img src="https://cdn.lixingyong.com/2021/11/19/YNH040C0LZA6KDU14C.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 2"/></a><div class="content"><a class="title" href="/2022/05/19/CS61A-Lab-2/" title="CS61A Lab 2">CS61A Lab 2</a><time datetime="2022-05-19T11:07:23.000Z" title="发表于 2022-05-19 19:07:23">2022-05-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
@@ -481,31 +576,23 @@ if ('Twikoo' === 'Disqus' || !true) {
     loadDisqus()
   }
 }
-</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
-  function butterfly_footer_beautify_injector_config(){
-    var parent_div_git = document.getElementById('footer-wrap');
-    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
-    console.log('已挂载butterfly_footer_beautify')
-    parent_div_git.insertAdjacentHTML("beforeend",item_html)
-    }
-  var elist = 'null'.split(',');
-  var cpage = location.pathname;
-  var epage = 'all';
-  var flag = 0;
-
-  for (var i=0;i<elist.length;i++){
-    if (cpage.includes(elist[i])){
-      flag++;
-    }
-  }
-
-  if ((epage ==='all')&&(flag == 0)){
-    butterfly_footer_beautify_injector_config();
-  }
-  else if (epage === cpage){
-    butterfly_footer_beautify_injector_config();
-  }
-  </script><script async src="/js/runtime.js"></script><script data-pjax>
+</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
   function butterfly_clock_injector_config(){
     var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
     var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
@@ -541,20 +628,28 @@ if ('Twikoo' === 'Disqus' || !true) {
         gitcalendar_injector_config()
         GitCalendarInit("https://git-api-4yazkln1p-misaka-9982-coder.vercel.app/api?Misaka-9982-coder",['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'],'Misaka-9982-coder')
     }
-  </script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
