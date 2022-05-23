@@ -1,0 +1,524 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS61A Lab 8 | Misaka's blog</title><meta name="keywords" content="CS61A"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab 8: Midterm Review lab08.zip Due by 11:59pm on Wednesday, March 16. Starter Files Download lab08.zip. Inside the archive, you will find starter files for the questions in this lab, along with a cop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Lab 8">
+<meta property="og:url" content="http://www.misaka-9982.com/2022/05/23/CS61A-Lab-8/index.html">
+<meta property="og:site_name" content="Misaka&#39;s blog">
+<meta property="og:description" content="Lab 8: Midterm Review lab08.zip Due by 11:59pm on Wednesday, March 16. Starter Files Download lab08.zip. Inside the archive, you will find starter files for the questions in this lab, along with a cop">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png">
+<meta property="article:published_time" content="2022-05-23T09:02:28.000Z">
+<meta property="article:modified_time" content="2022-05-23T09:03:17.191Z">
+<meta property="article:author" content="Misaka">
+<meta property="article:tag" content="CS61A">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/05/23/CS61A-Lab-8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":150,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CS61A Lab 8',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-23 17:03:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">95</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS61A Lab 8</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-23T09:02:28.000Z" title="发表于 2022-05-23 17:02:28">2022-05-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-23T09:03:17.191Z" title="更新于 2022-05-23 17:03:17">2022-05-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS61A Lab 8"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Lab 8: Midterm Review <a target="_blank" rel="noopener" href="https://cs61a.org/lab/lab08/lab08.zip">lab08.zip</a></h1>
+<p><em>Due by 11:59pm on Wednesday, March 16.</em></p>
+<h2 id="Starter-Files">Starter Files</h2>
+<p>Download <a target="_blank" rel="noopener" href="https://cs61a.org/lab/lab08/lab08.zip">lab08.zip</a>. Inside the archive, you will find starter files for the questions in this lab, along with a copy of the <a target="_blank" rel="noopener" href="https://cs61a.org/lab/lab08/ok">Ok</a> autograder.</p>
+<h1>Topics</h1>
+<p>Consult this section if you need a refresher on the material for this lab. It’s okay to skip directly to <a target="_blank" rel="noopener" href="https://cs61a.org/lab/lab08/#required-questions">the questions</a> and refer back here should you get stuck.</p>
+<p>Iterators</p>
+<p>Generators</p>
+<h1>Required Questions</h1>
+<h2 id="Iterators-Generators">Iterators &amp; Generators</h2>
+<h3 id="Q1-Repeated">Q1: Repeated</h3>
+<p>Implement <code>repeated</code>, which takes in an iterator <code>t</code> and returns the first value in <code>t</code> that appears <code>k</code> times in a row.</p>
+<blockquote>
+<p><strong>Note:</strong> You can assume that the iterator <code>t</code> will have a value that appears at least <code>k</code> times in a row. If you are receiving a <code>StopIteration</code>, your <code>repeated</code> function is likely not identifying the correct value.</p>
+</blockquote>
+<p>Your implementation should iterate through the items in a way such that if the same iterator is passed into <code>repeated</code> twice, it should continue in the second call at the point it left off in the first. An example of this behavior is in the doctests.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">def repeated(t, k):</span><br><span class="line">    &quot;&quot;&quot;Return the first value in iterator T that appears K times in a row.</span><br><span class="line">    Iterate through the items such that if the same iterator is passed into</span><br><span class="line">    the function twice, it continues in the second call at the point it left</span><br><span class="line">    off in the first.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])</span><br><span class="line">    &gt;&gt;&gt; repeated(s, 2)</span><br><span class="line">    9</span><br><span class="line">    &gt;&gt;&gt; s2 = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])</span><br><span class="line">    &gt;&gt;&gt; repeated(s2, 3)</span><br><span class="line">    8</span><br><span class="line">    &gt;&gt;&gt; s = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])</span><br><span class="line">    &gt;&gt;&gt; repeated(s, 3)</span><br><span class="line">    2</span><br><span class="line">    &gt;&gt;&gt; repeated(s, 3)</span><br><span class="line">    5</span><br><span class="line">    &gt;&gt;&gt; s2 = iter([4, 1, 6, 6, 7, 7, 8, 8, 2, 2, 2, 5])</span><br><span class="line">    &gt;&gt;&gt; repeated(s2, 3)</span><br><span class="line">    2</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    assert k &gt; 1</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q repeated✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q2-Merge">Q2: Merge</h3>
+<p>Implement <code>merge(incr_a, incr_b)</code>, which takes two iterables <code>incr_a</code> and <code>incr_b</code> whose elements are ordered. <code>merge</code> yields elements from <code>incr_a</code> and <code>incr_b</code> in sorted order, eliminating repetition. You may assume <code>incr_a</code> and <code>incr_b</code> themselves do not contain repeats, and that none of the elements of either are <code>None</code>. You may <strong>not</strong> assume that the iterables are finite; either may produce an infinite stream of results.</p>
+<p>You will probably find it helpful to use the two-argument version of the built-in <code>next</code> function: <code>next(incr, v)</code> is the same as <code>next(incr)</code>, except that instead of raising <code>StopIteration</code> when <code>incr</code> runs out of elements, it returns <code>v</code>.</p>
+<p>See the doctest for examples of behavior.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def merge(incr_a, incr_b):</span><br><span class="line">    &quot;&quot;&quot;Yield the elements of strictly increasing iterables incr_a and incr_b, removing</span><br><span class="line">    repeats. Assume that incr_a and incr_b have no repeats. incr_a or incr_b may or may not</span><br><span class="line">    be infinite sequences.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; m = merge([0, 2, 4, 6, 8, 10, 12, 14], [0, 3, 6, 9, 12, 15])</span><br><span class="line">    &gt;&gt;&gt; type(m)</span><br><span class="line">    &lt;class &#x27;generator&#x27;&gt;</span><br><span class="line">    &gt;&gt;&gt; list(m)</span><br><span class="line">    [0, 2, 3, 4, 6, 8, 9, 10, 12, 14, 15]</span><br><span class="line">    &gt;&gt;&gt; def big(n):</span><br><span class="line">    ...    k = 0</span><br><span class="line">    ...    while True: yield k; k += n</span><br><span class="line">    &gt;&gt;&gt; m = merge(big(2), big(3))</span><br><span class="line">    &gt;&gt;&gt; [next(m) for _ in range(11)]</span><br><span class="line">    [0, 2, 3, 4, 6, 8, 9, 10, 12, 14, 15]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    iter_a, iter_b = iter(incr_a), iter(incr_b)</span><br><span class="line">    next_a, next_b = next(iter_a, None), next(iter_b, None)</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q merge✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Linked-Lists-Trees">Linked Lists &amp; Trees</h2>
+<h3 id="Q3-Deep-Linked-List-Length">Q3: Deep Linked List Length</h3>
+<p>A linked list that contains one or more linked lists as elements is called a <em>deep</em> linked list. Write a function <code>deep_len</code> that takes in a (possibly deep) linked list and returns the <em>deep length</em> of that linked list. The deep length of a linked list is the total number of non-link elements in the list, as well as the total number of elements contained in all contained lists. See the function’s doctests for examples of the deep length of linked lists.</p>
+<blockquote>
+<p><strong>Hint:</strong> Use <code>isinstance</code> to check if something is an instance of an object.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def deep_len(lnk):</span><br><span class="line">    &quot;&quot;&quot; Returns the deep length of a possibly deep linked list.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; deep_len(Link(1, Link(2, Link(3))))</span><br><span class="line">    3</span><br><span class="line">    &gt;&gt;&gt; deep_len(Link(Link(1, Link(2)), Link(3, Link(4))))</span><br><span class="line">    4</span><br><span class="line">    &gt;&gt;&gt; levels = Link(Link(Link(1, Link(2)), \</span><br><span class="line">            Link(3)), Link(Link(4), Link(5)))</span><br><span class="line">    &gt;&gt;&gt; print(levels)</span><br><span class="line">    &lt;&lt;&lt;1 2&gt; 3&gt; &lt;4&gt; 5&gt;</span><br><span class="line">    &gt;&gt;&gt; deep_len(levels)</span><br><span class="line">    5</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if ______________:</span><br><span class="line">        return 0</span><br><span class="line">    elif ______________:</span><br><span class="line">        return 1</span><br><span class="line">    else:</span><br><span class="line">        return _________________________</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q deep_len✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q4-Add-Leaves">Q4: Add Leaves</h3>
+<p>Implement <code>add_d_leaves</code>, a function that takes in a <code>Tree</code> instance <code>t</code> and a number <code>v</code>.</p>
+<p>We define the depth of a node in <code>t</code> to be the number of edges from the root to that node. The depth of root is therefore 0.</p>
+<p>For each node in the tree, you should add <code>d</code> leaves to it, where <code>d</code> is the depth of the node. Every added leaf should have a label of <code>v</code>. If the node at this depth has existing branches, you should add these leaves to the end of that list of branches.</p>
+<p>For example, you should be adding 1 leaf with label <code>v</code> to each node at depth 1, 2 leaves to each node at depth 2, and so on.</p>
+<p>Here is an example of a tree <code>t</code>(shown on the left) and the result after <code>add_d_leaves</code> is applied with <code>v</code> as 5.<img src="https://cs61a.org/lab/lab08/assets/add_leaves.png" alt="add"></p>
+<blockquote>
+<p>Try drawing out the second doctest to visualize how the function is mutating <code>t3</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Hint:</strong> Use a helper function to keep track of the depth!</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">def add_d_leaves(t, v):</span><br><span class="line">    &quot;&quot;&quot;Add d leaves containing v to each node at every depth d.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; t_one_to_four = Tree(1, [Tree(2), Tree(3, [Tree(4)])])</span><br><span class="line">    &gt;&gt;&gt; print(t_one_to_four)</span><br><span class="line">    1</span><br><span class="line">      2</span><br><span class="line">      3</span><br><span class="line">        4</span><br><span class="line">    &gt;&gt;&gt; add_d_leaves(t_one_to_four, 5)</span><br><span class="line">    &gt;&gt;&gt; print(t_one_to_four)</span><br><span class="line">    1</span><br><span class="line">      2</span><br><span class="line">        5</span><br><span class="line">      3</span><br><span class="line">        4</span><br><span class="line">          5</span><br><span class="line">          5</span><br><span class="line">        5</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; t1 = Tree(1, [Tree(3)])</span><br><span class="line">    &gt;&gt;&gt; add_d_leaves(t1, 4)</span><br><span class="line">    &gt;&gt;&gt; t1</span><br><span class="line">    Tree(1, [Tree(3, [Tree(4)])])</span><br><span class="line">    &gt;&gt;&gt; t2 = Tree(2, [Tree(5), Tree(6)])</span><br><span class="line">    &gt;&gt;&gt; t3 = Tree(3, [t1, Tree(0), t2])</span><br><span class="line">    &gt;&gt;&gt; print(t3)</span><br><span class="line">    3</span><br><span class="line">      1</span><br><span class="line">        3</span><br><span class="line">          4</span><br><span class="line">      0</span><br><span class="line">      2</span><br><span class="line">        5</span><br><span class="line">        6</span><br><span class="line">    &gt;&gt;&gt; add_d_leaves(t3, 10)</span><br><span class="line">    &gt;&gt;&gt; print(t3)</span><br><span class="line">    3</span><br><span class="line">      1</span><br><span class="line">        3</span><br><span class="line">          4</span><br><span class="line">            10</span><br><span class="line">            10</span><br><span class="line">            10</span><br><span class="line">          10</span><br><span class="line">          10</span><br><span class="line">        10</span><br><span class="line">      0</span><br><span class="line">        10</span><br><span class="line">      2</span><br><span class="line">        5</span><br><span class="line">          10</span><br><span class="line">          10</span><br><span class="line">        6</span><br><span class="line">          10</span><br><span class="line">          10</span><br><span class="line">        10</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q add_d_leaves✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Efficiency">Efficiency</h2>
+<h3 id="Q5-Efficiency-Practice">Q5: Efficiency Practice</h3>
+<p>Choose the term that fills in the blank for the functions defined below: <code>&lt;function&gt;</code> runs in <code>____</code> time in the length of its input.</p>
+<ul>
+<li>Constant</li>
+<li>Logarithmic</li>
+<li>Linear</li>
+<li>Quadratic</li>
+<li>Exponential</li>
+<li>None of these</li>
+</ul>
+<p>Assume that <code>len</code> runs in constant time and <code>all</code> runs in linear time in the length of its input. Selecting an element of a list by its index requires constant time. Constructing a range requires constant time.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def count_partitions(n, m):</span><br><span class="line">    &quot;&quot;&quot;Counts the number of partitions of a positive integer n, </span><br><span class="line">    using parts up to size m.&quot;&quot;&quot;</span><br><span class="line">    if n == 0:</span><br><span class="line">        return 1</span><br><span class="line">    elif n &lt; 0:</span><br><span class="line">        return 0</span><br><span class="line">    elif m == 0:</span><br><span class="line">        return 0</span><br><span class="line">    else:</span><br><span class="line">        with_m = count_partitions(n-m, m)</span><br><span class="line">        without_m = count_partitions(n, m-1)</span><br><span class="line">        return with_m + without_m</span><br><span class="line"></span><br><span class="line">def is_palindrome(s):</span><br><span class="line">    &quot;&quot;&quot;Return whether a list of numbers s is a palindrome.&quot;&quot;&quot;</span><br><span class="line">    return all([s[i] == s[len(s) - i - 1] for i in range(len(s))])</span><br><span class="line"></span><br><span class="line">def binary_search(lst, n):</span><br><span class="line">    &quot;&quot;&quot;Takes in a sorted list lst and returns the index where integer n</span><br><span class="line">    is contained in lst. Returns -1 if n does not exist in lst.&quot;&quot;&quot;</span><br><span class="line">    low = 0</span><br><span class="line">    high = len(lst)</span><br><span class="line">    while low &lt;= high:</span><br><span class="line">        middle = (low + high) // 2</span><br><span class="line">        if lst[middle] == n:</span><br><span class="line">            return middle</span><br><span class="line">        elif n &lt; lst[middle]:</span><br><span class="line">            high = middle - 1</span><br><span class="line">        else:</span><br><span class="line">            low = middle + 1</span><br><span class="line">    return -1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The <code>is_palindrome</code> question was reformatted from question 6(d) on fall 2019’s <a target="_blank" rel="noopener" href="https://cs61a.org/exam/fa19/final/61a-fa19-final.pdf#page=7">final</a>.</p>
+</blockquote>
+<p>Use Ok to test your understanding:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q efficiency_practice -u✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Submit">Submit</h2>
+<p>Make sure to submit this assignment by running:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --submit</span><br></pre></td></tr></table></figure>
+<h1>Extra Practice</h1>
+<h2 id="Recursion-and-Tree-Recursion">Recursion and Tree Recursion</h2>
+<h3 id="Q6-Subsequences">Q6: Subsequences</h3>
+<p>A subsequence of a sequence <code>S</code> is a subset of elements from <code>S</code>, in the same order they appear in <code>S</code>. Consider the list <code>[1, 2, 3]</code>. Here are a few of it’s subsequences <code>[]</code>, <code>[1, 3]</code>, <code>[2]</code>, and <code>[1, 2, 3]</code>.</p>
+<p>Write a function that takes in a list and returns all possible subsequences of that list. The subsequences should be returned as a list of lists, where each nested list is a subsequence of the original input.</p>
+<p>In order to accomplish this, you might first want to write a function <code>insert_into_all</code> that takes an item and a list of lists, adds the item to the beginning of each nested list, and returns the resulting list.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">def insert_into_all(item, nested_list):</span><br><span class="line">    &quot;&quot;&quot;Return a new list consisting of all the lists in nested_list,</span><br><span class="line">    but with item added to the front of each. You can assume that</span><br><span class="line">     nested_list is a list of lists.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; nl = [[], [1, 2], [3]]</span><br><span class="line">    &gt;&gt;&gt; insert_into_all(0, nl)</span><br><span class="line">    [[0], [0, 1, 2], [0, 3]]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line"></span><br><span class="line">def subseqs(s):</span><br><span class="line">    &quot;&quot;&quot;Return a nested list (a list of lists) of all subsequences of S.</span><br><span class="line">    The subsequences can appear in any order. You can assume S is a list.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; seqs = subseqs([1, 2, 3])</span><br><span class="line">    &gt;&gt;&gt; sorted(seqs)</span><br><span class="line">    [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]</span><br><span class="line">    &gt;&gt;&gt; subseqs([])</span><br><span class="line">    [[]]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if ________________:</span><br><span class="line">        ________________</span><br><span class="line">    else:</span><br><span class="line">        ________________</span><br><span class="line">        ________________</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q subseqs✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q7-Non-Decreasing-Subsequences">Q7: Non-Decreasing Subsequences</h3>
+<p>Just like the last question, we want to write a function that takes a list and returns a list of lists, where each individual list is a subsequence of the original input.</p>
+<p>This time we have another condition: we only want the subsequences for which consecutive elements are <em>nondecreasing</em>. For example, <code>[1, 3, 2]</code> is a subsequence of <code>[1, 3, 2, 4]</code>, but since 2 &lt; 3, this subsequence would <em>not</em> be included in our result.</p>
+<p><strong>Fill in the blanks</strong> to complete the implementation of the <code>non_decrease_subseqs</code> function. You may assume that the input list contains no negative elements.</p>
+<p>You may use the provided helper function <code>insert_into_all</code>, which takes in an <code>item</code> and a list of lists and inserts the <code>item</code> to the front of each list.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def non_decrease_subseqs(s):</span><br><span class="line">    &quot;&quot;&quot;Assuming that S is a list, return a nested list of all subsequences</span><br><span class="line">    of S (a list of lists) for which the elements of the subsequence</span><br><span class="line">    are strictly nondecreasing. The subsequences can appear in any order.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; seqs = non_decrease_subseqs([1, 3, 2])</span><br><span class="line">    &gt;&gt;&gt; sorted(seqs)</span><br><span class="line">    [[], [1], [1, 2], [1, 3], [2], [3]]</span><br><span class="line">    &gt;&gt;&gt; non_decrease_subseqs([])</span><br><span class="line">    [[]]</span><br><span class="line">    &gt;&gt;&gt; seqs2 = non_decrease_subseqs([1, 1, 2])</span><br><span class="line">    &gt;&gt;&gt; sorted(seqs2)</span><br><span class="line">    [[], [1], [1], [1, 1], [1, 1, 2], [1, 2], [1, 2], [2]]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def subseq_helper(s, prev):</span><br><span class="line">        if not s:</span><br><span class="line">            return ____________________</span><br><span class="line">        elif s[0] &lt; prev:</span><br><span class="line">            return ____________________</span><br><span class="line">        else:</span><br><span class="line">            a = ______________________</span><br><span class="line">            b = ______________________</span><br><span class="line">            return insert_into_all(________, ______________) + ________________</span><br><span class="line">    return subseq_helper(____, ____)</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q non_decrease_subseqs✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Mutable-Lists">Mutable Lists</h2>
+<h3 id="Q8-Shuffle">Q8: Shuffle</h3>
+<p>Define a function <code>shuffle</code> that takes a sequence with an even number of elements (cards) and creates a new list that interleaves the elements of the first half with the elements of the second half.</p>
+<p>To interleave two sequences <code>s0</code> and <code>s1</code> is to create a new sequence such that the new sequence contains (in this order) the first element of <code>s0</code>, the first element of <code>s1</code>, the second element of <code>s0</code>, the second element of <code>s1</code>, and so on. If the two lists are not the same length, then the leftover elements of the longer list should still appear at the end.</p>
+<blockquote>
+<p><strong>Note:</strong> If you’re running into an issue where the special heart / diamond / spades / clubs symbols are erroring in the doctests, feel free to copy paste the below doctests into your file as these don’t use the special characters and should not give an “illegal multibyte sequence” error.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">def card(n):</span><br><span class="line">    &quot;&quot;&quot;Return the playing card numeral as a string for a positive n &lt;= 13.&quot;&quot;&quot;</span><br><span class="line">    assert type(n) == int and n &gt; 0 and n &lt;= 13, &quot;Bad card n&quot;</span><br><span class="line">    specials = &#123;1: &#x27;A&#x27;, 11: &#x27;J&#x27;, 12: &#x27;Q&#x27;, 13: &#x27;K&#x27;&#125;</span><br><span class="line">    return specials.get(n, str(n))</span><br><span class="line"></span><br><span class="line">def shuffle(cards):</span><br><span class="line">    &quot;&quot;&quot;Return a shuffled list that interleaves the two halves of cards.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; shuffle(range(6))</span><br><span class="line">    [0, 3, 1, 4, 2, 5]</span><br><span class="line">    &gt;&gt;&gt; suits = [&#x27;H&#x27;, &#x27;D&#x27;, &#x27;S&#x27;, &#x27;C&#x27;]</span><br><span class="line">    &gt;&gt;&gt; cards = [card(n) + suit for n in range(1,14) for suit in suits]</span><br><span class="line">    &gt;&gt;&gt; cards[:12]</span><br><span class="line">    [&#x27;AH&#x27;, &#x27;AD&#x27;, &#x27;AS&#x27;, &#x27;AC&#x27;, &#x27;2H&#x27;, &#x27;2D&#x27;, &#x27;2S&#x27;, &#x27;2C&#x27;, &#x27;3H&#x27;, &#x27;3D&#x27;, &#x27;3S&#x27;, &#x27;3C&#x27;]</span><br><span class="line">    &gt;&gt;&gt; cards[26:30]</span><br><span class="line">    [&#x27;7S&#x27;, &#x27;7C&#x27;, &#x27;8H&#x27;, &#x27;8D&#x27;]</span><br><span class="line">    &gt;&gt;&gt; shuffle(cards)[:12]</span><br><span class="line">    [&#x27;AH&#x27;, &#x27;7S&#x27;, &#x27;AD&#x27;, &#x27;7C&#x27;, &#x27;AS&#x27;, &#x27;8H&#x27;, &#x27;AC&#x27;, &#x27;8D&#x27;, &#x27;2H&#x27;, &#x27;8S&#x27;, &#x27;2D&#x27;, &#x27;8C&#x27;]</span><br><span class="line">    &gt;&gt;&gt; shuffle(shuffle(cards))[:12]</span><br><span class="line">    [&#x27;AH&#x27;, &#x27;4D&#x27;, &#x27;7S&#x27;, &#x27;10C&#x27;, &#x27;AD&#x27;, &#x27;4S&#x27;, &#x27;7C&#x27;, &#x27;JH&#x27;, &#x27;AS&#x27;, &#x27;4C&#x27;, &#x27;8H&#x27;, &#x27;JD&#x27;]</span><br><span class="line">    &gt;&gt;&gt; cards[:12]  # Should not be changed</span><br><span class="line">    [&#x27;AH&#x27;, &#x27;AD&#x27;, &#x27;AS&#x27;, &#x27;AC&#x27;, &#x27;2H&#x27;, &#x27;2D&#x27;, &#x27;2S&#x27;, &#x27;2C&#x27;, &#x27;3H&#x27;, &#x27;3D&#x27;, &#x27;3S&#x27;, &#x27;3C&#x27;]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    assert len(cards) % 2 == 0, &#x27;len(cards) must be even&#x27;</span><br><span class="line">    half = _______________</span><br><span class="line">    shuffled = []</span><br><span class="line">    for i in _____________:</span><br><span class="line">        _________________</span><br><span class="line">        _________________</span><br><span class="line">    return shuffled</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q shuffle✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Generators-Iterators">Generators &amp; Iterators</h2>
+<h3 id="Q9-Pairs-generator">Q9: Pairs (generator)</h3>
+<p>Write a generator function <code>pairs</code> that takes a list and yields all the possible pairs of elements from that list.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def pairs(lst):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; type(pairs([3, 4, 5]))</span><br><span class="line">    &lt;class &#x27;generator&#x27;&gt;</span><br><span class="line">    &gt;&gt;&gt; for x, y in pairs([3, 4, 5]):</span><br><span class="line">    ...     print(x, y)</span><br><span class="line">    ...</span><br><span class="line">    3 3</span><br><span class="line">    3 4</span><br><span class="line">    3 5</span><br><span class="line">    4 3</span><br><span class="line">    4 4</span><br><span class="line">    4 5</span><br><span class="line">    5 3</span><br><span class="line">    5 4</span><br><span class="line">    5 5</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q pairs✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q10-Pairs-iterator">Q10: Pairs (iterator)</h3>
+<blockquote>
+<p><strong>Important note (March 14):</strong> This question is <strong>not</strong> in scope for this semester (Spring 2022), as it involves <code>__iter__</code> and <code>__next__</code>.</p>
+</blockquote>
+<p>Now write an iterator that does the same thing. You are only allowed to use a linear amount of space - so computing a list of all of the possible pairs is not a valid answer. Notice how much harder it is - this is why generators are useful.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class PairsIterator:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; for x, y in PairsIterator([3, 4, 5]):</span><br><span class="line">    ...     print(x, y)</span><br><span class="line">    ...</span><br><span class="line">    3 3</span><br><span class="line">    3 4</span><br><span class="line">    3 5</span><br><span class="line">    4 3</span><br><span class="line">    4 4</span><br><span class="line">    4 5</span><br><span class="line">    5 3</span><br><span class="line">    5 4</span><br><span class="line">    5 5</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self, lst):</span><br><span class="line">        &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line"></span><br><span class="line">    def __next__(self):</span><br><span class="line">        &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line"></span><br><span class="line">    def __iter__(self):</span><br><span class="line">        &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q PairsIterator✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Trees">Trees</h2>
+<h3 id="Q11-Long-Paths">Q11: Long Paths</h3>
+<p>Implement <code>long_paths</code>, which returns a list of all <em>paths</em> in a tree with length at least <code>n</code>. A path in a tree is a linked list of node values that starts with the root and ends at a leaf. Each subsequent element must be from a child of the previous value’s node. The <em>length</em> of a path is the number of edges in the path (i.e. one less than the number of nodes in the path). Paths are listed in order from left to right. See the doctests for some examples.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">def long_paths(tree, n):</span><br><span class="line">    &quot;&quot;&quot;Return a list of all paths in tree with length at least n.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; t = Tree(3, [Tree(4), Tree(4), Tree(5)])</span><br><span class="line">    &gt;&gt;&gt; left = Tree(1, [Tree(2), t])</span><br><span class="line">    &gt;&gt;&gt; mid = Tree(6, [Tree(7, [Tree(8)]), Tree(9)])</span><br><span class="line">    &gt;&gt;&gt; right = Tree(11, [Tree(12, [Tree(13, [Tree(14)])])])</span><br><span class="line">    &gt;&gt;&gt; whole = Tree(0, [left, Tree(13), mid, right])</span><br><span class="line">    &gt;&gt;&gt; for path in long_paths(whole, 2):</span><br><span class="line">    ...     print(path)</span><br><span class="line">    ...</span><br><span class="line">    &lt;0 1 2&gt;</span><br><span class="line">    &lt;0 1 3 4&gt;</span><br><span class="line">    &lt;0 1 3 4&gt;</span><br><span class="line">    &lt;0 1 3 5&gt;</span><br><span class="line">    &lt;0 6 7 8&gt;</span><br><span class="line">    &lt;0 6 9&gt;</span><br><span class="line">    &lt;0 11 12 13 14&gt;</span><br><span class="line">    &gt;&gt;&gt; for path in long_paths(whole, 3):</span><br><span class="line">    ...     print(path)</span><br><span class="line">    ...</span><br><span class="line">    &lt;0 1 3 4&gt;</span><br><span class="line">    &lt;0 1 3 4&gt;</span><br><span class="line">    &lt;0 1 3 5&gt;</span><br><span class="line">    &lt;0 6 7 8&gt;</span><br><span class="line">    &lt;0 11 12 13 14&gt;</span><br><span class="line">    &gt;&gt;&gt; long_paths(whole, 4)</span><br><span class="line">    [Link(0, Link(11, Link(12, Link(13, Link(14)))))]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q long_paths✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Linked-Lists">Linked Lists</h2>
+<h3 id="Q12-Flip-Two">Q12: Flip Two</h3>
+<p>Write a recursive function <code>flip_two</code> that takes as input a linked list <code>s</code> and mutates <code>s</code> so that every pair of values in the linked list is flipped.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def flip_two(s):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; one_lnk = Link(1)</span><br><span class="line">    &gt;&gt;&gt; flip_two(one_lnk)</span><br><span class="line">    &gt;&gt;&gt; one_lnk</span><br><span class="line">    Link(1)</span><br><span class="line">    &gt;&gt;&gt; lnk = Link(1, Link(2, Link(3, Link(4, Link(5)))))</span><br><span class="line">    &gt;&gt;&gt; flip_two(lnk)</span><br><span class="line">    &gt;&gt;&gt; lnk</span><br><span class="line">    Link(2, Link(1, Link(4, Link(3, Link(5)))))</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line"></span><br><span class="line">    # For an extra challenge, try writing out an iterative approach as well below!</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q flip_two✂️</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/05/23/CS61A-Lab-8/">http://www.misaka-9982.com/2022/05/23/CS61A-Lab-8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS61A/">CS61A</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/23/CS61A-Lab-7/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CS61A Lab 7</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/19/CS61A-Homework-1/" title="CS61A Homework 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 1</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-3/" title="CS61A Homework 3"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 3</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-2/" title="CS61A Homework 2"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/L5P02Q12KNJWAZ3J3.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 2</div></div></a></div><div><a href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/1F890Y6UTUL762D6F.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-21</div><div class="title">CS61A Homework 4</div></div></a></div><div><a href="/2022/05/19/CS61A-Lab-1/" title="CS61A Lab 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/UMU98C2B3G_7N0MDBOD.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Lab 1</div></div></a></div><div><a href="/2022/05/19/CS61A-Lab-2/" title="CS61A Lab 2"><img class="cover" src="https://cdn.lixingyong.com/2021/11/27/XAKFG64FZM8I0IYO4655.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Lab 2</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">95</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Lab 8: Midterm Review lab08.zip</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Starter-Files"><span class="toc-text">Starter Files</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Topics</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Required Questions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Iterators-Generators"><span class="toc-text">Iterators &amp; Generators</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1-Repeated"><span class="toc-text">Q1: Repeated</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-Merge"><span class="toc-text">Q2: Merge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linked-Lists-Trees"><span class="toc-text">Linked Lists &amp; Trees</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-Deep-Linked-List-Length"><span class="toc-text">Q3: Deep Linked List Length</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q4-Add-Leaves"><span class="toc-text">Q4: Add Leaves</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Efficiency"><span class="toc-text">Efficiency</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q5-Efficiency-Practice"><span class="toc-text">Q5: Efficiency Practice</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Submit"><span class="toc-text">Submit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Extra Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Recursion-and-Tree-Recursion"><span class="toc-text">Recursion and Tree Recursion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q6-Subsequences"><span class="toc-text">Q6: Subsequences</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q7-Non-Decreasing-Subsequences"><span class="toc-text">Q7: Non-Decreasing Subsequences</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mutable-Lists"><span class="toc-text">Mutable Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q8-Shuffle"><span class="toc-text">Q8: Shuffle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generators-Iterators"><span class="toc-text">Generators &amp; Iterators</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q9-Pairs-generator"><span class="toc-text">Q9: Pairs (generator)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q10-Pairs-iterator"><span class="toc-text">Q10: Pairs (iterator)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trees"><span class="toc-text">Trees</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q11-Long-Paths"><span class="toc-text">Q11: Long Paths</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linked-Lists"><span class="toc-text">Linked Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q12-Flip-Two"><span class="toc-text">Q12: Flip Two</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/CS61A-Lab-8/" title="CS61A Lab 8"><img src="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 8"/></a><div class="content"><a class="title" href="/2022/05/23/CS61A-Lab-8/" title="CS61A Lab 8">CS61A Lab 8</a><time datetime="2022-05-23T09:02:28.000Z" title="发表于 2022-05-23 17:02:28">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/CS61A-Lab-7/" title="CS61A Lab 7"><img src="https://cdn.lixingyong.com/2021/11/19/MFGM0ZJKAVZGYFEXXN.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 7"/></a><div class="content"><a class="title" href="/2022/05/23/CS61A-Lab-7/" title="CS61A Lab 7">CS61A Lab 7</a><time datetime="2022-05-23T08:53:19.000Z" title="发表于 2022-05-23 16:53:19">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/CS61A-Homework-5/" title="CS61A Homework 5"><img src="https://cdn.lixingyong.com/2021/11/27/7EDEBG1WVQD_9YIAQ2UV.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 5"/></a><div class="content"><a class="title" href="/2022/05/23/CS61A-Homework-5/" title="CS61A Homework 5">CS61A Homework 5</a><time datetime="2022-05-23T02:15:08.000Z" title="发表于 2022-05-23 10:15:08">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/22/CS61A-Lab-6/" title="CS61A Lab 6"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 6"/></a><div class="content"><a class="title" href="/2022/05/22/CS61A-Lab-6/" title="CS61A Lab 6">CS61A Lab 6</a><time datetime="2022-05-22T11:44:18.000Z" title="发表于 2022-05-22 19:44:18">2022-05-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img src="https://cdn.lixingyong.com/2021/11/19/1F890Y6UTUL762D6F.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 4"/></a><div class="content"><a class="title" href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4">CS61A Homework 4</a><time datetime="2022-05-21T05:54:01.000Z" title="发表于 2022-05-21 13:54:01">2022-05-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        if(typeof window.mediumZoom!='undefined'){
+          const zoomComment = mediumZoom(document.querySelectorAll('.tk-content :not(a)>img'))
+          zoomComment.on('open', e => {
+            const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
+            zoomComment.update({
+              background: photoBg
+            })
+          })
+        }
+        if(GLOBAL_CONFIG.lightbox === 'fancybox'){
+            const addFancybox = function (ele) {
+              const runFancybox = (ele) => {
+                ele.each(function (i, o) {
+                  const $this = $(o)
+                  const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
+                  const dataCaption = $this.attr('alt') || ''
+                  $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+                })
+
+                $().fancybox({
+                  selector: '[data-fancybox]',
+                  loop: true,
+                  transitionEffect: 'slide',
+                  protect: true,
+                  buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+                  hash: false
+                })
+              }
+
+              if (typeof $.fancybox === 'undefined') {
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
+                $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
+                  runFancybox($(ele))
+                })
+              } else {
+                runFancybox($(ele))
+              }
+            }
+          addFancybox(document.querySelectorAll('.tk-content :not(a)>img'))
+        }
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://www.misaka-9982.com/2022/05/23/CS61A-Lab-8/'
+    this.page.identifier = '2022/05/23/CS61A-Lab-8/'
+    this.page.title = 'CS61A Lab 8'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Twikoo' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  function gitcalendar_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      console.log('已挂载gitcalendar')
+      }
+
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+        gitcalendar_injector_config()
+        GitCalendarInit("https://git-api-4yazkln1p-misaka-9982-coder.vercel.app/api?Misaka-9982-coder",['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'],'Misaka-9982-coder')
+    }
+  </script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
