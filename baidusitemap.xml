@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://www.misaka-9982.com/2022/07/23/Mac-M1-%E5%AE%89%E8%A3%85MIT-Scheme/</loc>
-    <lastmod>2022-07-23T12:26:21.028Z</lastmod>
-  </url>  <url>
     <loc>http://www.misaka-9982.com/2022/07/23/CS61A-Proj-0/</loc>
-    <lastmod>2022-07-23T06:09:20.947Z</lastmod>
+    <lastmod>2022-07-30T04:10:27.979Z</lastmod>
+  </url>  <url>
+    <loc>http://www.misaka-9982.com/2022/07/30/CS61A/</loc>
+    <lastmod>2022-07-30T04:09:29.964Z</lastmod>
+  </url>  <url>
+    <loc>http://www.misaka-9982.com/2022/07/23/Mac-M1-%E5%AE%89%E8%A3%85MIT-Scheme/</loc>
+    <lastmod>2022-07-23T12:52:58.789Z</lastmod>
   </url>  <url>
     <loc>http://www.misaka-9982.com/2022/05/23/CS61A-Proj-2/</loc>
     <lastmod>2022-07-23T05:24:47.058Z</lastmod>
