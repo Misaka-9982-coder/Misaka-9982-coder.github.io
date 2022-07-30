@@ -1,0 +1,498 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS61A Lab 12 | Misaka's blog</title><meta name="keywords" content="CS61A"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab 12: Scheme Data Abstraction lab12.zip Due by 11:59pm on Wednesday, April 13. Starter Files Download lab12.zip. Inside the archive, you will find starter files for the questions in this lab, along">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Lab 12">
+<meta property="og:url" content="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-12/index.html">
+<meta property="og:site_name" content="Misaka&#39;s blog">
+<meta property="og:description" content="Lab 12: Scheme Data Abstraction lab12.zip Due by 11:59pm on Wednesday, April 13. Starter Files Download lab12.zip. Inside the archive, you will find starter files for the questions in this lab, along">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png">
+<meta property="article:published_time" content="2022-07-30T05:36:53.000Z">
+<meta property="article:modified_time" content="2022-07-30T05:41:15.817Z">
+<meta property="article:author" content="Misaka">
+<meta property="article:tag" content="CS61A">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-12/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":150,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CS61A Lab 12',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-30 13:41:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">111</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS61A Lab 12</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-30T05:36:53.000Z" title="发表于 2022-07-30 13:36:53">2022-07-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-30T05:41:15.817Z" title="更新于 2022-07-30 13:41:15">2022-07-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS61A Lab 12"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Lab 12: Scheme Data Abstraction <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/sp22/lab/lab12/lab12.zip">lab12.zip</a></h1>
+<p><em>Due by 11:59pm on Wednesday, April 13.</em></p>
+<h2 id="Starter-Files-2">Starter Files</h2>
+<p>Download <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/sp22/lab/lab12/lab12.zip">lab12.zip</a>. Inside the archive, you will find starter files for the questions in this lab, along with a copy of the <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/sp22/lab/lab12/ok">Ok</a> autograder.</p>
+<h1>Topics</h1>
+<p>Consult this section if you need a refresher on the material for this lab. It’s okay to skip directly to <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/sp22/lab/lab12/#required-questions">the questions</a> and refer back here should you get stuck.</p>
+<h2 id="Data-Abstractions">Data Abstractions</h2>
+<p>Data Abstractions</p>
+<h2 id="Example-Data-Abstractions">Example Data Abstractions</h2>
+<h3 id="Rational"><code>Rational</code></h3>
+<p>Recall that a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rational_number">rational number</a> is any number that can be expressed as <em>p / q</em>, where <em>p</em> and <em>q</em> are integers.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">; Creates the rational number n/d (Assume n, d are integers and d != 0)</span><br><span class="line">; Note that the constructor simplifies the numerator and denominator.</span><br><span class="line">(rational n d)</span><br><span class="line"></span><br><span class="line">; Gets the numerator of rational number r</span><br><span class="line">(numer r) </span><br><span class="line"></span><br><span class="line">; Gets the denominator of rational number r</span><br><span class="line">(denom r)</span><br><span class="line"></span><br><span class="line">; Adds two rational numbers x and y</span><br><span class="line">(add-rational x y)</span><br><span class="line"></span><br><span class="line">; Multiplies two rational numbers x and y</span><br><span class="line">(mul-rational x y)</span><br></pre></td></tr></table></figure>
+<h3 id="Trees"><code>Trees</code></h3>
+<p>Below is a Scheme-ified data abstraction of the Tree class we’ve been working with this semester.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; Constructs tree given label and list of branches</span><br><span class="line">(tree label branches)</span><br><span class="line"></span><br><span class="line">; Returns the label of the tree</span><br><span class="line">(label t)</span><br><span class="line"></span><br><span class="line">; Returns the list of branches of the given tree</span><br><span class="line">(branches t)</span><br><span class="line"></span><br><span class="line">; Returns #t if t is a leaf, #f otherwise</span><br><span class="line">(is-leaf t)</span><br></pre></td></tr></table></figure>
+<h1>Questions</h1>
+<h2 id="What-Would-Scheme-Do">What Would Scheme Do?</h2>
+<h3 id="Q1-WWSD-Data-Abstractions">Q1: WWSD: Data Abstractions</h3>
+<p>Let’s familiarize ourselves with some Scheme data abstractions!</p>
+<blockquote>
+<p>If you need a refresher on the <code>tree</code> and <code>rational</code> abstractions, refer to this lab’s introduction or <a target="_blank" rel="noopener" href="https://cs61a.org/lecture/lec31/">Monday 04/11’s lecture</a>.</p>
+</blockquote>
+<p>Use Ok to test your knowledge with the following “What Would Python Display?” questions:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q abstractions -u✂️</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (load rational.scm)</span><br><span class="line">scm&gt; (define x (rational 2 5))</span><br><span class="line"></span><br><span class="line">scm&gt; (numer x)</span><br><span class="line"></span><br><span class="line">scm&gt; (denom x)</span><br><span class="line"></span><br><span class="line">scm&gt; (define y (rational 1 4))</span><br><span class="line"></span><br><span class="line">scm&gt; (define z1 (add-rational x y))</span><br><span class="line"></span><br><span class="line">scm&gt; (numer z1)</span><br><span class="line"></span><br><span class="line">scm&gt; (denom z1)</span><br><span class="line"></span><br><span class="line">scm&gt; (define z2 (mul-rational x y)) ; don&#x27;t forget to reduce the rational!</span><br><span class="line"></span><br><span class="line">scm&gt; (numer z2)</span><br><span class="line"></span><br><span class="line">scm&gt; (denom z2)</span><br><span class="line">scm&gt; (load tree.scm)</span><br><span class="line">scm&gt; (define t (tree 1 (list (tree 2 nil)) ))</span><br><span class="line"></span><br><span class="line">scm&gt; (label t)</span><br><span class="line"></span><br><span class="line">scm&gt; (length (branches t))</span><br><span class="line"></span><br><span class="line">scm&gt; (define child (car (branches t)))</span><br><span class="line"></span><br><span class="line">scm&gt; (label child)</span><br><span class="line"></span><br><span class="line">scm&gt; (is-leaf child)</span><br><span class="line"></span><br><span class="line">scm&gt; (branches child)</span><br><span class="line">scm&gt; (load tree.scm)</span><br><span class="line">scm&gt; (define b1 (tree 5 (list (tree 6 nil) (tree 7 nil)) )) </span><br><span class="line"></span><br><span class="line">scm&gt; (map is-leaf (branches b1))    ; draw the tree if you get stuck!</span><br><span class="line"></span><br><span class="line">scm&gt; (define b2 (tree 8 (list (tree 9 (list (tree 10 nil)) )) )) </span><br><span class="line"></span><br><span class="line">scm&gt; (map is-leaf (branches b2))    ; draw the tree if you get stuck!</span><br><span class="line"></span><br><span class="line">scm&gt; (define t (tree 11 (list b1 b2)))</span><br><span class="line"></span><br><span class="line">scm&gt; (label t)</span><br><span class="line"></span><br><span class="line">scm&gt; (map (lambda (b) (label b)) (branches t)) ; draw the tree if you get stuck!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">$ python3 ok -q abstractions -u</span><br><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 12</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">What Would Scheme Display? &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 3)</span><br><span class="line"></span><br><span class="line">scm&gt; (load &quot;./lab12.scm&quot;)</span><br><span class="line">scm&gt; (define x (rational 2 5))</span><br><span class="line">? x</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (numer x)</span><br><span class="line">? 2</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (denom x)</span><br><span class="line">? 5</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define y (rational 1 4))</span><br><span class="line">? y</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define z1 (add-rational x y))</span><br><span class="line">? z1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (numer z1)</span><br><span class="line">? 13</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (denom z1)</span><br><span class="line">? 20</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define z2 (mul-rational x y))</span><br><span class="line">? z2</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (numer z2)</span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (denom z2)</span><br><span class="line">? 10</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">What Would Scheme Display? &gt; Suite 1 &gt; Case 2</span><br><span class="line">(cases remaining: 2)</span><br><span class="line"></span><br><span class="line">scm&gt; (load &quot;./lab12.scm&quot;)</span><br><span class="line">scm&gt; (define t (tree 1 (list (tree 2 nil))))</span><br><span class="line">? t</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (label t)</span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (length (branches t))</span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define child (car (branches t)))</span><br><span class="line">? child</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (label child)</span><br><span class="line">? 2</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (is-leaf child)</span><br><span class="line">? #t</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (branches child)</span><br><span class="line">? ()</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">What Would Scheme Display? &gt; Suite 1 &gt; Case 3</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">scm&gt; (load &quot;./lab12.scm&quot;)</span><br><span class="line">scm&gt; (define b1 (tree 5 (list (tree 6 nil) (tree 7 nil)) )) </span><br><span class="line">? b1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (map is-leaf (branches b1))  ; draw the tree if you get stuck!</span><br><span class="line">? (#t #t)</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define b2 (tree 8 (list (tree 9 (list (tree 10 nil)) )) )) </span><br><span class="line">? b2</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (map is-leaf (branches b2))  ; draw the tree if you get stuck!</span><br><span class="line">? (#f)</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (define t (tree 11 (list b1 b2)))</span><br><span class="line">? t</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (label t)</span><br><span class="line">? 11</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">scm&gt; (map (lambda (b) (label b)) (branches t))</span><br><span class="line">? (5 8)</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for What Would Scheme Display? unlocked.</span><br></pre></td></tr></table></figure>
+<h2 id="Code-Writing-Questions">Code Writing Questions</h2>
+<blockquote>
+<p>Remember that when working with data abstractions, you should <strong>not</strong> break the abstraction barrier if possible! Later questions will have <em>abstraction checks</em>, where the underlying representation of the abstraction will be changed; thus, attempting to refer to specifics of the implementation will break. Attempt to use the functions you are creating to interface with the classes whenever possible.</p>
+</blockquote>
+<h3 id="Cities">Cities</h3>
+<p>Say we have an abstract data type for cities. A city has a name, a latitude coordinate, and a longitude coordinate.</p>
+<p>Our data abstraction has one <strong>constructor</strong>:</p>
+<ul>
+<li><code>(make-city name lat lon)</code>: Creates a city object with the given name, latitude, and longitude.</li>
+</ul>
+<p>We also have the following <strong>selectors</strong> in order to get the information for each city:</p>
+<ul>
+<li><code>(get-name city)</code>: Returns the city’s name</li>
+<li><code>(get-lat city)</code>: Returns the city’s latitude</li>
+<li><code>(get-lon city)</code>: Returns the city’s longitude</li>
+</ul>
+<p>Here is how we would use the constructor and selectors to create cities and extract their information:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (define berkeley (make-city &#x27;Berkeley 122 37))</span><br><span class="line">berkeley</span><br><span class="line">scm&gt; (get-name berkeley)</span><br><span class="line">Berkeley</span><br><span class="line">scm&gt; (get-lat berkeley)</span><br><span class="line">122</span><br><span class="line">scm&gt; (define new-york (make-city &#x27;NYC 74 40))</span><br><span class="line">new-york</span><br><span class="line">scm&gt; (get-lon new-york)</span><br><span class="line">40</span><br></pre></td></tr></table></figure>
+<p>All of the selector and constructor functions can be found in the lab file, if you are curious to see how they are implemented. However, the point of data abstraction is that we do not need to know how an abstract data type is implemented, but rather just how we can interact with and use the data type.</p>
+<h3 id="Q2-Distance">Q2: Distance</h3>
+<p>We will now implement the function <code>distance</code>, which computes the <em>Euclidean distance</em> between two city objects; the Euclidean distance between two coordinate pairs <code>(x1, y1)</code> and <code>(x2, y2)</code> can be found by calculating the <code>sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)</code>. Use the latitude and longitude of a city as its coordinates; you’ll need to use the selectors to access this info!</p>
+<blockquote>
+<p>You may find the following methods useful:</p>
+<ul>
+<li><code>(expt base exp)</code>: calculate <code>base ** exp</code></li>
+<li><code>(sqrt x)</code> calculate <code>sqrt(x)</code></li>
+</ul>
+</blockquote>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">distance</span> city-a city-b) </span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">sqrt</span></span></span><br><span class="line">    (<span class="name"><span class="builtin-name">+</span></span></span><br><span class="line">      (<span class="name"><span class="builtin-name">expt</span></span> (<span class="name"><span class="builtin-name">-</span></span> (<span class="name">get-lat</span> city-a) (<span class="name">get-lat</span> city-b)) <span class="number">2</span>)</span><br><span class="line">      (<span class="name"><span class="builtin-name">expt</span></span> (<span class="name"><span class="builtin-name">-</span></span> (<span class="name">get-lon</span> city-a) (<span class="name">get-lon</span> city-b)) <span class="number">2</span>)</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q city_distance✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q3-Closer-city">Q3: Closer city</h3>
+<p>Next, implement <code>closer-city</code>, a function that takes a latitude, longitude, and two cities, and returns the name of the city that is relatively closer to the provided latitude and longitude.</p>
+<p>You may only use the selectors and constructors introduced above and the <code>distance</code> function you just defined for this question.</p>
+<blockquote>
+<p><strong>Hint</strong>: How can you use your <code>distance</code> function to find the distance between the given location and each of the given cities?</p>
+</blockquote>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">closer-city</span> lat lon city-a city-b)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> x (<span class="name">make-city</span> <span class="symbol">&#x27;x</span> lat lon))</span><br><span class="line">  (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&lt;</span></span> (<span class="name">distance</span> x city-a) (<span class="name">distance</span> x city-b))</span><br><span class="line">    (<span class="name">get-name</span> city-a)</span><br><span class="line">    (<span class="name">get-name</span> city-b)</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q city_closer✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Teachers-and-Students">Teachers and Students</h3>
+<p>In the following questions, you’ll be implementing data abstractions for students and teachers:</p>
+<ol>
+<li>The <code>teacher</code> abstraction keeps track of the teacher’s <code>name</code>, the <code>class</code> they teach, and the <code>students</code> enrolled in their class. Specifically, a <code>teacher</code>’s <code>name</code> and <code>class</code> are atomic symbols, and their <code>students</code> is a list of <code>student</code> objects.</li>
+<li>The <code>student</code> abstraction keeps track of a student’s <code>name</code> and number of <code>classes</code> attended. Specifically, a <code>student</code>’s <code>name</code> is an atomic symbol, and their <code>classes</code> is a list of atomic symbols representing all classes attended. For example, if a student had attended <code>cs61a</code> and <code>astronomy</code>, their <code>classes</code> list would be <code>(cs61a astronomy)</code>.</li>
+</ol>
+<p>You can find the constructors for these classes below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define (student-create name classes) (cons name classes))</span><br><span class="line">(define (teacher-create name class students) (cons name (cons class students)))</span><br></pre></td></tr></table></figure>
+<h3 id="Q4-Teachers-and-Students-Selectors">Q4: Teachers and Students: Selectors</h3>
+<p>Implement <code>student-get-name</code>, <code>student-get-classes</code>, <code>teacher-get-name</code>, <code>teacher-get-class</code>, and <code>teacher-get-students</code>. These functions take in a <code>student</code> or <code>teacher</code> abstraction, and return the relevant attribute; for example, <code>student-get-name</code> takes a <code>student</code> as input, and returns the <code>name</code>.</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">student-create</span> name classes)</span><br><span class="line">  (<span class="name"><span class="builtin-name">cons</span></span> name classes)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">teacher-create</span> name class students)</span><br><span class="line">  (<span class="name"><span class="builtin-name">cons</span></span> name (<span class="name"><span class="builtin-name">cons</span></span> class students))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">student-get-name</span> student)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">car</span></span> student)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">student-get-classes</span> student)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">cdr</span></span> student)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">teacher-get-name</span> teacher)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">car</span></span> teacher)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">teacher-get-class</span> teacher)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">car</span></span> (<span class="name"><span class="builtin-name">cdr</span></span> teacher))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">teacher-get-students</span> teacher)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">cdr</span></span> (<span class="name"><span class="builtin-name">cdr</span></span> teacher))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q teacher_student_selectors✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q5-Students-Attend-Class">Q5: Students: Attend Class</h3>
+<p>Implement <code>student-attend-class</code>. This method takes in a <code>student</code> and a <code>class</code> as input, and returns a <em>new</em> <code>student</code> abstraction with the <code>class</code> list updated to reflect the <code>class</code> attended.</p>
+<blockquote>
+<p>Be sure to keep the abstraction barrier in mind!</p>
+</blockquote>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">student-attend-class</span> student class)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  <span class="comment">; (define new_class (cons class (student-get-classes student)))</span></span><br><span class="line">  <span class="comment">; (define name (student-get-name student))</span></span><br><span class="line">  <span class="comment">; (student-create name new_class)</span></span><br><span class="line">  (<span class="name">student-create</span></span><br><span class="line">    (<span class="name">student-get-name</span> student)</span><br><span class="line">    (<span class="name"><span class="builtin-name">cons</span></span> class (<span class="name">student-get-classes</span> student))</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q student_attend_class✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q6-Teachers-Hold-Discussion">Q6: Teachers: Hold Discussion</h3>
+<p>Implement <code>teacher-hold-class</code>. This method takes in a <code>teacher</code> as input, and emulates holding a class. Specifically, the function should return a <em>new</em> updated <code>teacher</code>, where all <code>student</code> objects in the <code>teacher</code>’s <code>students</code> list have updated <code>class</code> lists to reflect their attendance.</p>
+<blockquote>
+<p>Be sure to keep the abstraction barrier in mind! Feel free to use any of the functions implemented in previous parts of this lab. You may also find the <a target="_blank" rel="noopener" href="https://cs61a.org/articles/scheme-builtins/"><code>map</code></a> function useful.</p>
+</blockquote>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">teacher-hold-class</span> teacher)</span><br><span class="line">  <span class="symbol">&#x27;YOUR-CODE-HERE</span></span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> name (<span class="name">teacher-get-name</span> teacher))</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> class (<span class="name">teacher-get-class</span> teacher))</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> students (<span class="name">teacher-get-students</span> teacher))</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> new_students</span><br><span class="line">    (<span class="name"><span class="builtin-name">map</span></span></span><br><span class="line">      (<span class="name"><span class="builtin-name">lambda</span></span> (student) </span><br><span class="line">        (<span class="name">student-attend-class</span> student class)</span><br><span class="line">      )</span><br><span class="line">      students</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">  </span><br><span class="line">  (<span class="name">teacher-create</span> name class new_students)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q teacher_hold_class✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Submit-2">Submit</h2>
+<p>Make sure to submit this assignment by running:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --submit</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-12/">http://www.misaka-9982.com/2022/07/30/CS61A-Lab-12/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS61A/">CS61A</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/30/CS61A-Lab-11/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CS61A Lab 11</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/19/CS61A-Homework-1/" title="CS61A Homework 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 1</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-2/" title="CS61A Homework 2"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 2</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-3/" title="CS61A Homework 3"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/P305ADMH8D9FOQ8_JG.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 3</div></div></a></div><div><a href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-21</div><div class="title">CS61A Homework 4</div></div></a></div><div><a href="/2022/05/23/CS61A-Homework-5/" title="CS61A Homework 5"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-23</div><div class="title">CS61A Homework 5</div></div></a></div><div><a href="/2022/05/19/CS61A-Lab-1/" title="CS61A Lab 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Lab 1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">111</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/+ih3m863trP4yZTFl" target="_blank" title=""><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://t.me/+m3x7kvycG6c5MWU1" target="_blank" title=""><i class="fab fa-android"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Lab 12: Scheme Data Abstraction lab12.zip</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Starter-Files-2"><span class="toc-text">Starter Files</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Topics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Abstractions"><span class="toc-text">Data Abstractions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-Data-Abstractions"><span class="toc-text">Example Data Abstractions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rational"><span class="toc-text">Rational</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trees"><span class="toc-text">Trees</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Questions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Would-Scheme-Do"><span class="toc-text">What Would Scheme Do?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1-WWSD-Data-Abstractions"><span class="toc-text">Q1: WWSD: Data Abstractions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Writing-Questions"><span class="toc-text">Code Writing Questions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cities"><span class="toc-text">Cities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-Distance"><span class="toc-text">Q2: Distance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-Closer-city"><span class="toc-text">Q3: Closer city</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Teachers-and-Students"><span class="toc-text">Teachers and Students</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q4-Teachers-and-Students-Selectors"><span class="toc-text">Q4: Teachers and Students: Selectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q5-Students-Attend-Class"><span class="toc-text">Q5: Students: Attend Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q6-Teachers-Hold-Discussion"><span class="toc-text">Q6: Teachers: Hold Discussion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Submit-2"><span class="toc-text">Submit</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-12/" title="CS61A Lab 12"><img src="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 12"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-12/" title="CS61A Lab 12">CS61A Lab 12</a><time datetime="2022-07-30T05:36:53.000Z" title="发表于 2022-07-30 13:36:53">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-11/" title="CS61A Lab 11"><img src="https://cdn.lixingyong.com/2021/11/19/70YQE6M5_KQA2PKDTAE.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 11"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-11/" title="CS61A Lab 11">CS61A Lab 11</a><time datetime="2022-07-30T05:33:10.000Z" title="发表于 2022-07-30 13:33:10">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Homework-6/" title="CS61A Homework 6"><img src="https://cdn.lixingyong.com/2021/11/19/YNH040C0LZA6KDU14C.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 6"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Homework-6/" title="CS61A Homework 6">CS61A Homework 6</a><time datetime="2022-07-30T05:29:52.000Z" title="发表于 2022-07-30 13:29:52">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-10/" title="CS61A Lab 10"><img src="https://cdn.lixingyong.com/2021/11/19/QNBSI2WFVQG941S7W109.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 10"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-10/" title="CS61A Lab 10">CS61A Lab 10</a><time datetime="2022-07-30T05:26:09.000Z" title="发表于 2022-07-30 13:26:09">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A/" title="CS61A"><img src="https://cdn.lixingyong.com/2021/11/19/6MRCZMDUV30F6TCA8OA.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A/" title="CS61A">CS61A</a><time datetime="2022-07-30T03:45:00.000Z" title="发表于 2022-07-30 11:45:00">2022-07-30</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        if(typeof window.mediumZoom!='undefined'){
+          const zoomComment = mediumZoom(document.querySelectorAll('.tk-content :not(a)>img'))
+          zoomComment.on('open', e => {
+            const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
+            zoomComment.update({
+              background: photoBg
+            })
+          })
+        }
+        if(GLOBAL_CONFIG.lightbox === 'fancybox'){
+            const addFancybox = function (ele) {
+              const runFancybox = (ele) => {
+                ele.each(function (i, o) {
+                  const $this = $(o)
+                  const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
+                  const dataCaption = $this.attr('alt') || ''
+                  $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+                })
+
+                $().fancybox({
+                  selector: '[data-fancybox]',
+                  loop: true,
+                  transitionEffect: 'slide',
+                  protect: true,
+                  buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+                  hash: false
+                })
+              }
+
+              if (typeof $.fancybox === 'undefined') {
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
+                $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
+                  runFancybox($(ele))
+                })
+              } else {
+                runFancybox($(ele))
+              }
+            }
+          addFancybox(document.querySelectorAll('.tk-content :not(a)>img'))
+        }
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://www.misaka-9982.com/2022/07/30/CS61A-Lab-12/'
+    this.page.identifier = '2022/07/30/CS61A-Lab-12/'
+    this.page.title = 'CS61A Lab 12'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Twikoo' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  function gitcalendar_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      console.log('已挂载gitcalendar')
+      }
+
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+        gitcalendar_injector_config()
+        GitCalendarInit("https://git-api-4yazkln1p-misaka-9982-coder.vercel.app/api?Misaka-9982-coder",['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'],'Misaka-9982-coder')
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
