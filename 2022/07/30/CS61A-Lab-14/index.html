@@ -1,0 +1,512 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS61A Lab 14 | Misaka's blog</title><meta name="keywords" content="CS61A"><meta name="author" content="Misaka"><meta name="copyright" content="Misaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lab 14 Solutions lab14.zip Solution Files This lab has many files. Remember to write in lab14.scm for the Scheme questions, lab14.lark for the BNF question, and lab14.py for all other questions. Requi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Lab 14">
+<meta property="og:url" content="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-14/index.html">
+<meta property="og:site_name" content="Misaka&#39;s blog">
+<meta property="og:description" content="Lab 14 Solutions lab14.zip Solution Files This lab has many files. Remember to write in lab14.scm for the Scheme questions, lab14.lark for the BNF question, and lab14.py for all other questions. Requi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png">
+<meta property="article:published_time" content="2022-07-30T05:46:42.000Z">
+<meta property="article:modified_time" content="2022-07-30T05:53:53.225Z">
+<meta property="article:author" content="Misaka">
+<meta property="article:tag" content="CS61A">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-14/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":150,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CS61A Lab 14',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-30 13:53:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script defer src="https://cdn.jsdelivr.net/npm/akilar-live2d-widget/autoload.min.js"></script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Misaka's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/bb/"><i class="fa-fw fa-brands fa-instalod"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲暇</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 阅读过的书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 看过的电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 玩过的游戏</span></a></li><li><a class="site-page child" href="/bilibili/"><i class="fa-fw fas fa-tv"></i><span> 追过的番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS61A Lab 14</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-30T05:46:42.000Z" title="发表于 2022-07-30 13:46:42">2022-07-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-30T05:53:53.225Z" title="更新于 2022-07-30 13:53:53">2022-07-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS61A Lab 14"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Lab 14 Solutions <a href="lab14.zip">lab14.zip</a></h1>
+<h2 id="Solution-Files-4">Solution Files</h2>
+<p>This lab has many files. Remember to write in <code>lab14.scm</code> for the Scheme questions, <code>lab14.lark</code> for the BNF question, and <code>lab14.py</code> for all other questions.</p>
+<h1>Required Questions</h1>
+<h2 id="Scheme">Scheme</h2>
+<h3 id="Q1-Split">Q1: Split</h3>
+<p>Implement <code>split-at</code>, which takes a list <code>lst</code> and a non-negative number <code>n</code> as input and returns a pair <code>new</code> such that <code>(car new)</code> is the first <code>n</code> elements of <code>lst</code> and <code>(cdr new)</code> is the remaining elements of <code>lst</code>. If <code>n</code> is greater than the length of <code>lst</code>, <code>(car new)</code> should be <code>lst</code> and <code>(cdr new)</code> should be <code>nil</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (car (split-at &#x27;(2 4 6 8 10) 3))</span><br><span class="line">(2 4 6)</span><br><span class="line">scm&gt; (cdr (split-at &#x27;(2 4 6 8 10) 3))</span><br><span class="line">(8 10)</span><br><span class="line">(define (split-at lst n)</span><br><span class="line"></span><br><span class="line">  (cond ((= n 0) (cons nil lst))</span><br><span class="line">        ((null? lst) (cons lst nil))</span><br><span class="line">        (else (let ((rec (split-at (cdr lst) (- n 1))))</span><br><span class="line">                (cons (cons (car lst) (car rec)) (cdr rec))))))</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q split-at✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Scheme-Data-Abstraction">Scheme Data Abstraction</h2>
+<h3 id="Q2-Filter-Odd-Tree">Q2: Filter Odd Tree</h3>
+<p>Write a function <code>filter-odd</code> which takes a <code>tree</code> data abstraction and returns a new <code>tree</code> with all even <code>label</code>s replaced with <code>nil</code>.</p>
+<blockquote>
+<p>Consider using the <code>map</code> procedure to apply a one-argument function to a list.</p>
+</blockquote>
+<p>Below is a Scheme-ified data abstraction of the Tree class we’ve been working with this semester.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">; Constructs tree given label and list of branches</span><br><span class="line">(tree label branches)</span><br><span class="line"></span><br><span class="line">; Returns the label of the tree</span><br><span class="line">(label t)</span><br><span class="line"></span><br><span class="line">; Returns the list of branches of the given tree</span><br><span class="line">(branches t)</span><br><span class="line">(define (filter-odd t)</span><br><span class="line"></span><br><span class="line">	(cond</span><br><span class="line">		((null? t) nil)</span><br><span class="line">		((odd? (label t)) (tree (label t) (map filter-odd (branches t))))</span><br><span class="line">		(else (tree nil (map filter-odd (branches t))))</span><br><span class="line">	))</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q filter_odd✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Programs-as-Data-2">Programs as Data</h2>
+<h3 id="Q3-Swap">Q3: Swap</h3>
+<p>Implement <code>swap</code> which takes an expression <code>expr</code> representing a call to some procedure and returns the same expression with its first two operands swapped if the value of the second operand is greater than the value of the first. Otherwise, it should just return the original expression. For example, <code>(swap '(- 1 (+ 3 5) 7))</code> should return the expression <code>(- (+ 3 5) 1 7)</code> since <code>1</code> evaluates to <code>1</code>, <code>(+ 3 5)</code> evaluates to <code>8</code>, and <code>8 &gt; 1</code>. Any operands after the first two should not be evaluated during the execution of the procedure, and they should be left unchanged in the final expression. You may assume that every operand evaluates to a number and that there are always at least two operands in <code>expr</code>. You may want to consider using a <code>let</code> expression in addition to the provided procedures to help simplify your code.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(define (cddr s)</span><br><span class="line">  (cdr (cdr s))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(define (cadr s)</span><br><span class="line">  (car (cdr s))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(define (caddr s)</span><br><span class="line">  (car (cddr s))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(define (swap expr)</span><br><span class="line"></span><br><span class="line">    (let ((op (car expr))</span><br><span class="line">        (first (car (cdr expr)))</span><br><span class="line">        (second (caddr expr))</span><br><span class="line">        (rest (cdr (cddr expr))))</span><br><span class="line">        (if (&gt; (eval second) (eval first))</span><br><span class="line">            (cons op (cons second (cons first rest)))</span><br><span class="line">            expr)</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q swap✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Regex">Regex</h2>
+<h3 id="Q4-Address-First-Line">Q4: Address First Line</h3>
+<p>Write a regular expression that parses strings and returns whether it contains the first line of a US mailing address.</p>
+<p>US mailing addresses typically contain a block number, which is a sequence of 3-5 digits, following by a street name. The street name can consist of multiple words but will always end with a street type abbreviation, which itself is a sequence of 2-5 English letters. The street name can also optionally start with a cardinal direction (“N”, “E”, “W”, “S”). Everything should be properly capitalized.</p>
+<p>Proper capitalization means that the first letter of each name is capitalized. It is fine to have things like “WeirdCApitalization” match.</p>
+<p>See the doctests for some examples.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def address_oneline(text):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Finds and returns if there are expressions in text that represent the first line</span><br><span class="line">    of a US mailing address.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;110 Sproul Hall, Berkeley, CA 94720&quot;)</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;What&#x27;s at 39177 Farwell Dr? Is there a 39177 Nearwell Dr?&quot;)</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;I just landed at 780 N McDonnell Rd, and I need to get to 1880-ish University Avenue. Help!&quot;)</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;123 Le Roy Ave&quot;)</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;110 Unabbreviated Boulevard&quot;)</span><br><span class="line">    False</span><br><span class="line">    &gt;&gt;&gt; address_oneline(&quot;790 lowercase St&quot;)</span><br><span class="line">    False</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    block_number = r&quot;\d&#123;3,5&#125;&quot;</span><br><span class="line">    cardinal_dir = r&quot;(?:[NEWS] )?&quot; # whitespace is important!</span><br><span class="line">    street = r&quot;(?:[A-Z][A-Za-z]+ )+&quot;</span><br><span class="line">    type_abbr = r&quot;[A-Z][a-z]&#123;1,4&#125;\b&quot;    street_name = f&quot;&#123;cardinal_dir&#125;&#123;street&#125;&#123;type_abbr&#125;&quot;</span><br><span class="line">    return bool(re.search(f&quot;&#123;block_number&#125; &#123;street_name&#125;&quot;, text))</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q address_oneline✂️</span><br></pre></td></tr></table></figure>
+<h2 id="BNF-2">BNF</h2>
+<h3 id="Q5-WWPD-PyCombinator">Q5: WWPD: PyCombinator</h3>
+<p>Consider this attempt at a BNF grammar for Pycombinator, a grammar which supports a subset of Python’s functionality. Specifically, it is able to parse any expression with a Python arithmetic operator. The grammar is specified below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">?start: pycomb_expression</span><br><span class="line"></span><br><span class="line">pycomb_expression: func &quot;(&quot; arg (&quot;,&quot; arg)* &quot;)&quot;</span><br><span class="line"></span><br><span class="line">arg: pycomb_expression | NUMBER</span><br><span class="line"></span><br><span class="line">func: FUNCNAME</span><br><span class="line"></span><br><span class="line">FUNCNAME: &quot;add&quot; | &quot;mul&quot; | &quot;sub&quot;</span><br><span class="line"></span><br><span class="line">%ignore &quot; &quot;</span><br><span class="line">%import common.NUMBER</span><br></pre></td></tr></table></figure>
+<p>Let’s understand and modify the functionality of this BNF with a few questions.</p>
+<blockquote>
+<p>Use Ok to test your knowledge by choosing the best answer for each of the following “What Would PyCombinator Do” questions:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q wwpd-bnf -u</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="Submit-3">Submit</h2>
+<p>Make sure to submit this assignment by running:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --submit</span><br></pre></td></tr></table></figure>
+<h1>Recommended Questions</h1>
+<p>The following problems are not required for credit on this lab but may help you prepare for the final.</p>
+<h2 id="Trees">Trees</h2>
+<h3 id="Q6-Prune-Min">Q6: Prune Min</h3>
+<p>Write a function that prunes a <code>Tree</code> <code>t</code> mutatively. <code>t</code> and its branches always have zero or two branches. For the trees with two branches, reduce the number of branches from two to one by keeping the branch that has the smaller label value. Do nothing with trees with zero branches.</p>
+<p>Prune the tree in a direction of your choosing (top down or bottom up). The result should be a linear tree.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">def prune_min(t):</span><br><span class="line">    &quot;&quot;&quot;Prune the tree mutatively.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; t1 = Tree(6)</span><br><span class="line">    &gt;&gt;&gt; prune_min(t1)</span><br><span class="line">    &gt;&gt;&gt; t1</span><br><span class="line">    Tree(6)</span><br><span class="line">    &gt;&gt;&gt; t2 = Tree(6, [Tree(3), Tree(4)])</span><br><span class="line">    &gt;&gt;&gt; prune_min(t2)</span><br><span class="line">    &gt;&gt;&gt; t2</span><br><span class="line">    Tree(6, [Tree(3)])</span><br><span class="line">    &gt;&gt;&gt; t3 = Tree(6, [Tree(3, [Tree(1), Tree(2)]), Tree(5, [Tree(3), Tree(4)])])</span><br><span class="line">    &gt;&gt;&gt; prune_min(t3)</span><br><span class="line">    &gt;&gt;&gt; t3</span><br><span class="line">    Tree(6, [Tree(3, [Tree(1)])])</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    if t.branches == []:</span><br><span class="line">        return</span><br><span class="line">    prune_min(t.branches[0])</span><br><span class="line">    prune_min(t.branches[1])</span><br><span class="line">    if (t.branches[0].label &gt; t.branches[1].label):</span><br><span class="line">        t.branches.pop(0)</span><br><span class="line">    else:</span><br><span class="line">        t.branches.pop(1)</span><br><span class="line">    return # return statement to block alternate from running</span><br><span class="line"></span><br><span class="line"># Alternate solution</span><br><span class="line">    if t.is_leaf():</span><br><span class="line">        return</span><br><span class="line">    remove_ind = int(t.branches[0].label &lt; t.branches[1].label)</span><br><span class="line">    t.branches.pop(remove_ind)</span><br><span class="line">    prune_min(t.branches[0])</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q prune_min✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q7-Add-trees">Q7: Add trees</h3>
+<p>Define the function <code>add_trees</code>, which takes in two trees and returns a new tree where each corresponding node from the first tree is added with the node from the second tree. If a node at any particular position is present in one tree but not the other, it should be present in the new tree as well.</p>
+<p><em>Hint</em>: You may want to use the built-in zip function to iterate over multiple sequences at once.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">def add_trees(t1, t2):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; numbers = Tree(1,</span><br><span class="line">    ...                [Tree(2,</span><br><span class="line">    ...                      [Tree(3),</span><br><span class="line">    ...                       Tree(4)]),</span><br><span class="line">    ...                 Tree(5,</span><br><span class="line">    ...                      [Tree(6,</span><br><span class="line">    ...                            [Tree(7)]),</span><br><span class="line">    ...                       Tree(8)])])</span><br><span class="line">    &gt;&gt;&gt; print(add_trees(numbers, numbers))</span><br><span class="line">    2</span><br><span class="line">      4</span><br><span class="line">        6</span><br><span class="line">        8</span><br><span class="line">      10</span><br><span class="line">        12</span><br><span class="line">          14</span><br><span class="line">        16</span><br><span class="line">    &gt;&gt;&gt; print(add_trees(Tree(2), Tree(3, [Tree(4), Tree(5)])))</span><br><span class="line">    5</span><br><span class="line">      4</span><br><span class="line">      5</span><br><span class="line">    &gt;&gt;&gt; print(add_trees(Tree(2, [Tree(3)]), Tree(2, [Tree(3), Tree(4)])))</span><br><span class="line">    4</span><br><span class="line">      6</span><br><span class="line">      4</span><br><span class="line">    &gt;&gt;&gt; print(add_trees(Tree(2, [Tree(3, [Tree(4), Tree(5)])]), \</span><br><span class="line">    Tree(2, [Tree(3, [Tree(4)]), Tree(5)])))</span><br><span class="line">    4</span><br><span class="line">      6</span><br><span class="line">        8</span><br><span class="line">        5</span><br><span class="line">      5</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    if not t1:</span><br><span class="line">        return t2</span><br><span class="line">    if not t2:</span><br><span class="line">        return t1</span><br><span class="line">    new_label = t1.label + t2.label</span><br><span class="line">    t1_branches, t2_branches = list(t1.branches), list(t2.branches)</span><br><span class="line">    length_t1, length_t2 = len(t1_branches), len(t2_branches)</span><br><span class="line">    if length_t1 &lt; length_t2:</span><br><span class="line">        t1_branches += [None for _ in range(length_t1, length_t2)]</span><br><span class="line">    elif length_t1 &gt; length_t2:</span><br><span class="line">        t2_branches += [None for _ in range(length_t2, length_t1)]</span><br><span class="line">    return Tree(new_label, [add_trees(branch1, branch2) for branch1, branch2 in zip(t1_branches, t2_branches)])</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q add_trees✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Objects">Objects</h2>
+<p>Let’s implement a game called Election. In this game, two players compete to try and earn the most votes. Both players start with 0 votes and 100 popularity.</p>
+<p>The two players alternate turns, and the first player starts. Each turn, the current player chooses an action. There are two types of actions:</p>
+<ul>
+<li>The player can debate, and either gain or lose 50 popularity. If the player has popularity <code>p1</code> and the other player has popularity <code>p2</code>, then the probability that the player gains 50 popularity is <code>max(0.1, p1 / (p1 + p2))</code> Note that the <code>max</code> causes the probability to never be lower than 0.1.</li>
+<li>The player can give a speech. If the player has popularity <code>p1</code> and the other player has popularity <code>p2</code>, then the player gains <code>p1 // 10</code> votes and popularity and the other player loses <code>p2 // 10</code> popularity.</li>
+</ul>
+<p>The game ends when a player reaches 50 votes, or after a total of 10 turns have been played (each player has taken 5 turns). Whoever has more votes at the end of the game is the winner!</p>
+<h3 id="Q8-Player">Q8: Player</h3>
+<p>First, let’s implement the <code>Player</code> class. Fill in the <code>debate</code> and <code>speech</code> methods, that take in another <code>Player</code> <code>other</code>, and implement the correct behavior as detailed above. Here are two additional things to keep in mind:</p>
+<ul>
+<li>In the <code>debate</code> method, you should call the provided <code>random</code> function, which returns a random float between 0 and 1. The player should gain 50 popularity if the random number is smaller than the probability described above, and lose 50 popularity otherwise.</li>
+<li>Neither players’ popularity should ever become negative. If this happens, set it equal to 0 instead.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">### Phase 1: The Player Class</span><br><span class="line">class Player:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; random = make_test_random()</span><br><span class="line">    &gt;&gt;&gt; p1 = Player(&#x27;Hill&#x27;)</span><br><span class="line">    &gt;&gt;&gt; p2 = Player(&#x27;Don&#x27;)</span><br><span class="line">    &gt;&gt;&gt; p1.popularity</span><br><span class="line">    100</span><br><span class="line">    &gt;&gt;&gt; p1.debate(p2)  # random() should return 0.0</span><br><span class="line">    &gt;&gt;&gt; p1.popularity</span><br><span class="line">    150</span><br><span class="line">    &gt;&gt;&gt; p2.popularity</span><br><span class="line">    100</span><br><span class="line">    &gt;&gt;&gt; p2.votes</span><br><span class="line">    0</span><br><span class="line">    &gt;&gt;&gt; p2.speech(p1)</span><br><span class="line">    &gt;&gt;&gt; p2.votes</span><br><span class="line">    10</span><br><span class="line">    &gt;&gt;&gt; p2.popularity</span><br><span class="line">    110</span><br><span class="line">    &gt;&gt;&gt; p1.popularity</span><br><span class="line">    135</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; # Additional correctness tests</span><br><span class="line">    &gt;&gt;&gt; p1.speech(p2)</span><br><span class="line">    &gt;&gt;&gt; p1.votes</span><br><span class="line">    13</span><br><span class="line">    &gt;&gt;&gt; p1.popularity</span><br><span class="line">    148</span><br><span class="line">    &gt;&gt;&gt; p2.votes</span><br><span class="line">    10</span><br><span class="line">    &gt;&gt;&gt; p2.popularity</span><br><span class="line">    99</span><br><span class="line">    &gt;&gt;&gt; for _ in range(4):  # 0.1, 0.2, 0.3, 0.4</span><br><span class="line">    ...     p1.debate(p2)</span><br><span class="line">    &gt;&gt;&gt; p2.debate(p1)</span><br><span class="line">    &gt;&gt;&gt; p2.popularity</span><br><span class="line">    49</span><br><span class="line">    &gt;&gt;&gt; p2.debate(p1)</span><br><span class="line">    &gt;&gt;&gt; p2.popularity</span><br><span class="line">    0</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.votes = 0</span><br><span class="line">        self.popularity = 100</span><br><span class="line"></span><br><span class="line">    def debate(self, other):</span><br><span class="line"></span><br><span class="line">        prob = max(0.1, self.popularity / (self.popularity + other.popularity))</span><br><span class="line">        if random() &lt; prob:</span><br><span class="line">            self.popularity += 50</span><br><span class="line">        else:</span><br><span class="line">            self.popularity = max(0, self.popularity - 50)</span><br><span class="line">    def speech(self, other):</span><br><span class="line"></span><br><span class="line">        self.votes += self.popularity // 10</span><br><span class="line">        self.popularity += self.popularity // 10</span><br><span class="line">        other.popularity -= other.popularity // 10</span><br><span class="line">    def choose(self, other):</span><br><span class="line">        return self.speech</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q Player✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q9-Game">Q9: Game</h3>
+<p>Now, implement the <code>Game</code> class. Fill in the <code>play</code> method, which should alternate between the two players, starting with <code>p1</code>, and have each player take one turn at a time. The <code>choose</code> method in the <code>Player</code> class returns the method, either <code>debate</code> or <code>speech</code>, that should be called to perform the action.</p>
+<p>In addition, fill in the <code>winner</code> method, which should return the player with more votes, or <code>None</code> if the players are tied.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">### Phase 2: The Game Class</span><br><span class="line">class Game:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; p1, p2 = Player(&#x27;Hill&#x27;), Player(&#x27;Don&#x27;)</span><br><span class="line">    &gt;&gt;&gt; g = Game(p1, p2)</span><br><span class="line">    &gt;&gt;&gt; winner = g.play()</span><br><span class="line">    &gt;&gt;&gt; p1 is winner</span><br><span class="line">    True</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; # Additional correctness tests</span><br><span class="line">    &gt;&gt;&gt; winner is g.winner()</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; g.turn</span><br><span class="line">    10</span><br><span class="line">    &gt;&gt;&gt; p1.votes = p2.votes</span><br><span class="line">    &gt;&gt;&gt; print(g.winner())</span><br><span class="line">    None</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self, player1, player2):</span><br><span class="line">        self.p1 = player1</span><br><span class="line">        self.p2 = player2</span><br><span class="line">        self.turn = 0</span><br><span class="line"></span><br><span class="line">    def play(self):</span><br><span class="line">        while not self.game_over():</span><br><span class="line"></span><br><span class="line">            if self.turn % 2 == 0:</span><br><span class="line">                curr, other = self.p1, self.p2</span><br><span class="line">            else:</span><br><span class="line">                curr, other = self.p2, self.p1</span><br><span class="line">            curr.choose(other)(other)</span><br><span class="line">            self.turn += 1        return self.winner()</span><br><span class="line"></span><br><span class="line">    def game_over(self):</span><br><span class="line">        return max(self.p1.votes, self.p2.votes) &gt;= 50 or self.turn &gt;= 10</span><br><span class="line"></span><br><span class="line">    def winner(self):</span><br><span class="line"></span><br><span class="line">        if self.p1.votes &gt; self.p2.votes:</span><br><span class="line">            return self.p1</span><br><span class="line">        elif self.p2.votes &gt; self.p1.votes:</span><br><span class="line">            return self.p2</span><br><span class="line">        else:</span><br><span class="line">            return None</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q Game✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q10-New-Players">Q10: New Players</h3>
+<p>The <code>choose</code> method in the <code>Player</code> class is boring, because it always returns the <code>speech</code> method. Let’s implement two new classes that inherit from <code>Player</code>, but have more interesting <code>choose</code> methods.</p>
+<p>Implement the <code>choose</code> method in the <code>AggressivePlayer</code> class, which returns the <code>debate</code> method if the player’s popularity is less than or equal to <code>other</code>’s popularity, and <code>speech</code> otherwise. Also implement the <code>choose</code> method in the <code>CautiousPlayer</code> class, which returns the <code>debate</code> method if the player’s popularity is 0, and <code>speech</code> otherwise.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">### Phase 3: New Players</span><br><span class="line">class AggressivePlayer(Player):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; random = make_test_random()</span><br><span class="line">    &gt;&gt;&gt; p1, p2 = AggressivePlayer(&#x27;Don&#x27;), Player(&#x27;Hill&#x27;)</span><br><span class="line">    &gt;&gt;&gt; g = Game(p1, p2)</span><br><span class="line">    &gt;&gt;&gt; winner = g.play()</span><br><span class="line">    &gt;&gt;&gt; p1 is winner</span><br><span class="line">    True</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; # Additional correctness tests</span><br><span class="line">    &gt;&gt;&gt; p1.popularity = p2.popularity</span><br><span class="line">    &gt;&gt;&gt; p1.choose(p2) == p1.debate</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; p1.popularity += 1</span><br><span class="line">    &gt;&gt;&gt; p1.choose(p2) == p1.debate</span><br><span class="line">    False</span><br><span class="line">    &gt;&gt;&gt; p2.choose(p1) == p2.speech</span><br><span class="line">    True</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def choose(self, other):</span><br><span class="line"></span><br><span class="line">        if self.popularity &lt;= other.popularity:</span><br><span class="line">            return self.debate</span><br><span class="line">        else:</span><br><span class="line">            return self.speech</span><br><span class="line">class CautiousPlayer(Player):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; random = make_test_random()</span><br><span class="line">    &gt;&gt;&gt; p1, p2 = CautiousPlayer(&#x27;Hill&#x27;), AggressivePlayer(&#x27;Don&#x27;)</span><br><span class="line">    &gt;&gt;&gt; p1.popularity = 0</span><br><span class="line">    &gt;&gt;&gt; p1.choose(p2) == p1.debate</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; p1.popularity = 1</span><br><span class="line">    &gt;&gt;&gt; p1.choose(p2) == p1.debate</span><br><span class="line">    False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; # Additional correctness tests</span><br><span class="line">    &gt;&gt;&gt; p2.choose(p1) == p2.speech</span><br><span class="line">    True</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def choose(self, other):</span><br><span class="line"></span><br><span class="line">        if self.popularity == 0:</span><br><span class="line">            return self.debate</span><br><span class="line">        else:</span><br><span class="line">            return self.speech</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q AggressivePlayer</span><br><span class="line">python3 ok -q CautiousPlayer✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Lists">Lists</h2>
+<h3 id="Q11-Intersection-Summer-2015-MT1-Q4">Q11: Intersection - Summer 2015 MT1 Q4</h3>
+<p>Implement <code>intersection(lst_of_lsts)</code>, which takes a list of lists and returns a list of distinct elements that appear in all the lists in <code>lst_of_lsts</code>. If no number appears in all of the lists, return the empty list. You may assume that <code>lst_of_lsts</code> contains at least one list.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">def intersection(lst_of_lsts):</span><br><span class="line">    &quot;&quot;&quot;Returns a list of distinct elements that appear in every list in</span><br><span class="line">    lst_of_lsts.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; lsts1 = [[1, 2, 3], [1, 3, 5]]</span><br><span class="line">    &gt;&gt;&gt; intersection(lsts1)</span><br><span class="line">    [1, 3]</span><br><span class="line">    &gt;&gt;&gt; lsts2 = [[1, 4, 2, 6], [7, 2, 4], [4, 4]]</span><br><span class="line">    &gt;&gt;&gt; intersection(lsts2)</span><br><span class="line">    [4]</span><br><span class="line">    &gt;&gt;&gt; lsts3 = [[1, 2, 3], [4, 5], [7, 8, 9, 10]]</span><br><span class="line">    &gt;&gt;&gt; intersection(lsts3)         # No number appears in all lists</span><br><span class="line">    []</span><br><span class="line">    &gt;&gt;&gt; lsts4 = [[3, 3], [1, 2, 3, 3], [3, 4, 3, 5]]</span><br><span class="line">    &gt;&gt;&gt; intersection(lsts4)         # Return list of distinct elements</span><br><span class="line">    [3]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    elements = []</span><br><span class="line"></span><br><span class="line">    for elem in lst_of_lsts[0]:</span><br><span class="line">        condition = elem not in elements</span><br><span class="line">        for lst in lst_of_lsts[1:]:</span><br><span class="line">            if elem not in lst:</span><br><span class="line">                condition = False</span><br><span class="line">        if condition:</span><br><span class="line">            elements = elements + [elem]    return elements</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q intersection✂️</span><br></pre></td></tr></table></figure>
+<h3 id="Q12-Deck-of-cards">Q12: Deck of cards</h3>
+<p>Write a list comprehension that will create a deck of cards, given a list of <code>suits</code> and a list of <code>ranks</code>. Each element in the list will be a card, which is represented by a 2-element list of the form <code>[suit, rank]</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def deck(suits, ranks):</span><br><span class="line">    &quot;&quot;&quot;Creates a deck of cards (a list of 2-element lists) with the given</span><br><span class="line">    suits and ranks. Each element in the returned list should be of the form</span><br><span class="line">    [suit, rank].</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; deck([&#x27;S&#x27;, &#x27;C&#x27;], [1, 2, 3])</span><br><span class="line">    [[&#x27;S&#x27;, 1], [&#x27;S&#x27;, 2], [&#x27;S&#x27;, 3], [&#x27;C&#x27;, 1], [&#x27;C&#x27;, 2], [&#x27;C&#x27;, 3]]</span><br><span class="line">    &gt;&gt;&gt; deck([&#x27;S&#x27;, &#x27;C&#x27;], [3, 2, 1])</span><br><span class="line">    [[&#x27;S&#x27;, 3], [&#x27;S&#x27;, 2], [&#x27;S&#x27;, 1], [&#x27;C&#x27;, 3], [&#x27;C&#x27;, 2], [&#x27;C&#x27;, 1]]</span><br><span class="line">    &gt;&gt;&gt; deck([], [3, 2, 1])</span><br><span class="line">    []</span><br><span class="line">    &gt;&gt;&gt; deck([&#x27;S&#x27;, &#x27;C&#x27;], [])</span><br><span class="line">    []</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    return [[suit, rank] for suit in suits</span><br><span class="line">                           for rank in ranks]</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q deck✂️</span><br></pre></td></tr></table></figure>
+<h2 id="Linked-Lists">Linked Lists</h2>
+<h3 id="Q13-O-Pascal-Fall-2017-Final-Q4">Q13: O!-Pascal - Fall 2017 Final Q4</h3>
+<p>Pasal’s Triangle is perhaps familiar to you from the diagram below, which shows the first five rows.</p>
+<p><img src="/Users/misaka/Downloads/CodeSpace/blog/source/_posts/assets/Pascal.png" alt="Pascal's Triangle"></p>
+<p>Every square is the sum of the two squares above it (as illustrated by the arrows showing here the value 4 comes from), unless it doesn’t have two squares above it, in whih case its value is 1.</p>
+<p>Given a linked list that represents a row in Pasal’s triangle, return a linked list that will represent the row below it.</p>
+<p><img src="/Users/misaka/Downloads/CodeSpace/blog/source/_posts/assets/Pascal2.png" alt="Diagonal"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def pascal_row(s):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &gt;&gt;&gt; a = Link.empty</span><br><span class="line">    &gt;&gt;&gt; for _ in range(5):</span><br><span class="line">    ...     a = pascal_row(a)</span><br><span class="line">    ...     print(a)</span><br><span class="line">    &lt;1&gt;</span><br><span class="line">    &lt;1 1&gt;</span><br><span class="line">    &lt;1 2 1&gt;</span><br><span class="line">    &lt;1 3 3 1&gt;</span><br><span class="line">    &lt;1 4 6 4 1&gt;</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    if s is Link.empty:</span><br><span class="line">        return Link(1)</span><br><span class="line">    start = Link(1)</span><br><span class="line">    last, current = start, s</span><br><span class="line">    while current.rest is not Link.empty:</span><br><span class="line">        last.rest = Link(current.first + current.rest.first)</span><br><span class="line">        last, current = last.rest, current.rest</span><br><span class="line">    last.rest = Link(1)</span><br><span class="line">    return start</span><br></pre></td></tr></table></figure>
+<p>Use Ok to test your code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q pascal_row✂️</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Misaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.misaka-9982.com/2022/07/30/CS61A-Lab-14/">http://www.misaka-9982.com/2022/07/30/CS61A-Lab-14/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.misaka-9982.com" target="_blank">Misaka's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS61A/">CS61A</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/30/CS61A-Homework-7/"><img class="prev-cover" src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CS61A Homework 7</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/30/CS61A-Lab-13/"><img class="next-cover" src="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CS61A Lab 13</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/19/CS61A-Homework-1/" title="CS61A Homework 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 1</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-2/" title="CS61A Homework 2"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 2</div></div></a></div><div><a href="/2022/05/19/CS61A-Homework-3/" title="CS61A Homework 3"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/P305ADMH8D9FOQ8_JG.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Homework 3</div></div></a></div><div><a href="/2022/05/21/CS61A-Homework-4/" title="CS61A Homework 4"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-21</div><div class="title">CS61A Homework 4</div></div></a></div><div><a href="/2022/05/23/CS61A-Homework-5/" title="CS61A Homework 5"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/9K5E09Z62Y_XM4B_M.md.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-23</div><div class="title">CS61A Homework 5</div></div></a></div><div><a href="/2022/05/19/CS61A-Lab-1/" title="CS61A Lab 1"><img class="cover" src="https://cdn.lixingyong.com/2021/11/19/GGR9ZZOHUFPUZ0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-19</div><div class="title">CS61A Lab 1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.acwing.com/media/user/profile/photo/68895_lg_4c14979634.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Misaka</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Misaka-9982-coder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Misaka-9982-coder" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1784321894@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/+ih3m863trP4yZTFl" target="_blank" title=""><i class="fab fa-telegram"></i></a><a class="social-icon" href="https://t.me/+m3x7kvycG6c5MWU1" target="_blank" title=""><i class="fab fa-android"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><p>Welcome to my Blog!</p><div class="twopeople"><div class="container" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width:200px;max-height:200px;touch-action:none;width:640px;height:640px;"></canvas></div><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script><script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script><script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script><style>.twopeople{margin:0;align-items:center;justify-content:center;text-align:center;}canvas{display:block;margin:0 auto;cursor:move;}</style></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Lab 14 Solutions lab14.zip</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-Files-4"><span class="toc-text">Solution Files</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Required Questions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scheme"><span class="toc-text">Scheme</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1-Split"><span class="toc-text">Q1: Split</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scheme-Data-Abstraction"><span class="toc-text">Scheme Data Abstraction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-Filter-Odd-Tree"><span class="toc-text">Q2: Filter Odd Tree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Programs-as-Data-2"><span class="toc-text">Programs as Data</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-Swap"><span class="toc-text">Q3: Swap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regex"><span class="toc-text">Regex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q4-Address-First-Line"><span class="toc-text">Q4: Address First Line</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BNF-2"><span class="toc-text">BNF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q5-WWPD-PyCombinator"><span class="toc-text">Q5: WWPD: PyCombinator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Submit-3"><span class="toc-text">Submit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Recommended Questions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Trees"><span class="toc-text">Trees</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q6-Prune-Min"><span class="toc-text">Q6: Prune Min</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q7-Add-trees"><span class="toc-text">Q7: Add trees</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Objects"><span class="toc-text">Objects</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q8-Player"><span class="toc-text">Q8: Player</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q9-Game"><span class="toc-text">Q9: Game</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q10-New-Players"><span class="toc-text">Q10: New Players</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lists"><span class="toc-text">Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q11-Intersection-Summer-2015-MT1-Q4"><span class="toc-text">Q11: Intersection - Summer 2015 MT1 Q4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q12-Deck-of-cards"><span class="toc-text">Q12: Deck of cards</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linked-Lists"><span class="toc-text">Linked Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q13-O-Pascal-Fall-2017-Final-Q4"><span class="toc-text">Q13: O!-Pascal - Fall 2017 Final Q4</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Homework-8/" title="CS61A Homework 8"><img src="https://cdn.lixingyong.com/2021/11/19/D4MFDHRNZQ5B2PZ6.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 8"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Homework-8/" title="CS61A Homework 8">CS61A Homework 8</a><time datetime="2022-07-30T05:49:23.000Z" title="发表于 2022-07-30 13:49:23">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Homework-7/" title="CS61A Homework 7"><img src="https://cdn.lixingyong.com/2021/11/19/I3NFLC3TXDG2F0UMQUX.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Homework 7"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Homework-7/" title="CS61A Homework 7">CS61A Homework 7</a><time datetime="2022-07-30T05:49:19.000Z" title="发表于 2022-07-30 13:49:19">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-14/" title="CS61A Lab 14"><img src="https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 14"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-14/" title="CS61A Lab 14">CS61A Lab 14</a><time datetime="2022-07-30T05:46:42.000Z" title="发表于 2022-07-30 13:46:42">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-13/" title="CS61A Lab 13"><img src="https://cdn.lixingyong.com/2021/11/19/_X81QBZ90TWIEGOIZKA.md.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 13"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-13/" title="CS61A Lab 13">CS61A Lab 13</a><time datetime="2022-07-30T05:45:13.000Z" title="发表于 2022-07-30 13:45:13">2022-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/30/CS61A-Lab-12/" title="CS61A Lab 12"><img src="https://cdn.lixingyong.com/2021/11/19/4_EXXZGP4OIKX_5.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS61A Lab 12"/></a><div class="content"><a class="title" href="/2022/07/30/CS61A-Lab-12/" title="CS61A Lab 12">CS61A Lab 12</a><time datetime="2022-07-30T05:36:53.000Z" title="发表于 2022-07-30 13:36:53">2022-07-30</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.lixingyong.com/2021/11/19/QE_Y_DW5798TM2.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Misaka</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        if(typeof window.mediumZoom!='undefined'){
+          const zoomComment = mediumZoom(document.querySelectorAll('.tk-content :not(a)>img'))
+          zoomComment.on('open', e => {
+            const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
+            zoomComment.update({
+              background: photoBg
+            })
+          })
+        }
+        if(GLOBAL_CONFIG.lightbox === 'fancybox'){
+            const addFancybox = function (ele) {
+              const runFancybox = (ele) => {
+                ele.each(function (i, o) {
+                  const $this = $(o)
+                  const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
+                  const dataCaption = $this.attr('alt') || ''
+                  $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+                })
+
+                $().fancybox({
+                  selector: '[data-fancybox]',
+                  loop: true,
+                  transitionEffect: 'slide',
+                  protect: true,
+                  buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+                  hash: false
+                })
+              }
+
+              if (typeof $.fancybox === 'undefined') {
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
+                $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
+                  runFancybox($(ele))
+                })
+              } else {
+                runFancybox($(ele))
+              }
+            }
+          addFancybox(document.querySelectorAll('.tk-content :not(a)>img'))
+        }
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-f8467x06b-misaka-9982-coder.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://www.misaka-9982.com/2022/07/30/CS61A-Lab-14/'
+    this.page.identifier = '2022/07/30/CS61A-Lab-14/'
+    this.page.title = 'CS61A Lab 14'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Twikoo' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><canvas id="universe"></canvas><script src="/js/jq.js"></script><script src="/js/valine.js"></script><script src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-clock/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v3.8.2" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" data-title="本站使用JsDelivr为静态资源提供CDN加速" title=""><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  function gitcalendar_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      console.log('已挂载gitcalendar')
+      }
+
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+        gitcalendar_injector_config()
+        GitCalendarInit("https://git-api-4yazkln1p-misaka-9982-coder.vercel.app/api?Misaka-9982-coder",['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'],'Misaka-9982-coder')
+    }
+  </script><!-- hexo injector body_end end --></body></html><script type="text/javascript" src="/js/crash_cheat.js"></script>
