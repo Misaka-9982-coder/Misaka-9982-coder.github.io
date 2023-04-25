@@ -5,7 +5,7 @@
 Create a better soldier<br>
 With inherit-ants.</p>
 </blockquote>
-<h2 id="Introduction-6">Introduction</h2>
+<h2 id="Introduction-5">Introduction</h2>
 <blockquote>
 <p><strong>Important submission note</strong>: For full credit,</p>
 <ul>
@@ -22,7 +22,7 @@ With inherit-ants.</p>
 <blockquote>
 <p>When students in the past have tried to implement the functions without thoroughly reading the problem description, they’ve often run into issues. 😱 <strong>Read each description thoroughly before starting to code.</strong></p>
 </blockquote>
-<h2 id="Download-starter-files-4">Download starter files</h2>
+<h2 id="Download-starter-files-3">Download starter files</h2>
 <p>The <a target="_blank" rel="noopener" href="https://cs61a.org/proj/ants/ants.zip">ants.zip</a> archive contains several files, but all of your changes will be made to <code>ants.py</code>.</p>
 <ul>
 <li><code>ants.py</code>: The game logic of Ants Vs. SomeBees</li>
@@ -38,7 +38,7 @@ With inherit-ants.</p>
 <li><code>proj3.ok</code>: The <code>ok</code> configuration file</li>
 <li><code>tests</code>: A directory of tests used by <code>ok</code></li>
 </ul>
-<h2 id="Logistics-4">Logistics</h2>
+<h2 id="Logistics-3">Logistics</h2>
 <p>The project is worth 24 points. 22 points are for correctness, 1 point is for submitting Phase 1 by the first checkpoint date, and 1 point is for submitting Phase 2 by the second checkpoint date.</p>
 <p>Additionally, there are some extra credit point opportunities. You can get 1 EC point for submitting the entire project by <strong>Wednesday, March 9</strong>, and 2 EC points for submitting the extra credit problem.</p>
 <blockquote>
@@ -134,7 +134,7 @@ With inherit-ants.</p>
 <blockquote>
 <p><strong>A note on unlocking tests</strong>: If you’d like to review the unlocking questions after you have completed the unlocking test, you can navigate to (within the <code>ants</code> folder), the <code>tests</code> folder. For example, after unlocking Problem 0, you can review the unlocking test at <code>tests/00.py</code>.</p>
 </blockquote>
-<h3 id="Problem-1-1-pt-4">Problem 1 (1 pt)</h3>
+<h3 id="Problem-1-1-pt-2">Problem 1 (1 pt)</h3>
 <p><strong>Part A</strong>: Currently, there is no cost for placing any type of <code>Ant</code>, and so there is no challenge to the game. The base class <code>Ant</code> has a <code>food_cost</code> of zero. Override this class attribute for <code>HarvesterAnt</code> and <code>ThrowerAnt</code> according to the “Food Cost” column in the table below.</p>
 <table>
 <thead>
@@ -184,7 +184,7 @@ With inherit-ants.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q 02 -u✂️</span><br></pre></td></tr></table></figure>
 <p>Once you are done unlocking, begin implementing your solution. You can check your correctness with:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q 02✂️</span><br></pre></td></tr></table></figure>
-<h3 id="Problem-3-2-pt-3">Problem 3 (2 pt)</h3>
+<h3 id="Problem-3-2-pt">Problem 3 (2 pt)</h3>
 <p>In order for a <code>ThrowerAnt</code> to throw a leaf, it must know which bee to hit. The provided implementation of the <code>nearest_bee</code> method in the <code>ThrowerAnt</code> class only allows them to hit bees in the same <code>Place</code>. Your job is to fix it so that a <code>ThrowerAnt</code> will <code>throw_at</code> the nearest bee in front of it <strong>that is not still in the <code>Hive</code>.</strong> This includes bees that are in the same <code>Place</code> as a <code>ThrowerAnt</code></p>
 <blockquote>
 <p><em>Hint:</em> All <code>Place</code>s have an <code>is_hive</code> attribute which is <code>True</code> when that place is the <code>Hive</code>.</p>
@@ -225,7 +225,7 @@ With inherit-ants.</p>
 <p>Now that you’ve implemented basic gameplay with two types of <code>Ant</code>s, let’s add some flavor to the ways ants can attack bees. In this phase, you’ll be implementing several different <code>Ant</code>s with different attack strategies.</p>
 <p>After you implement each <code>Ant</code> subclass in this section, you’ll need to set its <code>implemented</code> class attribute to <code>True</code> so that that type of ant will show up in the GUI. Feel free to try out the game with each new ant to test the functionality!</p>
 <p>With your Phase 2 ants, try <code>python3 gui.py -d easy</code> to play against a full swarm of bees in a multi-tunnel layout and try <code>-d normal</code>, <code>-d hard</code>, or <code>-d extra-hard</code> if you want a real challenge! If the bees are too numerous to vanquish, you might need to create some new ants.</p>
-<h3 id="Problem-4-2-pt-3">Problem 4 (2 pt)</h3>
+<h3 id="Problem-4-2-pt">Problem 4 (2 pt)</h3>
 <p>A <code>ThrowerAnt</code> is a powerful threat to the bees, but it has a high food cost. In this problem, you’ll implement two subclasses of <code>ThrowerAnt</code> that are less costly but have constraints on the distance they can throw:</p>
 <ul>
 <li>The <code>LongThrower</code> can only <code>throw_at</code> a <code>Bee</code> that is found after following at least 5 <code>entrance</code> transitions. It cannot hit <code>Bee</code>s that are in the same <code>Place</code> as it or the first 4 <code>Place</code>s in front of it. If there are two <code>Bees</code>, one too close to the <code>LongThrower</code> and the other within its range, the <code>LongThrower</code> should only throw at the farther <code>Bee</code>, which is within its range, instead of trying to hit the closer <code>Bee</code>.</li>
@@ -317,7 +317,7 @@ With inherit-ants.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q 05✂️</span><br></pre></td></tr></table></figure>
 <p>You can also test your program by playing a game or two! A <code>FireAnt</code> should destroy all co-located Bees when it is stung. To start a game with ten food (for easy testing):</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 gui.py --food 10</span><br></pre></td></tr></table></figure>
-<h3 id="Problem-6-1-pt-3">Problem 6 (1 pt)</h3>
+<h3 id="Problem-6-1-pt">Problem 6 (1 pt)</h3>
 <p>We are going to add some protection to our glorious home base by implementing the <code>WallAnt</code>, an ant that does nothing each turn. A <code>WallAnt</code> is useful because it has a large <code>health</code> value.</p>
 <table>
 <thead>
@@ -470,7 +470,7 @@ With inherit-ants.</p>
 <p>You will get an extra credit point for submitting the entire project by <strong>Wednesday, March 9</strong>.</p>
 </blockquote>
 <p>In the final phase, you’re going to add one last kick to the game by introducing a new type of place and new ants that are able to occupy this place. One of these ants is the most important ant of them all: the queen of the colony!</p>
-<h3 id="Problem-10-1-pt-3">Problem 10 (1 pt)</h3>
+<h3 id="Problem-10-1-pt">Problem 10 (1 pt)</h3>
 <p>Let’s add water to the colony! Currently there are only two types of places, the <code>Hive</code> and a basic <code>Place</code>. To make things more interesting, we’re going to create a new type of <code>Place</code> called <code>Water</code>.</p>
 <p>Only an insect that is waterproof can be placed in <code>Water</code>. In order to determine whether an <code>Insect</code> is waterproof, add a new class attribute to the <code>Insect</code> class named <code>is_waterproof</code> that is set to <code>False</code>. Since bees can fly, set their <code>is_waterproof</code> attribute to <code>True</code>, overriding the inherited value.</p>
 <p>Now, implement the <code>add_insect</code> method for <code>Water</code>. First, add the insect to the place regardless of whether it is waterproof. Then, if the insect is not waterproof, reduce the insect’s health to 0. <em>Do not repeat code from elsewhere in the program.</em> Instead, use methods that have already been defined.</p>
@@ -481,7 +481,7 @@ With inherit-ants.</p>
 <p>Once you’ve finished this problem, play a game that includes water. To access the <code>wet_layout</code>, which includes water, add the <code>--water</code> option (or <code>-w</code> for short) when you start the game.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 gui.py --water</span><br></pre></td></tr></table></figure>
 <p>👩🏽‍💻👨🏿‍💻 <a target="_blank" rel="noopener" href="https://cs61a.org/articles/pair-programming">Pair programming?</a> Remember to alternate between driver and navigator roles. The driver controls the keyboard; the navigator watches, asks questions, and suggests ideas.</p>
-<h3 id="Problem-11-1-pt-3">Problem 11 (1 pt)</h3>
+<h3 id="Problem-11-1-pt">Problem 11 (1 pt)</h3>
 <p>Currently there are no ants that can be placed on <code>Water</code>. Implement the <code>ScubaThrower</code>, which is a subclass of <code>ThrowerAnt</code> that is more costly and waterproof, <em>but otherwise identical to its base class</em>. A <code>ScubaThrower</code> should not lose its health when placed in <code>Water</code>.</p>
 <table>
 <thead>
@@ -589,7 +589,7 @@ With inherit-ants.</p>
 <p>You can run some provided tests, but they are not exhaustive:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q EC✂️</span><br></pre></td></tr></table></figure>
 <p>Make sure to test your code! Your code should be able to apply multiple statuses on a target; each new status applies to the current (possibly previously affected) action method of the bee.</p>
-<h2 id="Optional-Problems-2">Optional Problems</h2>
+<h2 id="Optional-Problems">Optional Problems</h2>
 <h3 id="Optional-Problem-1">Optional Problem 1</h3>
 <blockquote>
 <p>During Office Hours and Project Parties, the staff will prioritize helping students with required questions. We will not be offering help with this question unless the <a target="_blank" rel="noopener" href="https://oh.cs61a.org/">queue</a> is empty.</p>
