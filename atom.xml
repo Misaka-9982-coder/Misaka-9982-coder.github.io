@@ -6,7 +6,7 @@
   <link href="http://www.misaka-9982.com/atom.xml" rel="self"/>
   
   <link href="http://www.misaka-9982.com/"/>
-  <updated>2023-06-27T16:13:53.511Z</updated>
+  <updated>2023-06-27T16:16:13.387Z</updated>
   <id>http://www.misaka-9982.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.misaka-9982.com/2023/06/28/Codewar-%E4%BD%93%E9%AA%8C/"/>
     <id>http://www.misaka-9982.com/2023/06/28/Codewar-%E4%BD%93%E9%AA%8C/</id>
     <published>2023-06-27T16:00:42.000Z</published>
-    <updated>2023-06-27T16:13:53.511Z</updated>
+    <updated>2023-06-27T16:16:13.387Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>先膜拜个大佬：</p><p>在Codewars上做JavaScript算法题是一种怎样的体验？ - 千里冰封二瓣之的回答 - 知乎 <a href="https://www.zhihu.com/question/53766913/answer/212285498">https://www.zhihu.com/question/53766913/answer/212285498</a></p></blockquote><p>之前阅读&quot;The Little Schemer&quot;和&quot;The Seasoned Schemer&quot;这两本书，感觉需要找一个地方来练习和提升我对Scheme语言的理解和技巧，而且刚好莎莎推荐了《Essentials of Compilation_ An Incremental Approach in Racket》这本书，就决定来练习Scheme的方言Racket。虽然目前LeetCode也能支持Racket，但是用Racket做Leetcode的题目总觉得有点别扭，而且LeetCode对于练习一个新语言来说并不是那么的友好，于是转到Codewar来做些练习，Codewar支持的语言就非常的多，在这里做语法题目练习就很方便，它提供了不少语言的测试框架和测试样例，在本地搭建好环境后，就可以实现在本地运行并进行测试，自己随意的打印字符串打印变量，添加测试样例这些东西来调试代码，这点就比Leetcode强很多，体验很棒。</p><p>个人体会，LeetCode更偏向于去应付面试和练习算法，而Codewar的题目更适合锻炼自己的工程编程能力，考察的东西除了算法之外还有很多，例如语言特性，框架原型，代码Debug等。难度较高的题目中有很多关于解析器（parser）和编译器子模块的题目，这些题目很有挑战性，但当题目通过的时候，又会觉得嘎嘎爽。</p><p>对于Codewar的题目难度，我觉得它分为8个等级还是比较合理的，尽管有些3kyu的题目让我感觉并不比2kyu的题目简单（比如这道<a href="https://www.codewars.com/kata/638c92b10e43cc000e615a07">Prime counting</a>)。从4kyu开始的题目就需要结合很多其他的知识来解题(比如编译原理)。我觉得5-8kyu的题目比较简单，适合熟悉一些比较基本的语法，3-4kyu的题目难度适中，非常适合锻炼编程能力。1 - 2 kyu 本人目前也没写过几道，而且好像不少编译器相关的题目，就暂时还没能力去解题</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>先膜拜个大佬：</p><p>在Codewars上做JavaScript算法题是一种怎样的体验？ - 千里冰封二瓣之的回答 - 知乎 <a href="https://www.zhihu.com/question/53766913/answer/212285498">https://www.zhihu.com/question/53766913/answer/212285498</a></p></blockquote><p>之前阅读&quot;The Little Schemer&quot;和&quot;The Seasoned Schemer&quot;这两本书，感觉需要找一个地方来练习和提升我对Scheme语言的理解和技巧，而且刚好莎莎推荐了《Essentials of Compilation_ An Incremental Approach in Racket》这本书作为编译原理的入门书，就决定来练习Scheme的方言Racket。虽然目前LeetCode也能支持Racket，但是用Racket做Leetcode的题目总觉得有点别扭，而且LeetCode对于练习一个新语言来说并不是那么的友好，于是转到Codewar来做些练习，Codewar支持的语言就非常的多，在这里做语法题目练习就很方便，它提供了不少语言的测试框架和测试样例，在本地搭建好环境后，就可以实现在本地运行并进行测试，自己随意的打印字符串打印变量，添加测试样例这些东西来调试代码，这点就比Leetcode强很多，体验很棒。</p><p>个人体会，LeetCode更偏向于去应付面试和练习算法，而Codewar的题目更适合锻炼自己的工程编程能力，考察的东西除了算法之外还有很多，例如语言特性，框架原型，代码Debug等。难度较高的题目中有很多关于解析器（parser）和编译器子模块的题目，这些题目很有挑战性，但当题目通过的时候，又会觉得嘎嘎爽。</p><p>对于Codewar的题目难度，我觉得它分为8个等级还是比较合理的，尽管有些3kyu的题目让我感觉并不比2kyu的题目简单（比如这道<a href="https://www.codewars.com/kata/638c92b10e43cc000e615a07">Prime counting</a>)。从4kyu开始的题目就需要结合很多其他的知识来解题(比如编译原理)。我觉得5-8kyu的题目比较简单，适合熟悉一些比较基本的语法，3-4kyu的题目难度适中，非常适合锻炼编程能力。1 - 2 kyu 本人目前也没写过几道，而且好像不少编译器相关的题目，就暂时还没能力去解题</p>]]></content>
     
     
       
